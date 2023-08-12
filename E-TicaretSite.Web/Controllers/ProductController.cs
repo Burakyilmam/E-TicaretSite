@@ -9,7 +9,17 @@ namespace E_TicaretSite.Web.Controllers
         ProductManager pm = new ProductManager(new EfProductRepository());
         public IActionResult ProductList()
         {
-            var value = pm.ListNewProduct();
+            var value = pm.ListProductWithCategory();
+            return View(value);
+        }
+        public IActionResult ProductPage(int id)
+        {
+            var value = pm.ProductPage(id);
+            return View(value);
+        }
+        public IActionResult ListCategoryProduct(int id)
+        {
+            var value = pm.ListCategoryProduct(id);
             return View(value);
         }
     }

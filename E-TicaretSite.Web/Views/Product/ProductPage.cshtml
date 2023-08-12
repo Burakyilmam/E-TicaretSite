@@ -1,0 +1,13 @@
+﻿@using Entity.Entities
+@model List<Product>
+@{
+    ViewData["Title"] = "ProductPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach(var item in Model)
+{
+    <img src="@item.ThumbnailImage" width="100">
+    <b>@item.Id</b>
+    <h1>@item.Name</h1>  
+}

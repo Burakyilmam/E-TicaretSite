@@ -20,6 +20,9 @@ namespace Business.Abstract
         List<Product> ListProductWithCategory();
         List<Product> ListLowStockProduct();
         List<Product> ListHighStockProduct();
+        List<Product> ListCategoryProduct(int id);
+        List<Product> ListBrandProduct(int id);
+        List<Product> ProductPage(int id);
 
     }
 }

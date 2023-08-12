@@ -12,7 +12,7 @@ namespace DataAccess.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-EVJH8OQ;database=EticaretDb;integrated security=true");
+            optionsBuilder.UseSqlServer("server=DESKTOP-EVJH8OQ;database=EticaretDb12;integrated security=true");
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }

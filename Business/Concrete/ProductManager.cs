@@ -23,6 +23,16 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public List<Product> ListBrandProduct(int id)
+        {
+            return _productDal.ListBrandProduct(id);
+        }
+
+        public List<Product> ListCategoryProduct(int id)
+        {
+            return _productDal.ListCategoryProduct(id);
+        }
+
         public List<Product> ListHighPriceProduct()
         {
             return _productDal.ListHighPriceProduct();
@@ -66,6 +76,11 @@ namespace Business.Concrete
         public void ProductDelete(Product product)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Product> ProductPage(int id)
+        {
+           return _productDal.ProductPage(id);
         }
 
         public void ProductUpdate(Product product)
