@@ -4,6 +4,12 @@
     ViewData["Title"] = "CategoryList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (!Model.Any())
+{
+    <div>
+        Kategori Bulunamadı
+    </div>
+}
 <table>
     <tr>
         <th>Kategori ID</th>

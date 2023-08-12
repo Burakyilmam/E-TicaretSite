@@ -17,7 +17,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).ToList();
+                return c.Products.Include(x => x.Category).Where(x=>x.Statu == true).ToList();
             }
 
         }
@@ -25,7 +25,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderByDescending(x => x.CreatedDate).ToList();
+                return c.Products.Include(x => x.Category).OrderByDescending(x => x.CreatedDate).Where(x=>(x.CreatedDate <= DateTime.Now) && (x.Statu == true)).ToList();
             }
 
         }
@@ -33,7 +33,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderByDescending(x => x.Price).ToList();
+                return c.Products.Include(x => x.Category).OrderByDescending(x => x.Price).Where(x => x.Statu == true).ToList();
             }
 
         }
@@ -41,7 +41,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderBy(x => x.Price).ToList();
+                return c.Products.Include(x => x.Category).OrderBy(x => x.Price).Where(x => x.Statu == true).ToList();
             }
 
         }
@@ -49,7 +49,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderBy(x => x.Stock).ToList();
+                return c.Products.Include(x => x.Category).OrderBy(x => x.Stock).Where(x=>(x.Stock > 0) && (x.Statu == true)).ToList();
             }
 
         }
@@ -57,7 +57,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderByDescending(x => x.Stock).ToList();
+                return c.Products.Include(x => x.Category).OrderByDescending(x => x.Stock).Where(x => (x.Stock > 0) && (x.Statu == true)).ToList();
             }
 
         }
