@@ -11,11 +11,8 @@ namespace EntityLayer.Entities
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Kategori Adı Boş Bırakılamaz.")]
-        [Display(Name = "Kategori Adı")]
-        [StringLength(50,ErrorMessage ="Kategori Adı Maksimum 50 Karakter Olmalıdır.")]
         public string Name { get; set; }
         public bool Statu { get; set; }
-        public virtual List<Product> Products { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

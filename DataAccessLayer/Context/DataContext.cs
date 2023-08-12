@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Context
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User,Role,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-EVJH8OQ;database=EticaretDb;integrated security=true");
+            optionsBuilder.UseSqlServer("server=DESKTOP-EVJH8OQ;database=EticaretDb3;integrated security=true");
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
