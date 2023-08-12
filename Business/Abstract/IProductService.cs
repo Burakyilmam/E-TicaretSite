@@ -5,15 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Abstract
+namespace Business.Abstract
 {
-    public interface IProductDal : IGenericDal<Product>
+    public interface IProductService
     {
-        List<Product> ListProductWithCategory();
+        void ProductAdd(Product product);
+        void ProductDelete(Product product);
+        void ProductUpdate(Product product);
+        Product GetProduct(int id);
+        List<Product> ListProduct(); 
         List<Product> ListNewProduct();
         List<Product> ListHighPriceProduct();
         List<Product> ListLowPriceProduct();
+        List<Product> ListProductWithCategory();
         List<Product> ListLowStockProduct();
         List<Product> ListHighStockProduct();
+
     }
 }

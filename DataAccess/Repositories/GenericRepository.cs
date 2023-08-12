@@ -33,10 +33,6 @@ namespace DataAccess.Repositories
         {
             return c.Set<T>().ToList();
         }
-        public List<T> List(string p)
-        {
-            return c.Set<T>().Include(p).ToList();
-        }
         public void Update(T t)
         {
             c.Update(t);

@@ -1,5 +1,5 @@
 ﻿using DataAccess.Abstract;
-using DataAccess.Context;
+using DataAccess.Repositories;
 using Entity.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories
+namespace DataAccess.EntityFramework
 {
-    public class CategoryRepository : GenericRepository<Category>
+    public class EfUserRepository : GenericRepository<User>,IUserDal
     {
-       
     }
 }
