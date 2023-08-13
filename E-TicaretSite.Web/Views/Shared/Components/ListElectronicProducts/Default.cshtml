@@ -15,9 +15,9 @@
 <div class="carousel" data-flickity='{ "draggable": true, "pageDots": false}'>
     @foreach (var item in Model)
     {
-        <div style="border:1px solid black;margin:10px;border-radius:10px;width:20%" class="Category carousel-cell">
+        <div style="border:1px solid black;margin:10px;border-radius:10px;width:30%" class="Category carousel-cell">
             <div class="col-12">
-                <a href="/Hotel/HotelPage/@item.Id">
+                <a href="/Product/ProductPage/@item.Id">
                     <img src="@item.ThumbnailImage" height="200" width="100%" style="border-radius:10px;padding:10px;" />
                 </a>
             </div>
@@ -26,19 +26,38 @@
                     @item.Name
                 </div>
                 <div class="col-6">
-                    <a style="text-decoration:none;outline:none;color:black" href="/Hotel/HotelCityListNoComment/@item.CategoryId">
+                    <a style="text-decoration:none;outline:none;color:black" href="/Product/ListCategoryProduct/@item.CategoryId">
                         <b>@item.Category.Name</b>
                     </a>
                 </div>
                 <div style="display:Flex" class="col-6 justify-content-end">
-                    <a href="/Hotel/HotelCategoryListNoComment/@item.CategoryId" style="text-decoration:none;outline:none;color:black">
+                    <a href="/Product/ListBrandProduct/@item.BrandId" style="text-decoration:none;outline:none;color:black">
                         <b>@item.Brand.Name</b>
                     </a>
                 </div>
             </div>
-            <div class="col-12 text-center mb-3"><b>@item.Price</b> ₺</div>
+            @if (item.Discount == 0)
+            {
+                <div class="col-12 text-center"><b>@item.Price.ToString("0")</b> ₺</div>
+                <div class="col-12 text-center mt-4"></div>
+            }
+            @if (item.Discount > 0)
+            {
+                <div class="col-12 text-center">
+                    <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                    <b>%@item.Discount.ToString("0")</b>
+                </div>
+                var discountedPrice =
+                item.Price - (item.Price * @item.Discount) / 100;
+
+                <div class="col-12 text-center text-danger">
+                    <b>
+                        @discountedPrice.ToString("0")
+                    </b> ₺
+                </div>
+            }
             <div class="col-12 mb-3 mt-3 text-center">
-                <a class="btn-primary" style="padding:10px;text-decoration:none;outline:none;" href="/Hotel/HotelPage/@item.Id">
+                <a class="btn-primary" style="padding:10px;text-decoration:none;outline:none;" href="/Product/ProductPage/@item.Id">
                     Ürüne Git
                 </a>
             </div>
