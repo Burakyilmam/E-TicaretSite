@@ -1,4 +1,4 @@
-﻿
+﻿@model Entity.Entities.User
 @{
     ViewData["Title"] = "Kullanıcı Kayıt Sayfası";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,11 +18,15 @@
         </div>
         <div style="display:flex" class="col-12 text-center justify-content-center">
             <div class="col-7">
-                <form class="text-center" action="#" method="post">
-                    <input class="mt-2 mb-2" style="width:100%" type="text" placeholder="Kullanıcı Adı" name="UserName" />
-                    <input class="mt-2 mb-2" style="width:100%" type="password" placeholder="Parola" name="Password" />
+                @using (Html.BeginForm("UserRegister", "User", FormMethod.Post))
+                {
+                    @Html.TextBoxFor(x=>x.UserName,new {@style="width:100%",@class="mt-2 mb-2"})
+                    @Html.ValidationMessageFor(x=>x.UserName,"", new { @class = "text-danger mt-2 mb-2" })
+                    @Html.TextBoxFor(x=>x.Password,new {@style="width:100%",@class="mt-2 mb-2"})
+                    @Html.ValidationMessageFor(x=>x.Password,"", new { @class = "text-danger mt-2 mb-2" })
+                    <br />
                     <input style="padding:5px 25px;border-radius:5px;text-decoration:none;" class="btn-success text-center mt-2" type="submit" value="Ekle" />
-                </form>
+                }
                 <p style="margin-top:20px;">Zaten Üye Misiniz ?</p>
                 <a class="btn-primary" style="padding:5px 10px;border-radius:5px;text-decoration:none;" href="/User/UserLogin/" id="btn_login">Giriş Yap</a>
             </div>

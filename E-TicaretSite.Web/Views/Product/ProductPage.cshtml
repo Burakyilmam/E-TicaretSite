@@ -5,11 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@foreach(var item in Model)
+@foreach (var item in Model)
 {
     <img src="@item.ThumbnailImage" width="100">
     <b>@item.Id</b>
-    <h1>@item.Name</h1>  
+    <h1>@item.Name</h1>
+    <b><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></b>
+    <b><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></b>
 }
-    @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
-
+@await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
+<br />
+@await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")

@@ -1,0 +1,9 @@
+﻿﻿﻿<div style="margin-top:-15px;" class="container-fluid">
+    <form action="/Comment/CommentAdd/" method="post">
+        <input type="text" name="ProductId" style="display:none" value="@ViewBag.Id" />
+        <textarea placeholder="Yorumunuzu Bu alana yazınız." style="width:100%;height:150px;resize:none;" required name="CommentText"></textarea>
+        <center>
+            <input class="text-center btn-success" style="padding:10px;border-radius:2px;width:120px;border:none;" type="submit" value="Ekle" />
+        </center>
+    </form>
+</div>
