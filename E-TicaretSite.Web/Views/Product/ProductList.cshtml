@@ -14,15 +14,15 @@
 {
     <table>
         <tr>
-            <th>Ürün ID</th>
-            <th>Ürün Adı</th>
-            <th>Ürün Marka</th>
-            <th>Ürün Açıklaması</th>
-            <th>Ürün Fiyatı</th>
-            <th>Ürün Stok Adedi</th>
-            <th>Ürün Resmi</th>
-            <th>Ürün Kategorisi</th>
-            <th>Ürün Statüsü</th>
+            <th>ID</th>
+            <th>Resmi</th>
+            <th>Adı</th>
+            <th>Marka</th>
+            <th>Açıklaması</th>
+            <th>Fiyatı</th>
+            <th>Stok Adedi</th>     
+            <th>Kategorisi</th>
+            <th>Statüsü</th>
             <th>Güncelle</th>
             <th>Sil</th>
             <th>Ürün Sayfası</th>
@@ -31,21 +31,32 @@
         {
             <tr>
                 <td>@item.Id</td>
+                <td><img width="100" src="@item.ThumbnailImage" /></td>
                 <td>@item.Name</td>
                 <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
                 <td>@item.Description</td>
                 <td>@item.Price</td>
-                <td>@item.Stock</td>
-                <td><img width="100" src="@item.ThumbnailImage" /></td>
+                <td>@item.Stock</td>           
                 <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
-                <td>@item.Statu</td>
+                <td>
+                    @if (item.Statu == true)
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                        </a>
+                    }
+                </td>
                 <td><a href="">Güncelle</a></td>
                 <td><a href="">Sil</a></td>
                 <td><a href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
             </tr>
         }
     </table>
-    
+
 }
 
 
