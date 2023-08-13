@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entities
 {
-    public class Product : EntityBase,IEntityBase
+    public class Product : EntityBase
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -19,5 +19,6 @@ namespace Entity.Entities
         public List<ProductImage> ProductImages { get; set; }
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
+        public List<Comment> Comments{ get; set; }
     }
 }

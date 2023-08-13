@@ -9,7 +9,7 @@ namespace DataAccess.Abstract
 {
     public interface IProductDal : IGenericDal<Product>
     {
-        List<Product> ListProductWithCategory();
+        List<Product> ListProductWith();
         List<Product> ListNewProduct();
         List<Product> ListHighPriceProduct();
         List<Product> ListLowPriceProduct();

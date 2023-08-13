@@ -1,0 +1,11 @@
+﻿@using Entity.Entities
+@model List<Comment>
+@{
+    ViewData["Title"] = "CommentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach(var item in Model)
+{
+    @item.CommentText
+}

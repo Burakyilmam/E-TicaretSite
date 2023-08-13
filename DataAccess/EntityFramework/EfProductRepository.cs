@@ -13,11 +13,11 @@ namespace DataAccess.EntityFramework
 {
     public class EfProductRepository : GenericRepository<Product>, IProductDal
     {
-        public List<Product> ListProductWithCategory()
+        public List<Product> ListProductWith()
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).Where(x=>x.Statu == true).ToList();
+                return c.Products.Include(x => x.Category).Include(x=>x.Brand).Where(x=>x.Statu == true).ToList();
             }
 
         }

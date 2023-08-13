@@ -11,3 +11,5 @@
     <b>@item.Id</b>
     <h1>@item.Name</h1>  
 }
+    @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
+

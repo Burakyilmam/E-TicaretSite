@@ -17,7 +17,7 @@ namespace Business.Abstract
         List<Product> ListNewProduct();
         List<Product> ListHighPriceProduct();
         List<Product> ListLowPriceProduct();
-        List<Product> ListProductWithCategory();
+        List<Product> ListProductWith();
         List<Product> ListLowStockProduct();
         List<Product> ListHighStockProduct();
         List<Product> ListCategoryProduct(int id);

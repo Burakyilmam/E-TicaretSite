@@ -40,12 +40,12 @@ namespace Business.Concrete
 
         public List<Product> ListHighStockProduct()
         {
-            return (_productDal.ListHighStockProduct());
+            return _productDal.ListHighStockProduct();
         }
 
         public List<Product> ListLowPriceProduct()
         {
-           return _productDal.ListLowPriceProduct();
+            return _productDal.ListLowPriceProduct();
         }
 
         public List<Product> ListLowStockProduct()
@@ -63,9 +63,9 @@ namespace Business.Concrete
             return _productDal.List();
         }
 
-        public List<Product> ListProductWithCategory()
+        public List<Product> ListProductWith()
         {
-            return _productDal.ListProductWithCategory();
+            return _productDal.ListProductWith();
         }
 
         public void ProductAdd(Product product)
@@ -79,8 +79,8 @@ namespace Business.Concrete
         }
 
         public List<Product> ProductPage(int id)
-        {
-           return _productDal.ProductPage(id);
+        {          
+            return _productDal.ProductPage(id);
         }
 
         public void ProductUpdate(Product product)

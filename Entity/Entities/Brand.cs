@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entities
 {
-    public class Brand : EntityBase, IEntityBase
+    public class Brand : EntityBase
     {
         public string Name { get; set; }
         public List<Product> Products { get; set; }

@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Entity.Entities
 {
-    public class ProductImage : EntityBase
+    public class Comment : EntityBase
     {
-        public string ImageUrl { get; set; }
+        public string CommentText { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

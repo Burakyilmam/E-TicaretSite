@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Entity.Entities.Comment>
+
+@if (!Model.Any())
+{
+    <div style="text-align:center">
+        <b>Yorum Bulunamadı.İlk Yorum Yapan Siz Olun.</b>
+    </div>
+}
+@if (Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        @item.CommentText
+    }
+}
