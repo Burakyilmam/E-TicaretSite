@@ -33,6 +33,11 @@ namespace Business.Concrete
             return _productDal.ListCategoryProduct(id);
         }
 
+        public List<Product> ListElectronicProducts()
+        {
+            return _productDal.ListElectronicProducts();
+        }
+
         public List<Product> ListHighPriceProduct()
         {
             return _productDal.ListHighPriceProduct();

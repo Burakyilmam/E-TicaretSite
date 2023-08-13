@@ -23,6 +23,7 @@ namespace Business.Abstract
         List<Product> ListCategoryProduct(int id);
         List<Product> ListBrandProduct(int id);
         List<Product> ProductPage(int id);
+        List<Product> ListElectronicProducts();
 
     }
 }

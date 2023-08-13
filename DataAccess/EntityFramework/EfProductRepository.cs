@@ -85,5 +85,12 @@ namespace DataAccess.EntityFramework
             }
 
         }
+        public List<Product> ListElectronicProducts()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => (x.CategoryId == 4) || (x.CategoryId == 5) || (x.CategoryId == 6) || (x.CategoryId == 7)).Take(10).ToList();
+            }
+        }
     }
 }
