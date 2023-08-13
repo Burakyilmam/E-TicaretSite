@@ -38,8 +38,7 @@
             </div>
             @if (item.Discount == 0)
             {
-                <div class="col-12 text-center"><b>@item.Price.ToString("0")</b> ₺</div>
-                <div class="col-12 text-center mt-4"></div>
+                <div class="col-12 text-center pt-2 pb-3"><b>@item.Price.ToString("0")</b> ₺</div>
             }
             @if (item.Discount > 0)
             {
@@ -56,11 +55,7 @@
                     </b> ₺
                 </div>
             }
-            <div class="col-12 mb-3 mt-3 text-center">
-                <a class="btn-primary" style="padding:10px;text-decoration:none;outline:none;" href="/Product/ProductPage/@item.Id">
-                    Ürüne Git
-                </a>
-            </div>
+            
         </div>
     }
 </div>
