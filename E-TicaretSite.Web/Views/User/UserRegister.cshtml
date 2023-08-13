@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Kullanıcı Kayıt Sayfası";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="margin-top:180px" class="container-fluid">
+    <div style="text-center;display;flex;justify-content:center;flex-wrap:wrap" class="row">
+        <h1 class="mt-4 mb-4 col-12 text-center">Kullanıcı Kayıt Formu</h1>
+        <div style="display:flex" class="col-12 text-center justify-content-center">
+            <div class="col-7">
+                @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+                {
+                    <div class="alert alert-danger">
+                        @ViewData["ErrorMessage"]
+                    </div>
+                }
+            </div>
+        </div>
+        <div style="display:flex" class="col-12 text-center justify-content-center">
+            <div class="col-7">
+                <form class="text-center" action="#" method="post">
+                    <input class="mt-2 mb-2" style="width:100%" type="text" placeholder="Kullanıcı Adı" name="UserName" />
+                    <input class="mt-2 mb-2" style="width:100%" type="password" placeholder="Parola" name="Password" />
+                    <input style="padding:5px 25px;border-radius:5px;text-decoration:none;" class="btn-success text-center mt-2" type="submit" value="Ekle" />
+                </form>
+                <p style="margin-top:20px;">Zaten Üye Misiniz ?</p>
+                <a class="btn-primary" style="padding:5px 10px;border-radius:5px;text-decoration:none;" href="/User/UserLogin/" id="btn_login">Giriş Yap</a>
+            </div>
+        </div>
+    </div>
