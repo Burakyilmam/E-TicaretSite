@@ -9,6 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface IProductImageDal : IGenericDal<ProductImage>
     {
-
+        List<ProductImage> ListProductImages(int id);
     }
 }
