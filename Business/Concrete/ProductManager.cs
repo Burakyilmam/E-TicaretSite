@@ -18,9 +18,24 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        public Product GetProduct(int id)
+        public void Add(Product t)
         {
-            throw new NotImplementedException();
+            _productDal.Add(t);
+        }
+
+        public void Delete(Product t)
+        {
+            _productDal.Delete(t);
+        }
+
+        public Product Get(int id)
+        {
+            return _productDal.GetId(id);
+        }
+
+        public List<Product> List()
+        {
+            return _productDal.List();
         }
 
         public List<Product> ListBrandProduct(int id)
@@ -63,34 +78,21 @@ namespace Business.Concrete
             return _productDal.ListNewProduct();
         }
 
-        public List<Product> ListProduct()
-        {
-            return _productDal.List();
-        }
 
         public List<Product> ListProductWith()
         {
             return _productDal.ListProductWith();
         }
 
-        public void ProductAdd(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ProductDelete(Product product)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<Product> ProductPage(int id)
         {          
             return _productDal.ProductPage(id);
         }
 
-        public void ProductUpdate(Product product)
+        public void Update(Product t)
         {
-            throw new NotImplementedException();
+            _productDal.Update(t);
         }
     }
 }

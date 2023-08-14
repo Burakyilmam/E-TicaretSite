@@ -13,7 +13,7 @@ namespace E_TicaretSite.Web.Controllers
         CommentManager cm = new CommentManager(new EfCommentRepository());
         public IActionResult CommentList()
         {
-            var value = cm.CommentList();
+            var value = cm.List();
             return View(value);
         }
         [HttpGet]
@@ -32,7 +32,7 @@ namespace E_TicaretSite.Web.Controllers
                 int userId = int.Parse(userIdClaim); 
                 c.UserId = userId;
             }
-            cm.CommentAdd(c);
+            cm.Add(c);
             return RedirectToAction("ProductPage", "Product", new { @id = c.ProductId });
 
         }

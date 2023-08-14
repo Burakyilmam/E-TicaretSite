@@ -11,7 +11,7 @@ namespace E_TicaretSite.Web.Controllers
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         public IActionResult CategoryList()
         {
-            var value = cm.ListCategory();
+            var value = cm.List();
             return View(value);
         }
     }

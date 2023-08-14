@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IUserService : IGenericService<User>
+    public interface IGenericService<T>
     {
-
+        void Add(T t);
+        void Delete(T t);
+        void Update(T t);
+        T Get(int id);
+        List<T> List();
     }
 }

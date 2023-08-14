@@ -18,14 +18,24 @@ namespace Business.Concrete
             _productImageDal = productImageDal;
         }
 
-        public ProductImage GetProductImage(int id)
+        public void Add(ProductImage t)
         {
-            throw new NotImplementedException();
+            _productImageDal.Add(t);
         }
 
-        public List<ProductImage> ListProductImage()
+        public void Delete(ProductImage t)
         {
-            throw new NotImplementedException();
+            _productImageDal.Delete(t);
+        }
+
+        public ProductImage Get(int id)
+        {
+            return _productImageDal.GetId(id);
+        }
+
+        public List<ProductImage> List()
+        {
+           return _productImageDal.List();
         }
 
         public List<ProductImage> ListProductImages(int id)
@@ -33,19 +43,9 @@ namespace Business.Concrete
             return _productImageDal.ListProductImages(id);
         }
 
-        public void ProductImageAdd(ProductImage productImage)
+        public void Update(ProductImage t)
         {
-            throw new NotImplementedException();
-        }
-
-        public void ProductImageDelete(ProductImage productImage)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ProductImageUpdate(ProductImage productImage)
-        {
-            throw new NotImplementedException();
+            _productImageDal.Update(t);
         }
     }
 }

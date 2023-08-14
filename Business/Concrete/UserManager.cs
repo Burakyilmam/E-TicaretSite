@@ -18,29 +18,29 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public User GetUser(int id)
+        public void Add(User t)
         {
-            throw new NotImplementedException();
+            _userDal.Add(t);
         }
 
-        public List<User> ListUser()
+        public void Delete(User t)
         {
-            throw new NotImplementedException();
+           _userDal.Delete(t);
         }
 
-        public void UserAdd(User user)
+        public User Get(int id)
         {
-            _userDal.Add(user);
+            return _userDal.GetId(id);
         }
 
-        public void UserDelete(User user)
+        public List<User> List()
         {
-            throw new NotImplementedException();
+            return _userDal.List();
         }
 
-        public void UserUpdate(User user)
+        public void Update(User t)
         {
-            throw new NotImplementedException();
+            _userDal.Update(t);
         }
     }
 }

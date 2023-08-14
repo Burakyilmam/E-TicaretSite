@@ -69,7 +69,7 @@ namespace E_TicaretSite.Web.Controllers
                 user.Statu = true;
                 user.CreatedDate = DateTime.Now;
                 user.Email = "";
-                um.UserAdd(user);
+                um.Add(user);
                 return RedirectToAction("UserLogin", "User");
             }
             else

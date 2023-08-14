@@ -16,7 +16,7 @@ namespace Business.Concrete
         ICategoryDal _categoryDal;
         public CategoryManager()
         {
-           
+
         }
 
         public CategoryManager(ICategoryDal categoryDal)
@@ -24,29 +24,29 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
-        public void CategoryAdd(Category category)
+        public void Add(Category t)
         {
-            _categoryDal.Add(category);
+            _categoryDal.Add(t);
         }
 
-        public void CategoryDelete(Category category)
+        public void Delete(Category t)
         {
-            _categoryDal.Delete(category);
+            _categoryDal.Delete(t);
         }
 
-        public void CategoryUpdate(Category category)
-        {
-            _categoryDal.Update(category);
-        }
-
-        public Category GetCategory(int id)
+        public Category Get(int id)
         {
             return _categoryDal.GetId(id);
         }
 
-        public List<Category> ListCategory()
+        public List<Category> List()
         {
             return _categoryDal.List();
+        }
+
+        public void Update(Category t)
+        {
+            _categoryDal.Update(t);
         }
     }
 }

@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IProductImageService
+    public interface IProductImageService : IGenericService<ProductImage>
     {
-        void ProductImageAdd(ProductImage productImage);
-        void ProductImageDelete(ProductImage productImage);
-        void ProductImageUpdate(ProductImage productImage);
-        ProductImage GetProductImage(int id);
-        List<ProductImage> ListProductImage();
         List<ProductImage> ListProductImages(int id);
     }
 }

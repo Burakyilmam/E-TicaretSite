@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IProductService
+    public interface IProductService : IGenericService<Product>
     {
-        void ProductAdd(Product product);
-        void ProductDelete(Product product);
-        void ProductUpdate(Product product);
-        Product GetProduct(int id);
-        List<Product> ListProduct(); 
         List<Product> ListNewProduct();
         List<Product> ListHighPriceProduct();
         List<Product> ListLowPriceProduct();
