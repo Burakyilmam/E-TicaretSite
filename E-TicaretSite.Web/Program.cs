@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace E_TicaretSite.Web
 {
     public class Program
@@ -8,6 +10,12 @@ namespace E_TicaretSite.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddSession();
+            builder.Services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+                {
+                    x.LoginPath = "/User/UserLogin/";
+                });
 
             var app = builder.Build();
 
@@ -24,6 +32,8 @@ namespace E_TicaretSite.Web
 
             app.UseRouting();
 
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

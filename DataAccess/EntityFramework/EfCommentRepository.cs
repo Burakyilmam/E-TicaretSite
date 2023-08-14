@@ -17,7 +17,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Comments.Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
+                return c.Comments.Include(x=>x.User).Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
             }
 
         }

@@ -8,8 +8,20 @@
 }
 @if (Model.Any())
 {
-    @foreach (var item in Model)
+    @foreach (var y in Model)
     {
-        @item.CommentText
+        <div class="container-fluid">
+            <div style="background-color:#cac6c694;border:1px solid black;border-radius:5px;" class="row mt-2 mb-2">
+                <div style="text-align:start;" class="col-6 mt-2">
+                    @y.User.UserName
+                </div>
+                <div style="text-align:end;" class="col-6 mt-2">
+                    @y.CreatedDate.ToString("dd MMMM yyyy")
+                </div>
+                <div class="col-12 mt-2 mb-2">
+                    @y.CommentText
+                </div>
+            </div>
+        </div>
     }
 }
