@@ -29,7 +29,6 @@ namespace E_TicaretSite.Web.Controllers
                     ViewBag.Name = username;
                     ViewBag.Id = userId;
                     return View();
-
                 }
             }
             return RedirectToAction("UserLogin", "User");

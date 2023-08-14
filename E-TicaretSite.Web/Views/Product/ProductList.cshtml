@@ -13,7 +13,7 @@
 @if (Model.Any())
 {
     <table>
-        <tr>
+        <tr class="text-center">
             <th>ID</th>
             <th>Resmi</th>
             <th>Adı</th>
@@ -29,13 +29,13 @@
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="text-center">
                 <td>@item.Id</td>
                 <td><img width="100" src="@item.ThumbnailImage" /></td>
                 <td>@item.Name</td>
                 <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
                 <td>@item.Description</td>
-                <td>@item.Price</td>
+                <td>@item.Price.ToString("0")</td>
                 <td>@item.Stock</td>           
                 <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
                 <td>

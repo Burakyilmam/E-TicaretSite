@@ -15,27 +15,69 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>LayoutAdmin</title>
+    <style>
+        .dropbtn {
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            margin-top: 16px;
+            position: absolute;
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: gray;
+                    color:White;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color:black;
+        }
+
+    </style>
 </head>
 <body>
-    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left bg-light" style="display:none" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large"
                 onclick="w3_close()">
             <i class="fa fa-bars"></i>
         </button>
-        <a href="/Product/ProductList" class="w3-bar-item w3-button">Ürünler</a>
+        <a style="text-decoration:none;" href="/Product/ProductList" class="w3-bar-item w3-button">Ürünler</a>
     </div>
     <div id="main">
 
-        <div class="w3-teal">
+        <div class="w3-teal bg-info">
             <div class="row">
                 <div class="col-6">
-                    <button id="openNav" style="text-align:start" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+                    <button id="openNav" style="text-align:start" class="w3-button w3-teal w3-xlarge bg-info" onclick="w3_open()">&#9776;</button>
                 </div>
                 <div style="text-align:end;padding-right:30px;padding-top:10px;border-radius:10px;" class="col-6">
-                    <a class="text-white" style="text-decoration:none;padding:10px" href="/User/UserProfile/">
-                        @await Html.PartialAsync("~/Views/User/GetUserName.cshtml")
-                    </a>
-                    <a class="text-white" style="text-decoration:none" href="/User/UserLogout">Çıkış Yap</a>
+                    <div class="dropdown">
+                        <a class="dropbtn">
+                            @await Html.PartialAsync("~/Views/User/GetUserName.cshtml")
+                        </a>
+                        <div class="dropdown-content bg-light">
+                            <a class="text-center" href="/User/UserPage/@ViewBag.Id">Profilim</a>
+                            <a class="text-center" href="/User/UserOrders">Siparişlerim</a>
+                            <a class="text-center" href="/User/UserComments">Yorumlarım</a>
+                        </div>
+                    </div>
+                    <a class="text-white" style="text-decoration:none" href="/User/UserLogout/">Çıkış Yap</a>
                 </div>
             </div>
         </div>
@@ -44,8 +86,8 @@
     <div>@RenderBody()</div>
     <script>
         function w3_open() {
-            document.getElementById("main").style.marginLeft = "25%";
-            document.getElementById("mySidebar").style.width = "25%";
+            document.getElementById("main").style.marginLeft = "15%";
+            document.getElementById("mySidebar").style.width = "15%";
             document.getElementById("mySidebar").style.display = "block";
             document.getElementById("openNav").style.display = 'none';
         }
