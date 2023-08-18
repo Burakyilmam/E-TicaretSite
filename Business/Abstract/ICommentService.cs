@@ -10,5 +10,6 @@ namespace Business.Abstract
     public interface ICommentService : IGenericService<Comment>
     {
         List<Comment> ListProductComment(int id);
+        List<Comment> ListUserComment(int id);
     }
 }

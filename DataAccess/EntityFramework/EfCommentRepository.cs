@@ -21,5 +21,13 @@ namespace DataAccess.EntityFramework
             }
 
         }
+        public List<Comment> ListUserComment(int id)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Comments.Include(x => x.User).Include(x => x.Product).Where(x => (x.Statu == true) && (x.UserId == id)).ToList();
+            }
+
+        }
     }
 }

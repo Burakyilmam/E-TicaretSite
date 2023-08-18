@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Context;
 using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,13 @@ namespace E_TicaretSite.Web.Controllers
     public class CommentController : Controller
     {
         CommentManager cm = new CommentManager(new EfCommentRepository());
-        public IActionResult CommentList()
+        public IActionResult UserComments()
         {
-            var value = cm.List();
+            DataContext c = new DataContext();
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.Username = User.Identity.Name;
+            ViewBag.Id = user.Id;
+            var value = cm.ListUserComment(user.Id);
             return View(value);
         }
         [HttpGet]

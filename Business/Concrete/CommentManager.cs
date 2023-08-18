@@ -43,6 +43,11 @@ namespace Business.Concrete
             return _commentDal.ListProductComment(id);
         }
 
+        public List<Comment> ListUserComment(int id)
+        {
+            return _commentDal.ListUserComment(id);
+        }
+
         public void Update(Comment t)
         {
             _commentDal.Update(t);
