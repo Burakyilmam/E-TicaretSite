@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Entity.Entities.Comment>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if (!Model.Any())
 {
     <div style="text-align:center">
@@ -8,17 +12,21 @@
 }
 @if (Model.Any())
 {
-    @foreach (var y in Model)
-    {
+    <div style="display:flex;justify-content:center;flex-wrap:wrap">
+        <h1 style="width:100%" class="text-center">Yorumlarım</h1>
         <table class="text-center">
             <tr>
                 <th>Yorum</th>
                 <th>Ürün</th>
             </tr>
-            <tr>
-                <td>@y.CommentText</td>
-                <td>@y.Product.Name</td>
-            </tr>
+        @foreach (var y in Model)
+        {    
+                <tr>
+                    <td>@y.CommentText</td>
+                    <td>@y.Product.Name</td>
+                    <td><a class="btn-primary" style="padding:1px 5px;border-radius:3px;text-decoration:none;" href="/Product/ProductPage/@y.ProductId">Ürün Sayfası</a></td>
+                </tr>
+        }
         </table>
-    }
+    </div>
 }
