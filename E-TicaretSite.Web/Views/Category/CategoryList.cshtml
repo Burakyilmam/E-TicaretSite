@@ -10,24 +10,26 @@
         Kategori Bulunamadı
     </div>
 }
-<table>
-    <tr>
-        <th>Kategori ID</th>
-        <th>Kategori Adı</th>
-        <th>Kategori Statüsü</th>
-        <th>Güncelle</th>
-        <th>Sil</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+@if (Model.Any())
+{
+    <table>
         <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td>@item.Statu</td>
-            <td><a href="">Güncelle</a></td>
-            <td><a href="">Sil</a></td>
+            <th>Kategori ID</th>
+            <th>Kategori Adı</th>
+            <th>Kategori Statüsü</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
         </tr>
-    }
-</table>
-
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Statu</td>
+                <td><a href="">Güncelle</a></td>
+                <td><a href="">Sil</a></td>
+            </tr>
+        }
+    </table>
+}
 

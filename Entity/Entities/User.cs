@@ -13,5 +13,6 @@ namespace Entity.Entities
         public string Password { get; set; }
         public string Email { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Cart> Carts { get; set; }
     }
 }

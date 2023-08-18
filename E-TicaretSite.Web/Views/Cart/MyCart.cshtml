@@ -1,0 +1,8 @@
+﻿@using Entity.Entities
+@model List<Cart>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Component.InvokeAsync("ListCartItems",new {id=ViewBag.Id})
+

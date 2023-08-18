@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Entity.Entities.CartItems>
+
+@if (!Model.Any())
+{
+    <div style="text-align:center">
+        <b>Sepette Ürün Bulunamadı.</b>
+    </div>
+}
+@if (Model.Any())
+{
+    @foreach (var y in Model)
+    {
+        <table class="text-center">
+            <tr>
+                <th>Resim</th>
+                <th>Adet</th>
+                <th>Ürün</th>
+                <th>Fiyat</th>
+                <th>İndirim</th>
+                <th>Toplam</th>
+            </tr>
+            <tr>
+                <td><img src="@y.Product.ThumbnailImage" width="100" /></td>
+                <td>@y.Quantity</td>
+                <td>@y.Product.Name</td>
+                @if (y.Product.Discount == 0)
+                {
+                    <td>@y.Product.Price.ToString("0")</td>
+                    <td>@y.Product.Price.ToString("0")</td>
+                }
+                @if (y.Product.Discount > 0)
+                {
+                    <td>@y.Product.Price.ToString("0")</td>
+                    var discountedPrice =
+                    y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
+                    <td>@discountedPrice.ToString("0")</td>
+                }
+                @{
+                    if (y.Product.Discount == 0)
+                    {
+                        var TotalPrice = y.Product.Price * y.Quantity;
+                        y.TotalPrice = TotalPrice;
+                    }
+                    if (y.Product.Discount > 0)
+                    {
+                        var discountedPrice =
+                        y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
+                        var TotalPrice = discountedPrice * y.Quantity;
+                        y.TotalPrice = TotalPrice;
+                    }
+                }
+                <td>
+                    @y.TotalPrice.ToString("0")
+                </td>
+                <td>
+                    <a style="padding:7px;border-radius:3px;" class="btn-success">+</a>
+                </td>
+                <td>
+                    <a style="padding:7px;border-radius:3px;" class="btn-warning">-</a>
+                </td>
+                <td>
+                    <a style="padding:7px;border-radius:3px;" class="btn-danger">Sil</a>
+                </td>
+            </tr>
+        </table>
+    }
+}

@@ -12,7 +12,7 @@ namespace DataAccess.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-EVJH8OQ;database=EticaretDb12;integrated security=true");
+            optionsBuilder.UseSqlServer("server=DESKTOP-EVJH8OQ;database=EticaretDb2;integrated security=true");
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -20,5 +20,7 @@ namespace DataAccess.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
     }
 }

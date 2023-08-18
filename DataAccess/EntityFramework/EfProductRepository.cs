@@ -89,7 +89,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => (x.CategoryId == 4) || (x.CategoryId == 5) || (x.CategoryId == 6) || (x.CategoryId == 7)).Take(10).ToList();
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => (x.CategoryId == 1) || (x.CategoryId == 2) || (x.CategoryId == 3) || (x.CategoryId == 4)).Take(10).ToList();
             }
         }
     }

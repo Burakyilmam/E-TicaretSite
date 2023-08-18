@@ -4,7 +4,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class _5 : Migration
+    public partial class m4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
