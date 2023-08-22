@@ -64,4 +64,7 @@
             </tr>
         </table>
     }
+    <div>
+        Toplam : @Model.Sum(y => y.TotalPrice).ToString("0")
+    </div> 
 }
