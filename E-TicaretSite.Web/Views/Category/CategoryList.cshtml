@@ -25,11 +25,34 @@
             <tr>
                 <td>@item.Id</td>
                 <td>@item.Name</td>
-                <td>@item.Statu</td>
-                <td><a href="">Güncelle</a></td>
-                <td><a href="">Sil</a></td>
+                <td>
+
+                    @if (item.Statu == true)
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                        </a>
+                    }
+                </td>
+                <td>
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Category/GetCategory/@item.Id">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Category/CategoryDelete/@item.Id">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
             </tr>
         }
     </table>
+    <div class="text-center">
+        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
+    </div>
 }
 

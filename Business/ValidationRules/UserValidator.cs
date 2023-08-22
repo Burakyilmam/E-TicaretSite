@@ -15,7 +15,9 @@ namespace Business.ValidationRules
             RuleFor(x=>x.UserName).NotEmpty().WithMessage("Kullanıcı Adı Boş Bırakılamaz.");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Parola Boş Bırakılamaz.");
             RuleFor(x => x.UserName).MaximumLength(100).WithMessage("Kullanıcı Adı 100 Karakteri Geçmemelidir.");
+            RuleFor(x => x.UserName).MinimumLength(2).WithMessage("Kullanıcı Adı En Az 2 Karakterden Oluşmalıdır.");
             RuleFor(x => x.Password).MaximumLength(100).WithMessage("Parola 100 Karakteri Geçmemelidir.");
+            RuleFor(x => x.Password).MinimumLength(2).WithMessage("Parola En Az 2 Karakterden Oluşmalıdır.");
         }
     }
 }

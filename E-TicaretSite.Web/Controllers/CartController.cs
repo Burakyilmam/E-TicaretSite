@@ -4,6 +4,7 @@ using DataAccess.Context;
 using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -23,9 +24,11 @@ namespace E_TicaretSite.Web.Controllers
                 return View(cart);
             }
             else
-            {
+            {   
                 return RedirectToAction("UserLogin", "User");
             }
         }
     }
-}
+    }
+
+
