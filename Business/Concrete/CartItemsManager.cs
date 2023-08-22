@@ -20,7 +20,7 @@ namespace Business.Concrete
 
         public void Add(CartItems t)
         {
-            throw new NotImplementedException();
+            _cartItemsDal.Add(t);
         }
 
         public void Delete(CartItems t)

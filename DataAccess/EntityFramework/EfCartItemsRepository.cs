@@ -17,7 +17,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.CartItems.Include(x=>x.Product).Where(x => x.Statu == true && x.Cart.UserId == id).ToList();
+                return c.CartItems.Include(x=>x.Product).Where(x => x.Statu == true && x.Cart.UserId == id && x.Cart.Statu == true).ToList();
             }
         }
     }

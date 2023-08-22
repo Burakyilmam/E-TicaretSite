@@ -56,7 +56,8 @@
                 </div>
             }
             <div class="col-12 mt-2 mb-3 text-center">
-                <a href="/Cart/AddToCart/" class="btn-success p-2">Sepete Ekle</a>
+               @*  @await Html.PartialAsync("~/Views/Cart/AddToCart.cshtml") *@
+                @await Html.PartialAsync("~/Views/Cart/AddToCart.cshtml", item.Id)
             </div>
 
         </div>
