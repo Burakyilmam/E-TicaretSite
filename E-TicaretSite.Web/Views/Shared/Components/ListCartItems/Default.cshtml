@@ -8,8 +8,7 @@
 }
 @if (Model.Any())
 {
-    @foreach (var y in Model)
-    {
+
         <table class="text-center">
             <tr>
                 <th>Resim</th>
@@ -19,6 +18,8 @@
                 <th>İndirim</th>
                 <th>Toplam</th>
             </tr>
+        @foreach (var y in Model)
+        {
             <tr>
                 <td><img src="@y.Product.ThumbnailImage" width="100" /></td>
                 <td>@y.Quantity</td>
@@ -62,8 +63,8 @@
                     <a style="padding:7px;border-radius:3px;" class="btn-danger">Sil</a>
                 </td>
             </tr>
+        }
         </table>
-    }
     <div>
         Toplam : @Model.Sum(y => y.TotalPrice).ToString("0")
     </div> 
