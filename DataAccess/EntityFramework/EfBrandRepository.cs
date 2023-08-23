@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityFramework
 {
-    public class EfCategoryRepository : GenericRepository<Category>,ICategoryDal
+    public class EfBrandRepository : GenericRepository<Brand>, IBrandDal
     {
-        public List<Category> ListProductCategory()
+        public List<Brand> ListProductBrand()
         {
             using (var c = new DataContext())
             {
-                return c.Categories.Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
+                return c.Brands.Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
             }
         }
     }

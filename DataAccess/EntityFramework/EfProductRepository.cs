@@ -67,7 +67,6 @@ namespace DataAccess.EntityFramework
             {
                 return c.Products.Include(x => x.Category).OrderByDescending(x => x.CreatedDate).Where(x => (x.CategoryId == id) && (x.Statu == true)).ToList();
             }
-
         }
         public List<Product> ListBrandProduct(int id)
         {

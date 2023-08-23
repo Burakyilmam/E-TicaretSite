@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface IBrandService : IGenericService<Brand>
     {
-        public List<Category> ListProductCategory();
+        public List<Brand> ListProductBrand();
     }
 }

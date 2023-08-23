@@ -1,22 +1,22 @@
 ﻿@using Entity.Entities
-@model List<Category>
+@model List<Brand>
 @{
-    ViewData["Title"] = "CategoryList";
+    ViewData["Title"] = "Marka Listesi";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @if (!Model.Any())
 {
     <div>
-        Kategori Bulunamadı
+        Marka Bulunamadı
     </div>
 }
 @if (Model.Any())
 {
     <table>
         <tr>
-            <th>Kategori ID</th>
-            <th>Kategori Adı</th>
-            <th>Kategori Statüsü</th>
+            <th>Marka ID</th>
+            <th>Marka Adı</th>
+            <th>Marka Statüsü</th>
             <th>Güncelle</th>
             <th>Sil</th>
         </tr>
@@ -39,12 +39,12 @@
                     }
                 </td>
                 <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Category/GetCategory/@item.Id">
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Brand/GetBrand/@item.Id">
                         <i class="fa fa-refresh"></i>
                     </a>
                 </td>
                 <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Category/CategoryDelete/@item.Id">
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Brand/BrandDelete/@item.Id">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -52,7 +52,7 @@
         }
     </table>
     <div class="text-center">
-        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
+        @await Html.PartialAsync("~/Views/Brand/BrandAdd.cshtml")
     </div>
 }
 

@@ -12,6 +12,10 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
+        public ProductManager()
+        {
+            
+        }
 
         public ProductManager(IProductDal productDal)
         {

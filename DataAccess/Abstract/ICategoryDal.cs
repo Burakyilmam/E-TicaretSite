@@ -9,6 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface ICategoryDal : IGenericDal<Category>
     {
-
+        public List<Category> ListProductCategory();
     }
 }

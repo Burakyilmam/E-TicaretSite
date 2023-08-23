@@ -44,6 +44,11 @@ namespace Business.Concrete
             return _categoryDal.List();
         }
 
+        public List<Category> ListProductCategory()
+        {
+            return _categoryDal.ListProductCategory();
+        }
+
         public void Update(Category t)
         {
             _categoryDal.Update(t);

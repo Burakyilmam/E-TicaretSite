@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Abstract
+namespace DataAccess.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface IBrandDal : IGenericDal<Brand>
     {
-        public List<Category> ListProductCategory();
+        public List<Brand> ListProductBrand();
     }
 }

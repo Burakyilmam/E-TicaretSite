@@ -1,6 +1,7 @@
 ﻿using Business.Concrete;
 using DataAccess.Context;
 using DataAccess.EntityFramework;
+using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -47,6 +48,19 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = pm.ListBrandProduct(id);
             return View(value);
+        }
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            product.Statu = true;
+            product.CreatedDate = DateTime.Now;
+            pm.Add(product);
+            return RedirectToAction("ProductList", "Product");
         }
     }
 }
