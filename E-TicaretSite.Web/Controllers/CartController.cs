@@ -50,7 +50,7 @@ namespace E_TicaretSite.Web.Controllers
             c.SaveChanges();
             int cartId = newCart.Id;
 
-            var existingCartItem = c.CartItems.FirstOrDefault(item => item.ProductId == id);
+            var existingCartItem = c.CartItems.FirstOrDefault(item => item.ProductId == id && item.Cart.UserId == user.Id);
 
             if (existingCartItem != null)
             {
@@ -64,7 +64,7 @@ namespace E_TicaretSite.Web.Controllers
                     CreatedDate = DateTime.Now,
                     CartId = cartId,
                     ProductId = id,
-                    TotalPrice = 0,
+                    TotalPrice =0,
                     Quantity = 1
                 };
                 cim.Add(newCartItem);
