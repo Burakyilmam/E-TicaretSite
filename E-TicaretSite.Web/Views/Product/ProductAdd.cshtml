@@ -8,13 +8,13 @@
 
 <div style="display:flex" class="col-12 text-center justify-content-center">
     <div class="col-6">
-        <form action="/Product/AddProduct/" method="post">
+        <form action="/Product/ProductAdd/" method="post">
             <input type="text" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Name" placeholder="Ürün Adını Giriniz." required />
             <input type="text" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Description" placeholder="Ürün Açıklamasını Giriniz." required />
             <input type="text" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="ThumbnailImage" placeholder="Ürün Resmini Giriniz." required />
-            <input type="text" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Price" placeholder="Ürün Fiyatı" required />
-            <input type="text" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Discount" placeholder="Ürün İndirim Oranı" required />
-            <input type="text" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Stock" placeholder="Stok Adeti" required />
+            <input type="number" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Price" placeholder="Ürün Fiyatı" required />
+            <input type="number" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Discount" placeholder="Ürün İndirim Oranı" required />
+            <input type="number" class="mt-2 mb-2" style="width:50%;padding: 4px 10px;outline:none" name="Stock" placeholder="Stok Adeti" required />
             @await Component.InvokeAsync("ListProductCategory")
             @await Component.InvokeAsync("ListProductBrand")
             <br />

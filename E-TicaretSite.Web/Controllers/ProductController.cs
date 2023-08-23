@@ -50,12 +50,12 @@ namespace E_TicaretSite.Web.Controllers
             return View(value);
         }
         [HttpGet]
-        public IActionResult AddProduct()
+        public IActionResult ProductAdd()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult ProductAdd(Product product)
         {
             product.Statu = true;
             product.CreatedDate = DateTime.Now;

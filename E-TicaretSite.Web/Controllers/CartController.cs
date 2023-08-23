@@ -36,12 +36,21 @@ namespace E_TicaretSite.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddToCart(int id,CartItems cartItems)
+        public IActionResult AddToCart(int id)
         {
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            
+            var newCart = new Cart()
+            {
+                Statu = true,
+                CreatedDate = DateTime.Now,
+                UserId = user.Id,
+            };
+            cm.Add(newCart);
+            c.SaveChanges();
+            int cartId = newCart.Id;
 
-            var existingCartItem = c.CartItems.FirstOrDefault(item =>
-                item.CartId == user.Id && item.ProductId == id);
+            var existingCartItem = c.CartItems.FirstOrDefault(item => item.ProductId == id);
 
             if (existingCartItem != null)
             {
@@ -53,7 +62,7 @@ namespace E_TicaretSite.Web.Controllers
                 {
                     Statu = true,
                     CreatedDate = DateTime.Now,
-                    CartId = user.Id,
+                    CartId = cartId,
                     ProductId = id,
                     TotalPrice = 0,
                     Quantity = 1
