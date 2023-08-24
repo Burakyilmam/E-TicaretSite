@@ -1,4 +1,5 @@
-﻿using Entity.Entities;
+﻿using DataAccess.EntityFramework;
+using Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Business.Abstract
     public interface ICartItemsService : IGenericService<CartItems>
     {
         List<CartItems> ListCartItemsWith(int id);
+        List<CartItems> GetCartItemsByUserId(int userid, int cartid);
     }
 }

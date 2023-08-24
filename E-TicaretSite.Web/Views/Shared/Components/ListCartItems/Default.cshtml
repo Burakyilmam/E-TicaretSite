@@ -26,15 +26,15 @@
                 <td>@y.Product.Name</td>
                 @if (y.Product.Discount == 0)
                 {
-                    <td>@y.Product.Price.ToString("0")</td>
-                    <td>@y.Product.Price.ToString("0")</td>
+                    <td>@y.Product.Price.ToString("N0") TL</td>
+                    <td>@y.Product.Price.ToString("N0") TL</td>
                 }
                 @if (y.Product.Discount > 0)
                 {
-                    <td>@y.Product.Price.ToString("0")</td>
+                    <td>@y.Product.Price.ToString("N0") TL</td>
                     var discountedPrice =
                     y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
-                    <td>@discountedPrice.ToString("0")</td>
+                    <td>@discountedPrice.ToString("N0") TL</td>
                 }
                 @{
                     if (y.Product.Discount == 0)
@@ -51,7 +51,7 @@
                     }
                 }
                 <td>
-                    @y.TotalPrice.ToString("0")
+                    @y.TotalPrice.ToString("N0") TL
                 </td>
                 <td>
                     <a style="padding:7px;border-radius:3px;" class="btn-success">+</a>
@@ -65,7 +65,7 @@
             </tr>
         }
         </table>
-    <div>
-        Toplam : @Model.Sum(y => y.TotalPrice).ToString("0")
-    </div> 
+    <b>
+        Toplam : @Model.Sum(y => y.TotalPrice).ToString("N0") TL
+    </b> 
 }

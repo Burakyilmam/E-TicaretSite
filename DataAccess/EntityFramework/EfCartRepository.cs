@@ -20,5 +20,12 @@ namespace DataAccess.EntityFramework
                 return c.Carts.Include(x => x.CartItems).Where(x => x.UserId == id).ToList();
             }
         }
+        public List<Cart> ListCartWith()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Carts.Include(x=>x.User).Where(x => x.Statu == true).ToList();
+            }
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace Business.Abstract
     public interface ICartService : IGenericService<Cart>
     {
         List<Cart> GetCartByUserId(int id);
+        List<Cart> ListCartWith();
     }
 }

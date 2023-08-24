@@ -1,0 +1,100 @@
+﻿@using Entity.Entities
+@model List<CartItems>
+@{
+    ViewData["Title"] = "Sepet Ürünleri";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (!Model.Any())
+{
+    <div>
+        Sepet Bulunamadı
+    </div>
+}
+@if (Model.Any())
+{
+    <table class="text-center">
+        <tr>
+            <th>ID</th>
+            <th>Adet</th>
+            <th>Sepet ID</th>
+            <th>Ürün ID</th>
+            <th>Adı</th>
+            <th>Fiyatı</th>
+            <th>İndirim Oranı</th>
+            <th>İndirimli Fiyat</th>
+            <th>Toplam Fiyat</th>
+            <th>Statü</th>
+            <th>Tarih</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Quantity</td>
+                <td>@item.CartId</td>
+                <td>@item.ProductId</td>
+                <td>@item.Product.Name</td>
+                <td>@item.Product.Price.ToString("N0") TL</td>
+                <td>%@item.Product.Discount.ToString("0")</td>
+                <td>
+
+                    @{
+                        var discountedprice = item.Product.Price - (item.Product.Price * (item.Product.Discount / 100));
+                        if (@item.Product.Discount == 0)
+                        {
+                            <div>@item.Product.Price.ToString("N0") TL</div>
+                        }
+                        else if (@item.Product.Discount > 0)
+                        {
+                            <div>@discountedprice.ToString("N0") TL</div>
+                        }
+                    }
+                    
+                </td>
+                <td>@{
+                        if (item.Product.Discount == 0)
+                        {
+                            var TotalPrice = item.Product.Price * item.Quantity;
+                            item.TotalPrice = TotalPrice;
+                        }
+                        if (item.Product.Discount > 0)
+                        {
+                            var discountedPrice =
+                            item.Product.Price - (item.Product.Price * item.Product.Discount) / 100;
+                            var TotalPrice = discountedPrice * item.Quantity;
+                            item.TotalPrice = TotalPrice;
+                        }
+                    }
+                    @item.TotalPrice.ToString("N0")
+                <td>
+
+                    @if (item.Statu == true)
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                        </a>
+                    }
+                </td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/GetCart/@item.Id">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/CartDelete/@item.Id">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+    <b>Sepet Toplam Fiyatı : @Model.Sum(y => y.TotalPrice).ToString("N0") TL</b>
+}
+

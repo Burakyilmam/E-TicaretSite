@@ -25,12 +25,12 @@ namespace Business.Concrete
 
         public void Delete(Cart t)
         {
-            throw new NotImplementedException();
+            _cartDal.Delete(t);
         }
 
         public Cart Get(int id)
         {
-            throw new NotImplementedException();
+            return _cartDal.GetId(id);
         }
 
         public List<Cart> GetCartByUserId(int id)
@@ -40,12 +40,17 @@ namespace Business.Concrete
 
         public List<Cart> List()
         {
-           return _cartDal.List();
+            return _cartDal.List();
+        }
+
+        public List<Cart> ListCartWith()
+        {
+            return _cartDal.ListCartWith();
         }
 
         public void Update(Cart t)
         {
-            throw new NotImplementedException();
+            _cartDal.Update(t);
         }
     }
 }

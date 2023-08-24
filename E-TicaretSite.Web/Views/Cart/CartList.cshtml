@@ -1,0 +1,63 @@
+﻿@using Entity.Entities
+@model List<Cart>
+@{
+    ViewData["Title"] = "Sepet Listesi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (!Model.Any())
+{
+    <div>
+        Sepet Bulunamadı
+    </div>
+}
+@if (Model.Any())
+{
+    <table class="text-center">
+        <tr>
+            <th>ID</th>
+            <th>Kullanıcı Adı</th>
+            <th>Statü</th>
+            <th>Tarih</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+            <th>Sepet Ögeleri</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.User.UserName</td>
+                <td>
+
+                    @if (item.Statu == true)
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                        </a>
+                    }
+                </td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/GetCart/@item.Id">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/CartDelete/@item.Id">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetCartItems", "Cart", new { userid = item.UserId, cartid = item.Id })">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+

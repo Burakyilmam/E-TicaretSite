@@ -23,7 +23,7 @@ namespace E_TicaretSite.Web.Controllers
                 if (user != null)
                 {
                     var username = User.Identity.Name;
-                    ViewBag.Name = username;
+                    ViewBag.UserName = username;
                     ViewBag.Id = userId;
                 }
             }

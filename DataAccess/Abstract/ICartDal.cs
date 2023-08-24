@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
     public interface ICartDal : IGenericDal<Cart>
     {
         List<Cart> GetCartByUserId(int id);
+        List<Cart> ListCartWith();
     }
 }
