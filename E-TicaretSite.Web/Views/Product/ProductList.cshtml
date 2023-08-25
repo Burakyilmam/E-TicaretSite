@@ -51,13 +51,28 @@
                         </a>
                     }
                 </td>
-                <td><a href="/Product/EditProduct/@item.Id">Güncelle</a></td>
-                <td><a href="/Product/ProductDelete/@item.Id">Sil</a></td>
-                <td><a href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
+                <td>
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Product/EditProduct/@item.Id">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductDelete/@item.Id">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetProductImages", "Product", new {  productid = item.Id })">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
+                <td><a class="btn-info" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
             </tr>
         }
     </table>
-    <a href="/Product/ProductAdd/">Ekle</a>
+   <center class="mt-2">
+        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
+   </center>
 
 }
 

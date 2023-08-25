@@ -2,6 +2,7 @@
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,13 @@ namespace DataAccess.EntityFramework
             {
                 return c.ProductImages.Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
             }
-
+        }
+        public List<ProductImage> GetProductImages(int productid)
+        {
+            using (var c = new DataContext())
+            {
+                return c.ProductImages.Include(x=>x.Product).Where(x => (x.Statu == true) && (x.ProductId == productid)).ToList();
+            }
         }
     }
 }

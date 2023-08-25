@@ -14,6 +14,7 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         ProductManager pm = new ProductManager(new EfProductRepository());
+        ProductImageManager pim = new ProductImageManager(new EfProductImageRepository());
         public IActionResult ProductList(Product product)
         {
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -108,6 +109,11 @@ namespace E_TicaretSite.Web.Controllers
         {
             pm.Update(product);
             return RedirectToAction("ProductList", "Product");
+        }
+        public IActionResult GetProductImages(int productid)
+        {
+            var productimages = pim.GetProductImages(productid);
+            return View(productimages);
         }
     }
 }

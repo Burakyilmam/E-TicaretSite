@@ -33,6 +33,11 @@ namespace Business.Concrete
             return _productImageDal.GetId(id);
         }
 
+        public List<ProductImage> GetProductImages(int productid)
+        {
+            return _productImageDal.GetProductImages(productid);
+        }
+
         public List<ProductImage> List()
         {
            return _productImageDal.List();

@@ -113,6 +113,18 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult UserList()
         {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+                }
+            }
             var value = um.List();
             return View(value);
         }
