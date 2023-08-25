@@ -1,0 +1,20 @@
+﻿﻿@using Entity.Entities
+@model IEnumerable<Comment>
+
+<div class="container-fluid">
+    @using (Html.BeginForm("AdminCommentAdd", "Comment", FormMethod.Post))
+    {
+        <center class="mb-2">
+            <textarea required type="text" style="width:50%;padding: 4px 10px;outline:none;" name="CommentText" placeholder="Yorumunuzu Giriniz."></textarea>
+        </center>
+        <center class="mb-2">
+            @await Component.InvokeAsync("ListCommentUser")
+        </center>
+        <center class="mb-2">
+            @await Component.InvokeAsync("ListCommentProduct")
+        </center>
+        <center>
+            <button style="padding: 4px 10px;margin-left:-10px;" class="btn-success text-center"><i class="fa fa-plus"></i></button>
+        </center>
+    }
+</div>

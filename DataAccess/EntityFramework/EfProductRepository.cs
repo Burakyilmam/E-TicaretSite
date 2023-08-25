@@ -91,5 +91,12 @@ namespace DataAccess.EntityFramework
                 return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => (x.CategoryId == 1) || (x.CategoryId == 2) || (x.CategoryId == 3) || (x.CategoryId == 4)).Take(10).ToList();
             }
         }
+        public List<Product> ListCommentProduct()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Business.Concrete
 
         public void Delete(User t)
         {
-           _userDal.Delete(t);
+            _userDal.Delete(t);
         }
 
         public User Get(int id)
@@ -41,6 +41,10 @@ namespace Business.Concrete
         public void Update(User t)
         {
             _userDal.Update(t);
+        }
+        public List<User> ListCommentUser()
+        {
+            return _userDal.ListCommentUser();
         }
     }
 }

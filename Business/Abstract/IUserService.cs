@@ -9,6 +9,6 @@ namespace Business.Abstract
 {
     public interface IUserService : IGenericService<User>
     {
-
+        List<User> ListCommentUser();
     }
 }

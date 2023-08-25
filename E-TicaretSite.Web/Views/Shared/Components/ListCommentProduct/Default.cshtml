@@ -1,0 +1,9 @@
+﻿﻿﻿@using Entity.Entities
+@model IEnumerable<Product>
+
+<select style="width:50%;padding: 4px 10px;outline:none;" name="ProductId">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>

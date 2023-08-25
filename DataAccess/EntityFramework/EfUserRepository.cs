@@ -13,6 +13,12 @@ namespace DataAccess.EntityFramework
 {
     public class EfUserRepository : GenericRepository<User>,IUserDal
     {
-
+        public List<User> ListCommentUser()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Users.OrderBy(x => x.UserName).ToList();
+            }
+        }
     }
 }

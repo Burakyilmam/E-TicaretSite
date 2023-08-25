@@ -11,5 +11,6 @@ namespace Business.Abstract
     {
         List<Comment> ListProductComment(int id);
         List<Comment> ListUserComment(int id);
+        List<Comment> ListCommentWith();
     }
 }

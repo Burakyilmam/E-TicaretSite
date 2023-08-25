@@ -21,6 +21,15 @@ namespace E_TicaretSite.Web.Controllers
             var value = cm.ListUserComment(user.Id);
             return View(value);
         }
+        public IActionResult ProductComments()
+        {
+            DataContext c = new DataContext();
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.Username = User.Identity.Name;
+            ViewBag.Id = user.Id;
+            var value = cm.ListProductComment(user.Id);
+            return View(value);
+        }
         [HttpGet]
         public IActionResult CommentAdd()
         {
@@ -39,7 +48,18 @@ namespace E_TicaretSite.Web.Controllers
             }
             cm.Add(c);
             return RedirectToAction("ProductPage", "Product", new { @id = c.ProductId });
-
+        }
+        public IActionResult CommentList()
+        {
+            var value = cm.ListCommentWith();
+            return View(value);
+        }
+        public IActionResult AdminCommentAdd(Comment c)
+        {
+            c.CreatedDate = DateTime.Today;
+            c.Statu = true;
+            cm.Add(c);
+            return RedirectToAction("CommentList","Comment");
         }
     }
 }

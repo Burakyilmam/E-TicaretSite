@@ -19,5 +19,6 @@ namespace DataAccess.Abstract
         List<Product> ListBrandProduct(int id);
         List<Product> ProductPage(int id);
         List<Product> ListElectronicProducts();
+        List<Product> ListCommentProduct();
     }
 }

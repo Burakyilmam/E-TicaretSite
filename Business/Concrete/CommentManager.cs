@@ -38,6 +38,11 @@ namespace Business.Concrete
             return _commentDal.List();
         }
 
+        public List<Comment> ListCommentWith()
+        {
+            return _commentDal.ListCommentWith();
+        }
+
         public List<Comment> ListProductComment(int id)
         {
             return _commentDal.ListProductComment(id);

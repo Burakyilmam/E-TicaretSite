@@ -17,9 +17,8 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Comments.Include(x=>x.User).Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
+                return c.Comments.Include(x => x.User).Include(x => x.Product).Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
             }
-
         }
         public List<Comment> ListUserComment(int id)
         {
@@ -27,7 +26,13 @@ namespace DataAccess.EntityFramework
             {
                 return c.Comments.Include(x => x.User).Include(x => x.Product).Where(x => (x.Statu == true) && (x.UserId == id)).ToList();
             }
-
+        }
+        public List<Comment> ListCommentWith()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Comments.Include(x => x.User).Include(x => x.Product).ToList();
+            }
         }
     }
 }

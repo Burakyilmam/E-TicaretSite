@@ -98,5 +98,9 @@ namespace Business.Concrete
         {
             _productDal.Update(t);
         }
+        public List<Product> ListCommentProduct()
+        {
+            return _productDal.ListCommentProduct();
+        }
     }
 }
