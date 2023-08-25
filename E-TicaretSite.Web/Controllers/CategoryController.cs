@@ -58,5 +58,24 @@ namespace E_TicaretSite.Web.Controllers
             }
             return View();
         }
+        public IActionResult CategoryDelete(int id)
+        {
+            var value = cm.Get(id);
+            cm.Delete(value);
+            return RedirectToAction("CategoryList", "Category");
+        }
+
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var value = cm.Get(id);
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult EditCategory(Category category)
+        {
+            cm.Update(category);
+            return RedirectToAction("CategoryList", "Category");
+        }
     }
 }

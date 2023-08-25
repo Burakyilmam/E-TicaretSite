@@ -1,0 +1,50 @@
+﻿@model Entity.Entities.Product
+@{
+    ViewData["Title"] = "Ürün Güncelleme Sayfası";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid">
+    <h2 class="text-center mt-3 mb-3">Ürün Güncelleme Formu</h2>
+    <center>
+        @using (Html.BeginForm("EditProduct", "Product", FormMethod.Post))
+        {
+            @Html.TextBoxFor(x=>x.Id,new {@style="display:none;"})
+            <h2 class="text-center col-12">Ürün Adı</h2>
+            @Html.TextBoxFor(x=>x.Name,new {style="border-radius: 5px;padding: 4px 10px;width:70%", })
+            <div class="col-12 text-center mb-3">
+                <img width="50%" src="@Model.ThumbnailImage">
+            </div>
+            <h2 class="text-center col-12">Resim Url</h2>
+            @Html.TextBoxFor(x=>x.ThumbnailImage,new {style="border-radius: 5px;padding: 4px 10px;width:70%", })
+            <h2 class="text-center col-12">Ürün Açıklaması</h2>
+            @Html.TextBoxFor(x=>x.Description,new {style="border-radius: 5px;padding: 4px 10px;width:70%", })
+            <h2 class="text-center col-12">Ürün Fiyatı</h2>
+            @Html.TextBoxFor(x=>x.Price,new {style="border-radius: 5px;padding: 4px 10px;width:70%", })
+            <h2 class="text-center col-12">Ürün İndirim Oranı</h2>
+            @Html.TextBoxFor(x=>x.Discount,new {style="border-radius: 5px;padding: 4px 10px;width:70%", })
+            <h2 class="text-center col-12">Ürün Stok Adeti</h2>
+            @Html.TextBoxFor(x=>x.Stock,new {style="border-radius: 5px;padding: 4px 10px;width:70%", })
+            <h2 class="text-center col-12">Ürün Kategorisi</h2>
+            @Html.DropDownListFor(model => model.CategoryId, ((IEnumerable<SelectListItem>)ViewBag.Categories).Select(c => new SelectListItem
+        {
+        Value = c.Value,
+        Text = $"{c.Value} - {c.Text}"
+        }),new {style="border-radius: 5px;padding: 4px 10px;width:70%" })
+            <h2 class="text-center col-12">Ürün Markası</h2>
+            @Html.DropDownListFor(model => model.BrandId, ((IEnumerable<SelectListItem>)ViewBag.Brands).Select(co => new SelectListItem
+        {
+        Value = co.Value,
+        Text = $"{co.Value} - {co.Text}",
+        }),new {style="border-radius: 5px;padding: 4px 10px;width:70%"})
+            <h2 class="text-center col-12">Ürün Statüsü</h2>
+        <div class="mb-2">
+                @Html.DropDownList("Statu", new List<SelectListItem>
+            {
+            new SelectListItem { Value = "True", Text = "Aktif" },
+            new SelectListItem { Value = "False", Text = "Pasif" }
+            }, new {style="border-radius: 5px;padding: 4px 10px;width:70%"})     
+        </div>
+         <button style="padding: 4px 10px;" class="btn-success text-center"><i class="fa fa-plus"></i></button>
+        }
+    </center>
+</div>
