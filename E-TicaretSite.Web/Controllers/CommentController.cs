@@ -61,5 +61,11 @@ namespace E_TicaretSite.Web.Controllers
             cm.Add(c);
             return RedirectToAction("CommentList","Comment");
         }
+        public IActionResult CommentDelete(int id)
+        {
+            var value = cm.Get(id);
+            cm.Delete(value);
+            return RedirectToAction("CommentList", "Comment");
+        }
     }
 }
