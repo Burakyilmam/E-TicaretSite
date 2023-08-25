@@ -5,6 +5,7 @@ using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Drawing2D;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -42,6 +43,24 @@ namespace E_TicaretSite.Web.Controllers
             brand.Statu = true;
             brand.CreatedDate = DateTime.Now;
             bm.Add(brand);
+            return RedirectToAction("BrandList", "Brand");
+        }
+        public IActionResult BrandDelete(int id)
+        {
+            var value = bm.Get(id);
+            bm.Delete(value);
+            return RedirectToAction("BrandList", "Brand");
+        }
+        [HttpGet]
+        public IActionResult EditBrand(int id)
+        {
+            var value = bm.Get(id);
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult EditBrand(Brand brand)
+        {
+            bm.Update(brand);
             return RedirectToAction("BrandList", "Brand");
         }
     }

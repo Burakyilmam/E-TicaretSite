@@ -17,6 +17,7 @@
                 <th>Fiyat</th>
                 <th>İndirim</th>
                 <th>Toplam</th>
+                <th>Stok</th>
             </tr>
         @foreach (var y in Model)
         {
@@ -53,6 +54,7 @@
                 <td>
                     @y.TotalPrice.ToString("N0") TL
                 </td>
+                <td>@y.Product.Stock</td>
                 <td>
                     <a style="padding:7px;border-radius:3px;" class="btn-success">+</a>
                 </td>

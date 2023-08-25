@@ -1,0 +1,21 @@
+﻿@model Entity.Entities.Brand
+@{
+    ViewData["Title"] = "Marka Güncelleme Sayfası";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("EditBrand", "Brand", FormMethod.Post))
+{
+    @Html.TextBoxFor(x=>x.Id,new {@style="display:none;"})
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.Name,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center>
+        @Html.DropDownList("Statu", new List<SelectListItem>
+    {
+    new SelectListItem { Value = "True", Text = "Aktif" },
+    new SelectListItem { Value = "False", Text = "Pasif" }
+    }, "-- Seçiniz --", new {@style="padding: 4px 10px;margin-left:-10px;width:50%"})
+    </center>
+    <center class="mt-2">
+        <button style="padding: 4px 10px;margin-left:-10px;" class="btn-success text-center">Güncelle</button>
+    </center>
+}
