@@ -1,0 +1,98 @@
+﻿@using Entity.Entities
+@model List<User>
+@{
+    ViewData["Title"] = "Kullanıcılar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (!Model.Any())
+{
+    <div>
+        Kullanıcı Bulunamadı
+    </div>
+}
+@if (Model.Any())
+{
+    <table class="text-center">
+        <tr>
+            <th>ID</th>
+            <th>Kullanıcı Ad</th>
+            <th>Parola</th>
+            <th>Email</th>
+            <th>Statüsü</th>
+            <th>Eklenme Tarihi</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
+                <td>
+                    <div style="display:flex;justify-content:center">
+                        <button style="border:none;background-color:transparent;outline:None" onclick="togglePasswordVisibility('@item.Id');toggleEye('@item.Id');">
+                            <i class="fa fa-eye" id="eye_@item.Id"></i>
+                            <i style="display:none;" class="fa fa-eye-slash" id="eye-slash_@item.Id"></i>
+                        </button>
+                        <input disabled type="password" id="password_@item.Id" style="border:none;background-color:transparent;text-align:center" value="@item.Password">
+                    </div>
+                </td>
+                <td>@item.Email</td>
+                <td>
+
+                    @if (item.Statu == true)
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                        </a>
+                    }
+                </td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/User/EditUser/@item.Id">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserDelete/@item.Id">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        } 
+    </table>
+   <center class="mt-4">
+        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserRegister/">
+            <i class="fa fa-plus"></i>
+        </a>
+   </center>
+    <script>
+        function togglePasswordVisibility(Id) {
+            var passwordField = document.getElementById("password_" + Id);
+
+            if (passwordField.getAttribute("type") === "password") {
+                // Parola gizliyse
+                passwordField.setAttribute("type", "text");
+            } else {
+                // Parola görünürse
+                passwordField.setAttribute("type", "password");
+            }
+        }
+        function toggleEye(UserId) {
+            var x = document.getElementById("eye_" + + Id);
+            var y = document.getElementById("eye-slash_" + Id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display = "none";
+            } else {
+                x.style.display = "none";
+                y.style.display = "block";
+            }
+        }
+    </script>
+}
+

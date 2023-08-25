@@ -111,5 +111,28 @@ namespace E_TicaretSite.Web.Controllers
             await HttpContext.SignOutAsync();
             return RedirectToAction("HomePage", "Home");
         }
+        public IActionResult UserList()
+        {
+            var value = um.List();
+            return View(value);
+        }
+        public IActionResult UserDelete(int id)
+        {
+            var value = um.Get(id);
+            um.Delete(value);   
+            return RedirectToAction("UserList", "User");
+        }
+        [HttpGet]
+        public IActionResult EditUser(int id)
+        {
+            var value = um.Get(id);
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult EditUser(User user)
+        {
+            um.Update(user);
+            return RedirectToAction("UserList", "User");
+        }
     }
 }
