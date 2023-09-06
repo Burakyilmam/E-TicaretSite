@@ -1,0 +1,46 @@
+﻿@using Entity.Entities
+@model List<Category>
+@{
+    ViewData["Title"] = "Ürün Resimleri";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (!Model.Any())
+{
+    <div>
+        Kategori Bulunamadı
+    </div>
+}
+@if (Model.Any())
+{
+    <table class="text-center">
+        <tr>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Genel Kategorisi</th>
+            <th>Statü</th>
+            <th>Tarih</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.MainCategory.MainCategoryName</td>
+                <td>
+                    @if (item.Statu == true)
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        </a>
+                    }
+                    else
+                    {
+                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                        </a>
+                    }
+                </td>
+                <td>@item.CreatedDate</td>
+            </tr>
+        }
+    </table>
+}
+

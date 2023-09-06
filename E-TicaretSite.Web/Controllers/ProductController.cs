@@ -32,19 +32,21 @@ namespace E_TicaretSite.Web.Controllers
             var value = pm.ListProductWith();
             return View(value);
         }
-        public void UpdateProductStatus()
+        public IActionResult MostViewProduct()
         {
-            var productsWithZeroStock = pm.ListProductWith().Where(p => p.Stock == 0).ToList();
-
-            foreach (var product in productsWithZeroStock)
-            {
-                product.Statu = false;
-                pm.Update(product);
-            }
+            var value = pm.ListMostViewProduct();
+            return View(value);
         }
         [AllowAnonymous]
         public IActionResult ProductPage(int id)
         {
+            var view = pm.Get(id);
+
+            if (view != null)
+            {
+                view.View++;
+                pm.Update(view);
+            }
             ViewBag.Id = id;
             var value = pm.ProductPage(id);
             return View(value);
@@ -77,6 +79,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             product.Statu = true;
             product.CreatedDate = DateTime.Now;
+            product.View = 0;
             pm.Add(product);
             return RedirectToAction("ProductList", "Product");
         }

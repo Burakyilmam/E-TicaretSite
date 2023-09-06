@@ -10,9 +10,6 @@
     <div>
         Kategori Bulunamadı
     </div>
-    <div class="text-center">
-        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
-    </div>
 }
 @if (Model.Any())
 {
@@ -23,6 +20,7 @@
             <th>Statüsü</th>
             <th>Güncelle</th>
             <th>Sil</th>
+            <th>Kategoriler</th>
         </tr>
         @foreach (var item in Model)
         {
@@ -52,12 +50,14 @@
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
+                <td>
+                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetCategory", "MainCategory", new {  categoryid = item.Id })">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
             </tr>
         }
     </table>
-    <div class="text-center">
-        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
-    </div>
 }
 
 

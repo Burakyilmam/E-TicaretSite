@@ -112,5 +112,10 @@ namespace Business.Concrete
         {
             return _productDal.ListMainCategoryProduct(id);
         }
+
+        public List<Product> ListClothingProducts()
+        {
+            return _productDal.ListClothingProducts();
+        }
     }
 }

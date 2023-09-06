@@ -20,5 +20,12 @@ namespace DataAccess.EntityFramework
                 return c.Categories.Include(x=>x.MainCategory).Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
             }
         }
+        public List<Category> GetCategory(int categoryid)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Categories.Include(x => x.MainCategory).Where(x => (x.Statu == true) && (x.MainCategoryId == categoryid)).ToList();
+            }
+        }
     }
 }
