@@ -1,16 +1,17 @@
-﻿@using Entity.Entities
-@model List<Comment>
+﻿
+@using Entity.Entities
+@model List<MainCategory>
 @{
-    ViewData["Title"] = "Yorumlar";
+    ViewData["Title"] = "CategoryList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @if (!Model.Any())
 {
     <div>
-        Yorum Bulunamadı
+        Kategori Bulunamadı
     </div>
     <div class="text-center">
-        @await Html.PartialAsync("~/Views/Comment/AdminCommentAdd.cshtml")
+        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
     </div>
 }
 @if (Model.Any())
@@ -18,11 +19,8 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>Yorum</th>
-            <th>Kullanıcı Ad</th>
-            <th>Ürün Ad</th>
+            <th>Adı</th>
             <th>Statüsü</th>
-            <th>Eklenme Tarihi</th>
             <th>Güncelle</th>
             <th>Sil</th>
         </tr>
@@ -30,9 +28,7 @@
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.CommentText</td>
-                <td><a href="/Comment/UserComments/@item.UserId">@item.User.UserName</a></td>
-                <td><a href="/Comment/ProductComments/@item.ProductId">@item.Product.Name</a></td>
+                <td>@item.MainCategoryName</td>
                 <td>
 
                     @if (item.Statu == true)
@@ -46,14 +42,13 @@
                         </a>
                     }
                 </td>
-                <td>@item.CreatedDate</td>
                 <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Comment/EditComment/@item.Id">
+                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Category/EditCategory/@item.Id">
                         <i class="fa fa-refresh"></i>
                     </a>
                 </td>
                 <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Comment/CommentDelete/@item.Id">
+                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Category/CategoryDelete/@item.Id">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -61,7 +56,8 @@
         }
     </table>
     <div class="text-center">
-        @await Html.PartialAsync("~/Views/Comment/AdminCommentAdd.cshtml")
+        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
     </div>
 }
+
 

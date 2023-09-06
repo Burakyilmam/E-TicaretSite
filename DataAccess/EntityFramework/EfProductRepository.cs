@@ -76,6 +76,14 @@ namespace DataAccess.EntityFramework
             }
 
         }
+        public List<Product> ListMainCategoryProduct(int id)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x => x.CreatedDate).Where(x => (x.Category.MainCategoryId == id) && (x.Statu == true)).ToList();
+            }
+
+        }
         public List<Product> ProductPage(int id)
         {
             using (var c = new DataContext())
@@ -88,7 +96,14 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => (x.CategoryId == 1) || (x.CategoryId == 2) || (x.CategoryId == 3) || (x.CategoryId == 4)).Take(10).ToList();
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Category.MainCategoryId == 1).Take(10).ToList();
+            }
+        }
+        public List<Product> ListMostViewProduct()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x=>x.View).Take(10).ToList();
             }
         }
         public List<Product> ListCommentProduct()

@@ -2,6 +2,7 @@
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Categories.Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
+                return c.Categories.Include(x=>x.MainCategory).Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
             }
         }
     }

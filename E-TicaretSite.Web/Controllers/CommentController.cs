@@ -13,22 +13,22 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         CommentManager cm = new CommentManager(new EfCommentRepository());
-        public IActionResult UserComments()
+        public IActionResult UserComments(int id)
         {
             DataContext c = new DataContext();
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
             ViewBag.Username = User.Identity.Name;
             ViewBag.Id = user.Id;
-            var value = cm.ListUserComment(user.Id);
+            var value = cm.ListUserComment(id);
             return View(value);
         }
-        public IActionResult ProductComments()
+        public IActionResult ProductComments(int id)
         {
             DataContext c = new DataContext();
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
             ViewBag.Username = User.Identity.Name;
             ViewBag.Id = user.Id;
-            var value = cm.ListProductComment(user.Id);
+            var value = cm.ListProductComment(id);
             return View(value);
         }
         [HttpGet]

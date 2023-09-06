@@ -60,6 +60,7 @@
         </button>
         <a style="text-decoration:none;" href="/Product/ProductList" class="w3-bar-item w3-button">Ürünler</a>
         <a style="text-decoration:none;" href="/Category/CategoryList" class="w3-bar-item w3-button">Kategoriler</a>
+        <a style="text-decoration:none;" href="/MainCategory/MainCategoryList" class="w3-bar-item w3-button">Genel Kategoriler</a>
         <a style="text-decoration:none;" href="/Brand/BrandList" class="w3-bar-item w3-button">Markalar</a>
         <a style="text-decoration:none;" href="/Cart/CartList" class="w3-bar-item w3-button">Sepetler</a>
         <a style="text-decoration:none;" href="/Comment/CommentList" class="w3-bar-item w3-button">Yorumlar</a>
@@ -80,7 +81,7 @@
                         <div class="dropdown-content bg-light">
                             <a class="text-center" href="/User/UserPage/@ViewBag.Id">Profilim</a>
                             <a class="text-center" href="/User/UserOrders">Siparişlerim</a>
-                            <a class="text-center" href="/Comment/UserComments/">Yorumlarım</a>
+                            <a class="text-center" href="/Comment/UserComments/@ViewBag.Id">Yorumlarım</a>
                         </div>
                     </div>
                     <a class="text-white" style="text-decoration:none" href="/User/UserLogout/">Çıkış Yap</a>

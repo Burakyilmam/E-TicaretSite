@@ -10,6 +10,8 @@ namespace Entity.Entities
     public class Category : EntityBase
     {
         public string Name { get; set; }
+        public int MainCategoryId { get; set; }
+        public MainCategory MainCategory { get; set; }
         public List<Product> Products { get; set; }
 
     }

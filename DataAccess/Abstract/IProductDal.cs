@@ -17,8 +17,10 @@ namespace DataAccess.Abstract
         List<Product> ListHighStockProduct();
         List<Product> ListCategoryProduct(int id);
         List<Product> ListBrandProduct(int id);
+        List<Product> ListMainCategoryProduct(int id);
         List<Product> ProductPage(int id);
         List<Product> ListElectronicProducts();
+        List<Product> ListMostViewProduct();
         List<Product> ListCommentProduct();
     }
 }

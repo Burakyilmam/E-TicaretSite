@@ -9,12 +9,16 @@
     <div>
         Kategori Bulunamadı
     </div>
+    <div class="text-center">
+        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
+    </div>
 }
 @if (Model.Any())
 {
     <table>
         <tr>
             <th>Kategori ID</th>
+            <th>Genel Kategorisi</th>
             <th>Kategori Adı</th>
             <th>Kategori Statüsü</th>
             <th>Güncelle</th>
@@ -24,6 +28,7 @@
         {
             <tr>
                 <td>@item.Id</td>
+                <td>@item.MainCategory.MainCategoryName</td>
                 <td>@item.Name</td>
                 <td>
 

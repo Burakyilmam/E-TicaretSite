@@ -1,0 +1,52 @@
+﻿@using Entity.Entities
+@model List<Product>
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (!Model.Any())
+{
+    <div style="text-align:center">
+        <b>Ürün Bulunamadı.</b>
+    </div>
+}
+@if (Model.Any())
+{
+    <table>
+        <tr>
+            <th>Ürün ID</th>
+            <th>Ürün Adı</th>
+            <th>Ürün Marka</th>
+            <th>Ürün Açıklaması</th>
+            <th>Ürün Fiyatı</th>
+            <th>Ürün Stok Adedi</th>
+            <th>Ürün Resmi</th>
+            <th>Ürün Kategorisi</th>
+            <th>Ürün Statüsü</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+            <th>Ürün Sayfası</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+                <td><img width="100" src="@item.ThumbnailImage" /></td>
+                <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
+                <td>@item.Statu</td>
+                <td><a href="">Güncelle</a></td>
+                <td><a href="">Sil</a></td>
+                <td><a href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
+            </tr>
+        }
+    </table>
+
+}
+
+
+

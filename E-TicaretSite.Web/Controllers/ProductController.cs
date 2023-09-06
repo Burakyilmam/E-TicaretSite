@@ -61,6 +61,12 @@ namespace E_TicaretSite.Web.Controllers
             var value = pm.ListBrandProduct(id);
             return View(value);
         }
+        [AllowAnonymous]
+        public IActionResult ListMainCategoryProduct(int id)
+        {
+            var value = pm.ListMainCategoryProduct(id);
+            return View(value);
+        }
         [HttpGet]
         public IActionResult ProductAdd()
         {

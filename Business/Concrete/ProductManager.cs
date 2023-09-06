@@ -102,5 +102,15 @@ namespace Business.Concrete
         {
             return _productDal.ListCommentProduct();
         }
+
+        public List<Product> ListMostViewProduct()
+        {
+            return _productDal.ListMostViewProduct();
+        }
+
+        public List<Product> ListMainCategoryProduct(int id)
+        {
+            return _productDal.ListMainCategoryProduct(id);
+        }
     }
 }

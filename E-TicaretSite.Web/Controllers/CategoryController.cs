@@ -29,7 +29,7 @@ namespace E_TicaretSite.Web.Controllers
                     ViewBag.Id = userId;
                 }
             }
-            var value = cm.List();
+            var value = cm.ListProductCategory();
             return View(value);
         }
         [HttpGet]

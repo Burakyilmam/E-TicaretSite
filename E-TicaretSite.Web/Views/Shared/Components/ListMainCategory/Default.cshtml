@@ -1,0 +1,9 @@
+﻿﻿﻿@using Entity.Entities
+@model IEnumerable<MainCategory>
+
+<select style="width:50%;padding: 4px 10px;outline:none" class="mt-2 mb-2" name="MainCategoryId">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.MainCategoryName</option>
+    }
+</select>
