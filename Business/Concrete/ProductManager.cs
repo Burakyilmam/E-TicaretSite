@@ -14,7 +14,7 @@ namespace Business.Concrete
         IProductDal _productDal;
         public ProductManager()
         {
-            
+
         }
 
         public ProductManager(IProductDal productDal)
@@ -90,7 +90,7 @@ namespace Business.Concrete
 
 
         public List<Product> ProductPage(int id)
-        {          
+        {
             return _productDal.ProductPage(id);
         }
 
@@ -116,6 +116,21 @@ namespace Business.Concrete
         public List<Product> ListClothingProducts()
         {
             return _productDal.ListClothingProducts();
+        }
+
+        public List<Product> ListSimilarCategoryProduct(int id)
+        {
+            return _productDal.ListSimilarCategoryProduct(id);
+        }
+
+        public List<Product> ListBrandProducts(int id)
+        {
+            return _productDal.ListBrandProducts(id);
+        }
+
+        public List<Product> MainCategoryProducts(int id)
+        {
+            return _productDal.MainCategoryProducts(id);
         }
     }
 }

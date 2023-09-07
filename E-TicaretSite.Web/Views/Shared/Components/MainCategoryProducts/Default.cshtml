@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Entity.Entities.Product>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<style>
+    .Category .carousel-cell {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .checked {
+        color: orange;
+    }
+</style>
+<div class="carousel" data-flickity='{ "draggable": true, "pageDots": false}'>
+    @foreach (var item in Model)
+    {
+        <div style="border:1px solid black;margin:10px;border-radius:10px;width:30%" class="Category carousel-cell">
+            <div class="col-12">
+                <a href="/Product/ProductPage/@item.Id">
+                    <img src="@item.ThumbnailImage" height="200" width="100%" style="border-radius:10px;padding:10px;" />
+                </a>
+            </div>
+            <div class="col-12" style="display:flex;flex-wrap:wrap">
+                <div class="col-12 text-center">
+                    @item.Name
+                </div>
+                <div class="col-6">
+                    <a style="text-decoration:none;outline:none;color:black" href="/Product/ListCategoryProduct/@item.CategoryId">
+                        <b>@item.Category.Name</b>
+                    </a>
+                </div>
+                <div style="display:Flex" class="col-6 justify-content-end">
+                    <a href="/Product/ListBrandProduct/@item.BrandId" style="text-decoration:none;outline:none;color:black">
+                        <b>@item.Brand.Name</b>
+                    </a>
+                </div>
+            </div>
+            @if (item.Discount == 0)
+            {
+                <div class="col-12 text-center pt-2 pb-3"><b>@item.Price.ToString("0")</b> ₺</div>
+            }
+            @if (item.Discount > 0)
+            {
+                <div class="col-12 text-center">
+                    <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                    <b>%@item.Discount.ToString("0")</b>
+                </div>
+                var discountedPrice =
+                item.Price - (item.Price * @item.Discount) / 100;
+
+                <div class="col-12 text-center text-danger">
+                    <b>
+                        @discountedPrice.ToString("0")
+                    </b> ₺
+                </div>
+            }
+            <div class="col-12 mt-2 mb-3 text-center">
+                @await Html.PartialAsync("~/Views/Cart/AddToCart.cshtml", item.Id)
+            </div>
+
+        </div>
+    }
+</div>
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>

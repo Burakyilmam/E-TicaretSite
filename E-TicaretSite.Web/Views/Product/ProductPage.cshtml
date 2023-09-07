@@ -8,12 +8,19 @@
 @foreach (var item in Model)
 {
     <img src="@item.ThumbnailImage" width="100">
-    <b>@item.Id</b>
     <h1>@item.Name</h1>
     <b><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></b>
     <b><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></b>
+
+    @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
+    @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
+    <br />
+    @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")
+    <h1>@item.Category.Name Kategorisi<span style="font-size:16px;"><a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h1>
+    @await Component.InvokeAsync("ListSimilarCategory",new {id = item.CategoryId})
+    <h1>@item.Brand.Name Ürünleri<span style="font-size:16px;"><a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h1>
+    @await Component.InvokeAsync("ListBrandProducts",new {id = item.BrandId})
+    <h1>@item.Category.MainCategory.MainCategoryName Kategorisi<span style="font-size:16px;"><a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h1>
+    @await Component.InvokeAsync("MainCategoryProducts",new {id = item.Category.MainCategoryId})
+   
 }
-@await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
-@await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
-<br />
-@await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")

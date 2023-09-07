@@ -49,7 +49,7 @@ namespace E_TicaretSite.Web.Controllers
                 {
                     Statu = true,
                     CreatedDate = DateTime.Now,
-                    UserId = user.Id,
+                    UserId = user.Id,    
                 };
                 cm.Add(newCart);
                 c.SaveChanges();
@@ -73,7 +73,7 @@ namespace E_TicaretSite.Web.Controllers
 
             if (existingCartItem != null)
             {
-                existingCartItem.Quantity += 1;
+                existingCartItem.Quantity += 1;  
             }
             else
             {

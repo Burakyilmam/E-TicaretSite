@@ -17,7 +17,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).Include(x=>x.Brand)./*Where(x=>x.Statu == true).*/ToList();
+                return c.Products.Include(x => x.Category).Include(x => x.Brand)./*Where(x=>x.Statu == true).*/ToList();
             }
 
         }
@@ -25,7 +25,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderByDescending(x => x.CreatedDate).Where(x=>(x.CreatedDate <= DateTime.Now) && (x.Statu == true)).ToList();
+                return c.Products.Include(x => x.Category).OrderByDescending(x => x.CreatedDate).Where(x => (x.CreatedDate <= DateTime.Now) && (x.Statu == true)).ToList();
             }
 
         }
@@ -49,7 +49,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).OrderBy(x => x.Stock).Where(x=>(x.Stock > 0) && (x.Statu == true)).ToList();
+                return c.Products.Include(x => x.Category).OrderBy(x => x.Stock).Where(x => (x.Stock > 0) && (x.Statu == true)).ToList();
             }
 
         }
@@ -88,7 +88,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Id == id).ToList();
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Include(x=>x.Category.MainCategory).Where(x => x.Id == id).ToList();
             }
 
         }
@@ -97,6 +97,13 @@ namespace DataAccess.EntityFramework
             using (var c = new DataContext())
             {
                 return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Category.MainCategoryId == 1).Take(10).ToList();
+            }
+        }
+        public List<Product> MainCategoryProducts(int id)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Category.MainCategoryId == id).Take(10).ToList();
             }
         }
         public List<Product> ListClothingProducts()
@@ -110,7 +117,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x=>x.View).Take(10).ToList();
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x => x.View).Take(10).ToList();
             }
         }
         public List<Product> ListCommentProduct()
@@ -118,6 +125,20 @@ namespace DataAccess.EntityFramework
             using (var c = new DataContext())
             {
                 return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
+            }
+        }
+        public List<Product> ListSimilarCategoryProduct(int id)
+        {
+            using(var c = new DataContext())
+            {
+                return c.Products.Include(x=>x.Category).Include(x=>x.Brand).OrderByDescending(x => x.View).Where(x => (x.CategoryId == id) && (x.Statu == true)).ToList();
+            }
+        }
+        public List<Product> ListBrandProducts(int id)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x => x.View).Where(x => (x.BrandId == id) && (x.Statu == true)).ToList();
             }
         }
     }
