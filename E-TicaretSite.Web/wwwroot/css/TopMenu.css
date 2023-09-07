@@ -1,0 +1,117 @@
+﻿.TopMenu {
+    height: 100px;
+    width: 100%;
+}
+
+    .TopMenu div {
+        float: left;
+    }
+
+.Logo {
+    width: 20%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.Searchbar {
+    width: 50%;
+    height: 100px;
+    text-align: center;
+    padding-top: 35px;
+}
+
+.PhoneSearchbar {
+    display: none;
+    width: 50%;
+    height: 100px;
+    text-align: center;
+    padding-top: 35px;
+}
+
+#inputsearch {
+    border-right: none;
+    width: 80%;
+    display: inline-block;
+    padding: 5px;
+    outline: none
+}
+
+#searchbtn {
+    margin-left: -5px;
+    display: inline-block;
+    padding: 5px;
+    width: 50px
+}
+
+.Buttons {
+    width: 30%;
+    height: 100px;
+    padding-top: 45px;
+    text-align: center;
+}
+
+#userbtn {
+    padding: 10px;
+    text-decoration: none;
+}
+
+#cartbtn {
+    padding: 10px;
+    text-decoration: none;
+}
+
+#cartcount {
+    border-radius: 50%;
+    padding: 5px 12px;
+}
+.BottomMenu {
+    width: 100%;
+}
+
+    .BottomMenu ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        list-style-type: none;
+    }
+
+    .BottomMenu a {
+        width: 15%;
+        text-align: center;
+        padding: 5px;
+        border: 1px solid white;
+        background-color: green;
+        color: white;
+        text-decoration:none;
+    }
+
+        .BottomMenu a :hover {
+            color: darkorange;
+        }   
+
+@media screen and (max-width: 782px) {
+    .Logo {
+        width: 30%;
+    }
+
+    .Searchbar {
+        display: none;
+    }
+
+    .PhoneSearchbar {
+        width: 100%;
+        display: block;
+    }
+
+    .Buttons {
+        width: 70%;
+        text-align: right;
+        padding-right: 25px;
+    }
+    .BottomMenu a {
+        width: 100%;
+    }
+}
+
+
