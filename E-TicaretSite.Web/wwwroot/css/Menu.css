@@ -7,6 +7,22 @@
         float: left;
     }
 
+.ToggleBtn {
+    display: none;
+    text-align:center;
+    margin-top:40px;  
+}
+.searchbtn {
+    display: none;
+    text-align: center;
+    margin-top: 40px;
+}
+.ToggleBtn button{
+    border:none;
+    background-color:white;
+     outline: none;
+}
+
 .Logo {
     width: 20%;
     height: 100px;
@@ -43,32 +59,45 @@
     padding: 5px;
     width: 50px
 }
-
-.Buttons {
-    width: 30%;
-    height: 100px;
-    padding-top: 45px;
-    text-align: center;
+.searchbtn button {
+    border: none;
+    background-color: white;
+    outline: none;
 }
-
+.Buttons {
+    width: 30%; 
+    display:flex;
+    margin-top:30px;
+    text-align: center;
+    justify-content:center;
+}
 #userbtn {
     padding: 10px;
+    display:block;
+    width:150px;
     text-decoration: none;
 }
 
 #cartbtn {
     padding: 10px;
+    display: block;
+    width: 150px;
     text-decoration: none;
 }
-
-#cartcount {
-    border-radius: 50%;
-    padding: 5px 12px;
+#userbtn, #cartbtn {
+    display:block;
 }
+#phoneuserbtn, #phonecartbtn {
+    display: none;
+}
+
+
 .BottomMenu {
     width: 100%;
 }
-
+#icon {
+    display: none;
+}
     .BottomMenu ul {
         display: flex;
         justify-content: center;
@@ -83,16 +112,16 @@
         border: 1px solid white;
         background-color: green;
         color: white;
-        text-decoration:none;
+        text-decoration: none;
     }
 
         .BottomMenu a :hover {
             color: darkorange;
-        }   
+        }
 
 @media screen and (max-width: 782px) {
     .Logo {
-        width: 30%;
+        width: 70%;
     }
 
     .Searchbar {
@@ -101,17 +130,30 @@
 
     .PhoneSearchbar {
         width: 100%;
+        margin-left: 10px;
         display: block;
-    }
-
-    .Buttons {
-        width: 70%;
-        text-align: right;
-        padding-right: 25px;
     }
     .BottomMenu a {
         width: 100%;
+        display:none;
+    }
+    .ToggleBtn {
+        width: 15%;
+        display: block;
+    }
+    .searchbtn {
+        width: 15%;
+        padding-bottom: 10px;
+        display: block;
+        float: right;
+    }
+    #userbtn, #cartbtn {
+        display: none;
+    }
+    #phoneuserbtn, #phonecartbtn {
+        display: none;
+    }
+    #icon {
+        display: block;
     }
 }
-
-
