@@ -16,11 +16,20 @@
     @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
     <br />
     @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")
-    <h1>@item.Category.Name Kategorisi<span style="font-size:16px;"><a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h1>
+    <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+        <h2>@item.Category.Name Kategorisi<span style="font-size:16px;">
+            <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>
+    </div>
     @await Component.InvokeAsync("ListSimilarCategory",new {id = item.CategoryId})
-    <h1>@item.Brand.Name Ürünleri<span style="font-size:16px;"><a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h1>
+    <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+        <h2>@item.Brand.Name Ürünleri<span style="font-size:16px;">
+            <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>
+    </div>
     @await Component.InvokeAsync("ListBrandProducts",new {id = item.BrandId})
-    <h1>@item.Category.MainCategory.MainCategoryName Kategorisi<span style="font-size:16px;"><a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h1>
+    <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+        <h2>@item.Category.MainCategory.MainCategoryName Kategorisi<span style="font-size:16px;">
+            <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>
+    </div>
     @await Component.InvokeAsync("MainCategoryProducts",new {id = item.Category.MainCategoryId})
    
 }

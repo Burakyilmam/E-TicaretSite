@@ -16,6 +16,7 @@ namespace Entity.Entities
         public int Stock { get; set; }
         public string ThumbnailImage { get; set; }
         public int View { get; set; }
+        public int Star { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<ProductImage> ProductImages { get; set; }

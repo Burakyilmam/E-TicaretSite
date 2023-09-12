@@ -1,80 +1,106 @@
 ﻿@using Entity.Entities
-@model List<Product>
+@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Ürünler";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
 @if (!Model.Any())
 {
     <div style="text-align:center">
-        <b>Ürün Bulunamadı.</b>
+        <b>Aradığınız Ürün Bulunmamaktadır.</b>
     </div>
-    <a href="/Product/ProductAdd/">Ekle</a>
 }
-@if (Model.Any())
-{
-    <table>
-        <tr class="text-center">
-            <th>ID</th>
-            <th>Resmi</th>
-            <th>Adı</th>
-            <th>Marka</th>
-            <th>Açıklaması</th>
-            <th>Fiyatı</th>
-            <th>Stok Adedi</th>
-            <th>Kategorisi</th>
-            <th>Statüsü</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-            <th>Ürün Sayfası</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr class="text-center">
-                <td>@item.Id</td>
-                <td><img width="100" src="@item.ThumbnailImage" /></td>
-                <td>@item.Name</td>
-                <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
-                <td>@item.Description</td>
-                <td>@item.Price.ToString("0")</td>
-                <td>@item.Stock</td>
-                <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
-                <td>
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
-                        </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
-                        </a>
-                    }
-                </td>
-                <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Product/EditProduct/@item.Id">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductDelete/@item.Id">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetProductImages", "Product", new {  productid = item.Id })">
-                        <i class="fa fa-info"></i>
-                    </a>
-                </td>
-                <td><a class="btn-info" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
-            </tr>
-        }
-    </table>
-    <center class="mt-2">
-        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
-    </center>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-md-3 col-lg-2" style="border: 1px solid black;border-radius:10px;margin:3px;box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.1);  ">
+            <div class="col-12" style="height:250px;">
+                <img src="@item.ThumbnailImage" width="100%" height="250">
+            </div>
+            <div class="col-12 text-center" style="height:50px;">
+                @item.Name
+            </div>
+            <div class="col-12 text-center" style="height:30px;">
 
-}
+                @if (item.Star == 5)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 4)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 3)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 2)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 1)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+            </div>
+            <div class="col-12" style="height:60px;">
+                @if (item.Discount == 0)
+                {
+                    <div class="col-12 text-center pt-2 pb-3"><b>@item.Price.ToString("0")</b> ₺</div>
+                }
+                @if (item.Discount > 0)
+                {
+                    <div class="col-12 text-center">
+                        <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                        <b>%@item.Discount.ToString("0")</b>
+                    </div>
+                    var discountedPrice =
+                    item.Price - (item.Price * @item.Discount) / 100;
+
+                    <div class="col-12 text-center text-danger">
+                        <b>
+                            @discountedPrice.ToString("0")
+                        </b> ₺
+                    </div>
+                }
+            </div>
+            <div style="height:50px;" class="col-12 text-center">
+                @await Html.PartialAsync("~/Views/Cart/AddToCart.cshtml", item.Id)
+            </div>
+        </div>
+    }
+</div>
+
 
 
 

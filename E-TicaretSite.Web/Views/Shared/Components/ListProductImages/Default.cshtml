@@ -1,13 +1,21 @@
 ﻿﻿@using Entity.Entities
 @model IEnumerable<ProductImage>
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-
-<div class="carousel" data-flickity='{ "draggable": true,"autoPlay" : 2500 , "pageDots": false , "pauseAutoPlayOnHover" : false }'>
-    @foreach(var item in Model)
-    {
-        <div class="carousel-cell">
-            <img src="@item.ImageUrl" width="100px" style="border-radius:10px;" />
-        </div>
-    }
-</div>
+@if (!Model.Any())
+{
+    <div style="text-align:center">
+        <b>Aradığınız Ürün Bulunmamaktadır.</b>
+    </div>
+}
+@if (Model.Any())
+{
+    <div class="carousel" data-flickity='{ "draggable": true,"autoPlay" : 2500 , "pageDots": false , "pauseAutoPlayOnHover" : false }'>
+        @foreach (var item in Model)
+        {
+            <div class="carousel-cell">
+                <img src="@item.ImageUrl" width="100px" style="border-radius:10px;" />
+            </div>
+        }
+    </div>
+}
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>

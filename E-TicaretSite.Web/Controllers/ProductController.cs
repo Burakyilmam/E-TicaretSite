@@ -5,6 +5,7 @@ using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -32,14 +33,22 @@ namespace E_TicaretSite.Web.Controllers
             var value = pm.ListProductWith();
             return View(value);
         }
-        public IActionResult MostViewProduct()
+        public IActionResult MostViewProduct(string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
             var value = pm.ListMostViewProduct();
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ProductPage(int id)
+        public IActionResult ProductPage(int id, string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
             var view = pm.Get(id);
 
             if (view != null)
@@ -52,20 +61,32 @@ namespace E_TicaretSite.Web.Controllers
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ListCategoryProduct(int id)
+        public IActionResult ListCategoryProduct(int id, string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
             var value = pm.ListCategoryProduct(id);
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ListBrandProduct(int id)
+        public IActionResult ListBrandProduct(int id, string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
             var value = pm.ListBrandProduct(id);
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ListMainCategoryProduct(int id)
+        public IActionResult ListMainCategoryProduct(int id,string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
             var value = pm.ListMainCategoryProduct(id);
             return View(value);
         }

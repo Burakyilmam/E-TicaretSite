@@ -4,49 +4,97 @@
     ViewData["Title"] = "Ürünler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (!Model.Any())
-{
-    <div style="text-align:center">
-        <b>Ürün Bulunamadı.</b>
-    </div>
-}
-@if (Model.Any())
-{
-    <table>
-        <tr>
-            <th>Ürün ID</th>
-            <th>Ürün Adı</th>
-            <th>Ürün Marka</th>
-            <th>Ürün Açıklaması</th>
-            <th>Ürün Fiyatı</th>
-            <th>Ürün Stok Adedi</th>
-            <th>Ürün Resmi</th>
-            <th>Ürün Kategorisi</th>
-            <th>Ürün Statüsü</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-            <th>Ürün Sayfası</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
-                <td>@item.Description</td>
-                <td>@item.Price</td>
-                <td>@item.Stock</td>
-                <td><img width="100" src="@item.ThumbnailImage" /></td>
-                <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
-                <td>@item.Statu</td>
-                <td><a href="">Güncelle</a></td>
-                <td><a href="">Sil</a></td>
-                <td><a href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
-            </tr>
-        }
-    </table>
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-md-3 col-lg-2" style="border: 1px solid black;border-radius:10px;margin:3px;box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.1);  ">
+            <div class="col-12" style="height:250px;">
+                <img src="@item.ThumbnailImage" width="100%" height="250">
+            </div>
+            <div class="col-12 text-center" style="height:50px;">
+                @item.Name
+            </div>
+            <div class="col-12 text-center" style="height:30px;">
 
-}
+                @if (item.Star == 5)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 4)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 3)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 2)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+                @if (item.Star == 1)
+                {
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span>@item.Star</span>
+                }
+            </div>
+            <div class="col-12" style="height:60px;">
+                @if (item.Discount == 0)
+                {
+                    <div class="col-12 text-center pt-2 pb-3"><b>@item.Price.ToString("0")</b> ₺</div>
+                }
+                @if (item.Discount > 0)
+                {
+                    <div class="col-12 text-center">
+                        <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                        <b>%@item.Discount.ToString("0")</b>
+                    </div>
+                    var discountedPrice =
+                    item.Price - (item.Price * @item.Discount) / 100;
+
+                    <div class="col-12 text-center text-danger">
+                        <b>
+                            @discountedPrice.ToString("0")
+                        </b> ₺
+                    </div>
+                }
+            </div>
+            <div style="height:50px;" class="col-12 text-center">
+                @await Html.PartialAsync("~/Views/Cart/AddToCart.cshtml", item.Id)
+            </div>
+        </div>
+    }
+</div>
+
 
 
 
