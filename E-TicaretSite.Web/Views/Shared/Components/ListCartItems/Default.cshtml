@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Entity.Entities.CartItems>
+<div class="container-fluid" style="display:flex;justify-content:center;">
 
-@if (!Model.Any())
-{
-    <div style="text-align:center">
-        <b>Sepette Ürün Bulunamadı.</b>
-    </div>
-}
-@if (Model.Any())
-{
-
-        <table class="text-center">
+        @if (!Model.Any())
+        {
+        <div class="container alert alert-dark" style="text-align:center">
+                <b>Sepette Ürün Bulunamadı.</b>
+        </div>
+        }
+    @if (Model.Any())
+    {
+        <table class="text-center table-bordered" style="width:100%">
             <tr>
                 <th>Resim</th>
                 <th>Adet</th>
@@ -17,57 +17,83 @@
                 <th>Fiyat</th>
                 <th>İndirim</th>
                 <th>Toplam</th>
-                <th>Stok</th>
             </tr>
-        @foreach (var y in Model)
-        {
-            <tr>
-                <td><img src="@y.Product.ThumbnailImage" width="100" /></td>
-                <td>@y.Quantity</td>
-                <td>@y.Product.Name</td>
-                @if (y.Product.Discount == 0)
-                {
-                    <td>@y.Product.Price.ToString("N0") TL</td>
-                    <td>@y.Product.Price.ToString("N0") TL</td>
-                }
-                @if (y.Product.Discount > 0)
-                {
-                    <td>@y.Product.Price.ToString("N0") TL</td>
-                    var discountedPrice =
-                    y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
-                    <td>@discountedPrice.ToString("N0") TL</td>
-                }
-                @{
-                    if (y.Product.Discount == 0)
+            @foreach (var y in Model)
+            {
+                <tr>
+                    <td><img src="@y.Product.ThumbnailImage" width="100" /></td>
+                    <td>@y.Quantity</td>
+                    <td>@y.Product.Name</td>
+                    @if (y.Product.Discount == 0)
                     {
-                        var TotalPrice = y.Product.Price * y.Quantity;
-                        y.TotalPrice = TotalPrice;
+                        <td>@y.Product.Price.ToString("N0") TL</td>
+                        <td>@y.Product.Price.ToString("N0") TL</td>
                     }
-                    if (y.Product.Discount > 0)
+                    @if (y.Product.Discount > 0)
                     {
+                        <td>@y.Product.Price.ToString("N0") TL</td>
                         var discountedPrice =
                         y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
-                        var TotalPrice = discountedPrice * y.Quantity;
-                        y.TotalPrice = TotalPrice;
+                        <td>@discountedPrice.ToString("N0") TL</td>
                     }
-                }
-                <td>
-                    @y.TotalPrice.ToString("N0") TL
+                    @{
+                        if (y.Product.Discount == 0)
+                        {
+                            var TotalPrice = y.Product.Price * y.Quantity;
+                            y.TotalPrice = TotalPrice;
+                        }
+                        if (y.Product.Discount > 0)
+                        {
+                            var discountedPrice =
+                            y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
+                            var TotalPrice = discountedPrice * y.Quantity;
+                            y.TotalPrice = TotalPrice;
+                        }
+                    }
+                    <td>
+                        @y.TotalPrice.ToString("N0") TL
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Increase", "Cart"))
+                        {
+                            @Html.Hidden("Id",y.ProductId)
+                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-success">+</button>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Decrease", "Cart"))
+                        {
+                            @Html.Hidden("Id",y.ProductId)
+                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-warning">-</button>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DeleteFromCart", "Cart"))
+                        {
+                            @Html.Hidden("Id",y.ProductId)
+                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="5">
+                    @using (Html.BeginForm("Clear", "Cart"))
+                    {
+                        <button type="submit" style="padding:7px;border-radius:3px;" class="btn-primary">
+                            Sepeti Temizle
+                        </button>
+                    }
                 </td>
-                <td>@y.Product.Stock</td>
-                <td>
-                    <a style="padding:7px;border-radius:3px;" class="btn-success">+</a>
-                </td>
-                <td>
-                    <a style="padding:7px;border-radius:3px;" class="btn-warning">-</a>
-                </td>
-                <td>
-                    <a style="padding:7px;border-radius:3px;" class="btn-danger">Sil</a>
+                <td colspan="5">
+                    <b>
+                        Toplam : @Model.Sum(y => y.TotalPrice).ToString("N0") TL
+                    </b>
                 </td>
             </tr>
-        }
         </table>
-    <b>
-        Toplam : @Model.Sum(y => y.TotalPrice).ToString("N0") TL
-    </b> 
-}
+
+    }
+</div>

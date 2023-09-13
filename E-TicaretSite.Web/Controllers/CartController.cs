@@ -49,7 +49,7 @@ namespace E_TicaretSite.Web.Controllers
                 {
                     Statu = true,
                     CreatedDate = DateTime.Now,
-                    UserId = user.Id,    
+                    UserId = user.Id,
                 };
                 cm.Add(newCart);
                 c.SaveChanges();
@@ -60,20 +60,11 @@ namespace E_TicaretSite.Web.Controllers
                 cartId = existingCart.Id;
             }
 
-            //var newCart = new Cart()
-            //{
-            //    Statu = true,
-            //    CreatedDate = DateTime.Now,
-            //    UserId = user.Id,
-            //};
-            //cm.Add(newCart);
-            //c.SaveChanges();
-
             var existingCartItem = c.CartItems.FirstOrDefault(item => item.ProductId == id && item.Cart.UserId == user.Id && item.Cart.Statu == true);
 
             if (existingCartItem != null)
             {
-                existingCartItem.Quantity += 1;  
+                existingCartItem.Quantity += 1;
             }
             else
             {
@@ -109,10 +100,62 @@ namespace E_TicaretSite.Web.Controllers
             var cart = cm.ListCartWith();
             return View(cart);
         }
-        public IActionResult GetCartItems(int cartid,int userid)
+        public IActionResult GetCartItems(int cartid, int userid)
         {
-            var cartItems = cim.GetCartItemsByUserId(userid,cartid);
+            var cartItems = cim.GetCartItemsByUserId(userid, cartid);
             return View(cartItems);
+        }
+        public IActionResult Increase(int id)
+        {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            var existingCartItem = c.CartItems.FirstOrDefault(item => item.ProductId == id && item.Cart.UserId == user.Id && item.Cart.Statu == true);
+            var product = c.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product != null && existingCartItem.Quantity < product.Stock)
+            {
+                existingCartItem.Quantity += 1;
+                c.SaveChanges();
+            }
+            c.SaveChanges();
+            return RedirectToAction("MyCart", "Cart");
+        }
+        public IActionResult Decrease(int id)
+        {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            var existingCartItem = c.CartItems.FirstOrDefault(item => item.ProductId == id && item.Cart.UserId == user.Id && item.Cart.Statu == true);
+
+            if (existingCartItem != null)
+            {
+                if (existingCartItem.Quantity > 0)
+                {
+                    existingCartItem.Quantity -= 1;
+                }
+            }
+            c.SaveChanges();
+            return RedirectToAction("MyCart", "Cart");
+        }
+        public IActionResult DeleteFromCart(int id)
+        {
+            var CartItem = c.CartItems.FirstOrDefault(p => p.ProductId == id);
+            var value = cim.Get(CartItem.ProductId);
+            cim.Delete(value);
+            return RedirectToAction("MyCart", "Cart");
+        }
+        public IActionResult Clear(int id)
+        {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            var existingCart = c.Carts.FirstOrDefault(cart => cart.UserId == user.Id && cart.Statu == true);
+            id = existingCart.Id;
+            var value = cm.Get(id);
+            cm.Delete(value);
+            return RedirectToAction("MyCart", "Cart");
+        }
+        public IActionResult CartCount()
+        {
+            //var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            //var cart = c.Carts.FirstOrDefault(cart => cart.UserId == user.Id && cart.Statu == true);
+            //var count = c.CartItems.Where(x => x.Cart.UserId == user.Id && x.CartId == cart.Id).Sum(x=>x.Quantity);
+            return View();
         }
     }
 }

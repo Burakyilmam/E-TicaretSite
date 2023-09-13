@@ -42,6 +42,42 @@ namespace E_TicaretSite.Web.Controllers
             var value = pm.ListMostViewProduct();
             return View(value);
         }
+        public IActionResult ListHighPriceProduct(string p)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
+            var value = pm.ListHighPriceProduct();
+            return View(value);
+        }
+        public IActionResult ListLowPriceProduct(string p)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
+            var value = pm.ListLowPriceProduct();
+            return View(value);
+        }
+        public IActionResult ListHighStockProduct(string p)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
+            var value = pm.ListHighStockProduct();
+            return View(value);
+        }
+        public IActionResult ListLowStockProduct(string p)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+            }
+            var value = pm.ListLowStockProduct();
+            return View(value);
+        }
         [AllowAnonymous]
         public IActionResult ProductPage(int id, string p)
         {
