@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,11 +39,11 @@
                     }
                 </div>
                 <div class="Buttons">
-                    <a href="/User/UserLogin/" id="userbtn" class="btn-success">
+                    <a href="/User/UserPage/" id="userbtn" class="btn-success">
                         <i class="fa fa-user"></i> Giriş Yap
                     </a>
                     <a href="/Cart/MyCart/" id="cartbtn" class="btn-danger">
-                        <i class="fa fa-shopping-cart"></i> Sepetim @await Html.PartialAsync("~/Views/Cart/CartCount.cshtml")
+                        <i class="fa fa-shopping-cart"></i> Sepetim @await Component.InvokeAsync("CartCount")
                     </a>
                 </div>
                 <div class="PhoneSearchbar" id="search">

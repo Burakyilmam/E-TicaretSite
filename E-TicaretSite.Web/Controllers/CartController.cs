@@ -130,17 +130,26 @@ namespace E_TicaretSite.Web.Controllers
                 {
                     existingCartItem.Quantity -= 1;
                 }
+                if (existingCartItem.Quantity == 0)
+                {
+                    cim.Delete(existingCartItem);
+                    return RedirectToAction("MyCart", "Cart");
+                }
             }
             c.SaveChanges();
             return RedirectToAction("MyCart", "Cart");
         }
         public IActionResult DeleteFromCart(int id)
         {
-            var CartItem = c.CartItems.FirstOrDefault(p => p.ProductId == id);
-            var value = cim.Get(CartItem.ProductId);
-            cim.Delete(value);
-            return RedirectToAction("MyCart", "Cart");
+            var cartItem = c.CartItems.FirstOrDefault(p => p.ProductId == id);
+            if (cartItem != null)
+            {
+                cim.Delete(cartItem);
+                return RedirectToAction("MyCart", "Cart");
+            }
+            return View();
         }
+
         public IActionResult Clear(int id)
         {
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
@@ -149,13 +158,6 @@ namespace E_TicaretSite.Web.Controllers
             var value = cm.Get(id);
             cm.Delete(value);
             return RedirectToAction("MyCart", "Cart");
-        }
-        public IActionResult CartCount()
-        {
-            //var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            //var cart = c.Carts.FirstOrDefault(cart => cart.UserId == user.Id && cart.Statu == true);
-            //var count = c.CartItems.Where(x => x.Cart.UserId == user.Id && x.CartId == cart.Id).Sum(x=>x.Quantity);
-            return View();
         }
     }
 }

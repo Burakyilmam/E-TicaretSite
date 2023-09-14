@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<Entity.Entities.CartItems>
 <div class="container-fluid" style="display:flex;justify-content:center;">
 
-        @if (!Model.Any())
-        {
+    @if (!Model.Any())
+    {
         <div class="container alert alert-dark" style="text-align:center">
-                <b>Sepette Ürün Bulunamadı.</b>
+            <b>Sepette Ürün Bulunamadı.</b>
         </div>
-        }
+    }
     @if (Model.Any())
     {
         <table class="text-center table-bordered" style="width:100%">
@@ -27,14 +27,16 @@
                     @if (y.Product.Discount == 0)
                     {
                         <td>@y.Product.Price.ToString("N0") TL</td>
-                        <td>@y.Product.Price.ToString("N0") TL</td>
+                        <td>@y.Product.Discount.ToString("N0") TL</td>
                     }
                     @if (y.Product.Discount > 0)
                     {
                         <td>@y.Product.Price.ToString("N0") TL</td>
-                        var discountedPrice =
-                        y.Product.Price - (y.Product.Price * y.Product.Discount) / 100;
-                        <td>@discountedPrice.ToString("N0") TL</td>
+                        var discountprice =
+                        (y.Product.Price * y.Product.Discount) / 100;
+                        <td style="color:indianred;">
+                            -@discountprice.ToString("N0") TL
+                        </td>
                     }
                     @{
                         if (y.Product.Discount == 0)
@@ -94,6 +96,14 @@
                 </td>
             </tr>
         </table>
-
     }
+
 </div>
+<div class="col-12" style="display:flex;justify-content:center;margin-left:60px">
+    <h2>
+        En Çok Bakılanlar<span style="font-size:16px;">
+            <a href="/Product/MostViewProduct/">Tümünü Göster</a>
+        </span>
+    </h2>
+</div>
+@await Component.InvokeAsync("ListMostViewProducts")
