@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Kullanıcı Giriş Sayfası";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top:180px" class="container-fluid">
+    <div style="text-center;display;flex;justify-content:center;flex-wrap:wrap" class="row">
+        <h1 class="mt-4 mb-4 col-12 text-center">Kullanıcı Giriş Formu</h1>
+        <form class="text-center" action="#" method="post">
+            <input class="mt-2 mb-2" style="width:100%" type="text" placeholder="Kullanıcı Adı" name="UserName" />
+            <input class="mt-2 mb-2" style="width:100%" type="password" placeholder="Parola" name="Password" />
+            <input style="padding:6px;border-radius:5px;" class="btn-success text-center mt-2" type="submit" value="Giriş Yap" />
+        </form>
+    </div>
+    <div class="col-12 text-center mt-4">
+        <a style="padding:6px;border-radius:5px" class="btn-warning" href="/User/UserRegister/">Yeni Üyelik</a>
+    </div>
+</div>

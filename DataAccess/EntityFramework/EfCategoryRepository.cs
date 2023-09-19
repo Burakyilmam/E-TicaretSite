@@ -27,5 +27,13 @@ namespace DataAccess.EntityFramework
                 return c.Categories.Include(x => x.MainCategory).Where(x => (x.Statu == true) && (x.MainCategoryId == categoryid)).ToList();
             }
         }
+        public bool CheckCategoryName(string CategoryName)
+        {
+            using (var c = new DataContext())
+            {
+                var value = c.Categories.Any(a => a.Name == CategoryName);
+                return value;
+            }
+        }
     }
 }

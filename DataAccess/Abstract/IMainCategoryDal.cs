@@ -9,5 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface IMainCategoryDal : IGenericDal<MainCategory>
     {
+        bool CheckMainCategoryName(string MainCategoryName);
     }
 }

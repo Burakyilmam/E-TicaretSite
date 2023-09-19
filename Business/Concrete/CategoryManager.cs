@@ -29,6 +29,11 @@ namespace Business.Concrete
             _categoryDal.Add(t);
         }
 
+        public bool CheckCategoryName(string CategoryName)
+        {
+            return _categoryDal.CheckCategoryName(CategoryName);
+        }
+
         public void Delete(Category t)
         {
             _categoryDal.Delete(t);

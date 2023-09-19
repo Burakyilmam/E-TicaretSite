@@ -46,5 +46,10 @@ namespace Business.Concrete
         {
             return _userDal.ListCommentUser();
         }
+
+        public bool CheckUserName(string UserName)
+        {
+            return _userDal.CheckUserName(UserName);
+        }
     }
 }

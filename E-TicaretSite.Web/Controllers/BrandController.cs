@@ -1,5 +1,4 @@
 ﻿using Business.Concrete;
-using Business.ValidationRules;
 using DataAccess.Context;
 using DataAccess.EntityFramework;
 using Entity.Entities;
@@ -40,10 +39,20 @@ namespace E_TicaretSite.Web.Controllers
         [HttpPost]
         public IActionResult BrandAdd(Brand brand)
         {
-            brand.Statu = true;
-            brand.CreatedDate = DateTime.Now;
-            bm.Add(brand);
-            return RedirectToAction("BrandList", "Brand");
+            bool isBrandExist = bm.CheckBrandName(brand.Name);
+            if (!isBrandExist)
+            {
+                brand.Statu = true;
+                brand.CreatedDate = DateTime.Now;
+                bm.Add(brand);
+                return RedirectToAction("BrandList", "Brand");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Marka Adı Kullanılmaktadır. Lütfen Aşağıdaki Alana Veritabanında Bulunmayan Bir Marka Adı Yazınız.";
+                return RedirectToAction("BrandList");
+            }
+            
         }
         public IActionResult BrandDelete(int id)
         {

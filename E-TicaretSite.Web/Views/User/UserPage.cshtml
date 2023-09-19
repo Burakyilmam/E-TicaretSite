@@ -4,3 +4,24 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <a href="/Home/HomePage/">Ana Sayfaya Dön</a>
+<div class="row" style="display:flex;justify-content:center;">
+@await Component.InvokeAsync("CategoryCount")
+@await Component.InvokeAsync("MainCategoryCount")
+@await Component.InvokeAsync("ProductCount")
+@await Component.InvokeAsync("BrandCount")
+@await Component.InvokeAsync("CartCount")
+@await Component.InvokeAsync("CommentCount")
+@await Component.InvokeAsync("UserCount")
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="text-center col-sm-6 col-md-4 col-lg-3 mt-2 mb-2">
+        <div class="card text-white" style="background-color:saddlebrown;height:100px">
+            <div class="card-body">
+                <h4>
+                    <span style="display:block" class="pt-2">Satıcı</span>
+                    <span data-val="@ViewBag.MainCategory" class="counter"></span>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/NumberCounter.js"></script>
+</div>

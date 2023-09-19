@@ -11,5 +11,6 @@ namespace DataAccess.Abstract
     {
         public List<Category> ListProductCategory();
         List<Category> GetCategory(int categoryid);
+        bool CheckCategoryName(string CategoryName);
     }
 }

@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
     public interface IBrandDal : IGenericDal<Brand>
     {
         public List<Brand> ListProductBrand();
+        bool CheckBrandName(string BrandName);
     }
 }

@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_TicaretSite.Web.ViewComponents
 {
-    public class CartCount : ViewComponent
+    public class ProductCount : ViewComponent
     {
         DataContext c = new DataContext();
         public IViewComponentResult Invoke()
         {
-            var cart = c.Carts.Where(x => x.Statu == true).Count();
-            ViewBag.Cart = cart;
+            var product = c.Products.Where(x => x.Statu == true).Count();
+            ViewBag.Product = product;
             return View();
         }
     }

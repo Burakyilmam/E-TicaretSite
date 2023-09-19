@@ -15,7 +15,24 @@
     @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
     @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
     <br />
-    @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")
+    @if (User.Identity.IsAuthenticated)
+    {
+        @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")
+    }
+    else
+    {
+        <div class="col-12">
+            <p class="bg-secondary text-white p-3" style="border-radius:10px;">
+                Sadece kayıtlı üyeler yorum yapabilir.Yorum Yapabilmeniz için üye girişi yapmanız gerekmektedir.Eğer üye değilseniz yan tarafta bulunan kayıt ol butonu ile üye olabilirsiniz.
+                <a class="btn-light m-2" style="padding:10px;border-radius:10px" href="/User/ProductUserLogin/@item.Id">
+                    Giriş Yap
+                </a>
+                <a class="btn-danger" style="padding:10px;border-radius:10px" href="/User/UserRegister/">
+                    Üye Ol
+                </a>
+            </p>
+        </div>
+    }
     <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
         <h2>@item.Category.Name Kategorisi<span style="font-size:16px;">
             <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>

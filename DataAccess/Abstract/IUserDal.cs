@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
     public interface IUserDal : IGenericDal<User>
     {
         List<User> ListCommentUser();
+        bool CheckUserName(string UserName);
     }
 }

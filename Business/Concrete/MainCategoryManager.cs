@@ -23,6 +23,11 @@ namespace Business.Concrete
             _mainCategoryDal.Add(t);
         }
 
+        public bool CheckMainCategoryName(string MainCategoryName)
+        {
+            return _mainCategoryDal.CheckMainCategoryName(MainCategoryName);
+        }
+
         public void Delete(MainCategory t)
         {
             _mainCategoryDal.Delete(t);

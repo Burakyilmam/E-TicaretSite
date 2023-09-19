@@ -1,5 +1,4 @@
 ﻿using Business.Concrete;
-using Business.ValidationRules;
 using DataAccess.Context;
 using DataAccess.EntityFramework;
 using Entity.Entities;
@@ -40,9 +39,8 @@ namespace E_TicaretSite.Web.Controllers
         [HttpPost]
         public IActionResult CategoryAdd(Category category)
         {
-            CategoryValidator cv = new CategoryValidator();
-            ValidationResult result = cv.Validate(category);
-            if (result.IsValid)
+            bool isCategoryExist = cm.CheckCategoryName(category.Name);
+            if (!isCategoryExist)
             {
                 category.Statu = true;
                 category.CreatedDate = DateTime.Now;
@@ -51,12 +49,10 @@ namespace E_TicaretSite.Web.Controllers
             }
             else
             {
-                foreach (var item in result.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
+                TempData["ErrorMessage"] = "Kategori Adı Kullanılmaktadır. Lütfen Aşağıdaki Alana Veritabanında Bulunmayan Bir Kategori Adı Yazınız.";
+                return RedirectToAction("CategoryList");
             }
-            return View();
+
         }
         public IActionResult CategoryDelete(int id)
         {

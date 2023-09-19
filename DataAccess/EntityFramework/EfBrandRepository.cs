@@ -19,5 +19,13 @@ namespace DataAccess.EntityFramework
                 return c.Brands.Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
             }
         }
+        public bool CheckBrandName(string BrandName)
+        {
+            using (var c = new DataContext())
+            {
+                var value = c.Brands.Any(a => a.Name == BrandName);
+                return value;
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Business.Concrete;
-using Business.ValidationRules;
 using DataAccess.Context;
 using DataAccess.EntityFramework;
 using Entity.Entities;
@@ -7,6 +6,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -61,9 +61,8 @@ namespace E_TicaretSite.Web.Controllers
         [HttpPost]
         public IActionResult UserRegister(User user)
         {
-            UserValidator uv = new UserValidator();
-            ValidationResult result = uv.Validate(user);
-            if (result.IsValid)
+            bool isUserExists = um.CheckUserName(user.UserName);
+            if (!isUserExists)
             {
                 user.Statu = true;
                 user.CreatedDate = DateTime.Now;
@@ -73,12 +72,9 @@ namespace E_TicaretSite.Web.Controllers
             }
             else
             {
-                foreach (var item in result.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
+                ViewData["ErrorMessage"] = "Kullanıcı Adı Kullanılmaktadır. Lütfen Aşağıdaki Alana Veritabanında Bulunmayan Bir Kullanıcı Adı Yazınız.";
+                return View();
             }
-            return View();
         }
         [AllowAnonymous]
         [HttpGet]
@@ -103,6 +99,32 @@ namespace E_TicaretSite.Web.Controllers
                 ClaimsPrincipal pr = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(pr);
                 return RedirectToAction("UserPage", "User");
+            }
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult ProductUserLogin()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> ProductUserLogin(User u,int id)
+        {
+
+            var value = c.Users.FirstOrDefault(x => x.UserName == u.UserName && x.Password == u.Password && x.Statu);
+            if (value != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,u.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, value.Id.ToString())
+                };
+                var useridentity = new ClaimsIdentity(claims, "a");
+                ClaimsPrincipal pr = new ClaimsPrincipal(useridentity);
+                await HttpContext.SignInAsync(pr);
+                return RedirectToAction("ProductPage", "Product",new { id = id });
             }
             return View();
         }

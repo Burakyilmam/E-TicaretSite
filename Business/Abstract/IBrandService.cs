@@ -10,5 +10,6 @@ namespace Business.Abstract
     public interface IBrandService : IGenericService<Brand>
     {
         public List<Brand> ListProductBrand();
+        bool CheckBrandName(string BrandName);
     }
 }

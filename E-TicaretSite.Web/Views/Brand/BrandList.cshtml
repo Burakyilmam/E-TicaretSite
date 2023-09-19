@@ -55,6 +55,12 @@
         }
     </table>
     <div class="text-center">
+        @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
         @await Html.PartialAsync("~/Views/Brand/BrandAdd.cshtml")
     </div>
 }

@@ -23,6 +23,11 @@ namespace Business.Concrete
             _brandDal.Add(t);
         }
 
+        public bool CheckBrandName(string BrandName)
+        {
+            return _brandDal.CheckBrandName(BrandName);
+        }
+
         public void Delete(Brand t)
         {
             _brandDal.Delete(t);

@@ -3,9 +3,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div style="display:flex" class="col-12 text-center justify-content-center">
     <div class="col-6">
-        <form action="/Category/CategoryAdd/" method="post">
-            <input type="text" style="width:50%;padding: 4px 10px;outline:none" name="Name" placeholder="Eklemek İstediğiniz Kategori Adını Giriniz." required />
-            <div>@await Component.InvokeAsync("ListMainCategory")</div>
+        <form action="/MainCategory/MainCategoryAdd/" method="post">
+            <input type="text" style="width:50%;padding: 4px 10px;outline:none" name="MainCategoryName" placeholder="Eklemek İstediğiniz Genel Kategori Adını Giriniz." required />
             <input class="text-center btn-success" style="padding: 4px 10px;margin-left:-10px;" type="submit" value="Ekle" />
         </form>
     </div>

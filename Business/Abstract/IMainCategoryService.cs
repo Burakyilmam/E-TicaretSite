@@ -9,5 +9,6 @@ namespace Business.Abstract
 {
     public interface IMainCategoryService : IGenericService<MainCategory>
     {
+        bool CheckMainCategoryName(string MainCategoryName);
     }
 }

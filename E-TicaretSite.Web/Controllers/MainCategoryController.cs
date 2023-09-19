@@ -1,5 +1,4 @@
 ﻿using Business.Concrete;
-using Business.ValidationRules;
 using DataAccess.Context;
 using DataAccess.EntityFramework;
 using Entity.Entities;
@@ -40,10 +39,20 @@ namespace E_TicaretSite.Web.Controllers
         [HttpPost]
         public IActionResult MainCategoryAdd(MainCategory mainCategory)
         {
-            mainCategory.Statu = true;
-            mainCategory.CreatedDate = DateTime.Now;
-            mcm.Add(mainCategory);
-            return RedirectToAction("MainCategoryList", "MainCategory");
+            bool isMainCategoryExist = mcm.CheckMainCategoryName(mainCategory.MainCategoryName);
+            if (!isMainCategoryExist)
+            {
+                mainCategory.Statu = true;
+                mainCategory.CreatedDate = DateTime.Now;
+                mcm.Add(mainCategory);
+                return RedirectToAction("MainCategoryList", "MainCategory");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Genel Kategori Adı Kullanılmaktadır. Lütfen Aşağıdaki Alana Veritabanında Bulunmayan Bir Genel Kategori Adı Yazınız.";
+                return RedirectToAction("MainCategoryList");
+            }
+            
         }
         public IActionResult CategoryDelete(int id)
         {

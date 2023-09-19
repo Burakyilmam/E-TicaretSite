@@ -9,7 +9,9 @@
     <div style="text-align:center">
         <b>Ürün Bulunamadı.</b>
     </div>
-    <a href="/Product/ProductAdd/">Ekle</a>
+    <center class="mt-2">
+        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
+    </center>
 }
 @if (Model.Any())
 {
@@ -35,7 +37,11 @@
                 <td><img width="100" src="@item.ThumbnailImage" /></td>
                 <td>@item.Name</td>
                 <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
-                <td>@item.Description</td>
+                <td>
+                    <p>
+                        @item.Description
+                    </p>
+                </td>
                 <td>@item.Price.ToString("0")</td>
                 <td>@item.Stock</td>           
                 <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
