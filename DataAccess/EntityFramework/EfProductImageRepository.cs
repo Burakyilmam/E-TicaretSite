@@ -20,11 +20,11 @@ namespace DataAccess.EntityFramework
                 return c.ProductImages.Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
             }
         }
-        public List<ProductImage> GetProductImages(int productid)
+        public List<ProductImage> GetProductImages(int id)
         {
             using (var c = new DataContext())
             {
-                return c.ProductImages.Include(x=>x.Product).Where(x => (x.Statu == true) && (x.ProductId == productid)).ToList();
+                return c.ProductImages.Include(x=>x.Product).Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
             }
         }
     }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -133,8 +134,13 @@ namespace E_TicaretSite.Web.Controllers
             await HttpContext.SignOutAsync();
             return RedirectToAction("HomePage", "Home");
         }
-        public IActionResult UserList()
+        public IActionResult UserList(string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(um.List().Where(x => x.UserName.ToLower().Contains(p.ToLower())));
+            }
+
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (!string.IsNullOrEmpty(userIdClaim))
             {

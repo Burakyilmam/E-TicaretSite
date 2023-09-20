@@ -6,58 +6,62 @@
 }
 @if (!Model.Any())
 {
-    <div>
+    <div class="alert alert-danger text-center mt-4">
         Sepet Bulunamadı
     </div>
 }
 @if (Model.Any())
 {
-    <table class="text-center">
-        <tr>
-            <th>ID</th>
-            <th>Kullanıcı Adı</th>
-            <th>Statü</th>
-            <th>Tarih</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-            <th>Sepet Ögeleri</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.User.UserName</td>
-                <td>
+    <div class="container-fluid">
+        <table class="table table-bordered text-center">
+           <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Statü</th>
+                    <th>Tarih</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                    <th>Sepet Ögeleri</th>
+                </tr>
+           </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.User.UserName</td>
+                    <td>
 
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                    <td>@item.CreatedDate</td>
+                    <td>
+                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/GetCart/@item.Id">
+                            <i class="fa fa-refresh"></i>
                         </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                    </td>
+                    <td>
+                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/Clear/">
+                            <i class="fa fa-trash"></i>
                         </a>
-                    }
-                </td>
-                <td>@item.CreatedDate</td>
-                <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/GetCart/@item.Id">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/CartDelete/@item.Id">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetCartItems", "Cart", new { userid = item.UserId, cartid = item.Id })">
-                        <i class="fa fa-info"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </table>
+                    </td>
+                    <td>
+                        <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetCartItems", "Cart", new { userid = item.UserId, cartid = item.Id })">
+                            <i class="fa fa-info"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 }
 

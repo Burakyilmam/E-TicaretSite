@@ -6,42 +6,57 @@
 }
 @if (!Model.Any())
 {
-    <div>
+    <div class="alert alert-danger text-center mt-4">
         Ürün Resimleri Bulunamadı
+    </div>
+    <div class="text-center">
+        @await Html.PartialAsync("~/Views/ProductImages/ProductImageAdd.cshtml")
     </div>
 }
 @if (Model.Any())
 {
-    <table class="text-center">
-        <tr>
-            <th>ID</th>
-            <th>Resim Url</th>
-            <th>Ürün Ad</th>
-            <th>Statü</th>
-            <th>Tarih</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td><img src="@item.ImageUrl" width="100" /></td>
-                <td>@item.ImageUrl</td>
-                <td>@item.Product.Name</td>
-                <td>
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
-                        </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
-                        </a>
-                    }
-                </td>
-                <td>@item.CreatedDate</td>
-            </tr>
-        }
-    </table>
+    <div class="container-fluid">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Resim</th>
+                    <th>Resim Url</th>
+                    <th>Ürün Ad</th>
+                    <th>Statü</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td><img src="@item.ImageUrl" width="100" /></td>
+                    <td>@item.ImageUrl</td>
+                    <td>@item.Product.Name</td>
+                    <td>
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                    <td>@item.CreatedDate</td>
+                </tr>
+            }
+        </table>
+    </div>
+    @foreach (var item in Model.Take(1))
+    {
+        <div class="text-center">
+            @await Html.PartialAsync("~/Views/ProductImages/ProductImageAdd.cshtml",new { id = @item.ProductId })
+        </div>
+    }
+
 }
 

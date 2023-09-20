@@ -6,7 +6,7 @@
         $({ countNum: $this.text() }).animate(
             { countNum: countTo },
             {
-                duration: 200,
+                duration: 500,
                 easing: "linear",
                 step: function () {
                     $this.text(Math.floor(this.countNum));

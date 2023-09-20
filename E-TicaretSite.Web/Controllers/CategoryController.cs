@@ -5,6 +5,7 @@ using Entity.Entities;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -14,8 +15,12 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-        public IActionResult CategoryList()
+        public IActionResult CategoryList(string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())));
+            }
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (!string.IsNullOrEmpty(userIdClaim))
             {

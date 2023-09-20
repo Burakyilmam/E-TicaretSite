@@ -102,6 +102,18 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult GetCartItems(int cartid, int userid)
         {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+                }
+            }
             var cartItems = cim.GetCartItemsByUserId(userid, cartid);
             return View(cartItems);
         }

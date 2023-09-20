@@ -17,7 +17,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             if (!string.IsNullOrEmpty(p))
             {
-                return View("~/Views/Product/MostViewProduct.cshtml",pm.ListMostViewProduct().Where(x=>x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+                return View("~/Views/Product/MostViewProduct.cshtml",pm.ListMostViewProduct().Where(x => x.Name.ToLower().Contains(p.ToLower())));
             }
             return View();
         }

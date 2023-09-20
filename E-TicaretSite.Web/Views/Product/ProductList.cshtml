@@ -1,12 +1,12 @@
 ﻿@using Entity.Entities
-@model List<Product>
+@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Ürünler";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @if (!Model.Any())
 {
-    <div style="text-align:center">
+    <div class="alert alert-danger text-center mt-4">
         <b>Ürün Bulunamadı.</b>
     </div>
     <center class="mt-2">
@@ -15,70 +15,88 @@
 }
 @if (Model.Any())
 {
-    <table>
-        <tr class="text-center">
-            <th>ID</th>
-            <th>Resmi</th>
-            <th>Adı</th>
-            <th>Marka</th>
-            <th>Açıklaması</th>
-            <th>Fiyatı</th>
-            <th>Stok Adedi</th>     
-            <th>Kategorisi</th>
-            <th>Statüsü</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-            <th>Ürün Sayfası</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr class="text-center">
-                <td>@item.Id</td>
-                <td><img width="100" src="@item.ThumbnailImage" /></td>
-                <td>@item.Name</td>
-                <td><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
-                <td>
-                    <p>
-                        @item.Description
-                    </p>
-                </td>
-                <td>@item.Price.ToString("0")</td>
-                <td>@item.Stock</td>           
-                <td><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
-                <td>
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+    <div class="container-fluid">
+        <div class="col-12 text-center mt-3 mb-3">
+            @using (Html.BeginForm())
+            {
+                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz ürünün adını veya markasını yazınız.">
+                <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                    <i class="fa fa-search"></i>
+                </button>
+            }
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Resmi</th>
+                    <th>Adı</th>
+                    <th>Marka</th>
+                    <th>Açıklaması</th>
+                    <th>Fiyatı</th>
+                    <th>Stok Adedi</th>
+                    <th>Kategorisi</th>
+                    <th>Statüsü</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                    <th>Ürün Resimleri</th>
+                    <th>Ürün Detay</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@item.Id</td>
+                    <td><img width="100" src="@item.ThumbnailImage" /></td>
+                    <td>@item.Name</td>
+                    <td><a style="text-decoration:none;font-weight:bolder" href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
+                    <td>
+                        <p>
+                            @item.Description
+                        </p>
+                    </td>
+                    <td>@item.Price.ToString("0")</td>
+                    <td>@item.Stock</td>
+                    <td><a style="text-decoration:none;font-weight:bolder" href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
+                    <td>
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Product/EditProduct/@item.Id">
+                            <i class="fa fa-refresh"></i>
                         </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                    </td>
+                    <td>
+                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductDelete/@item.Id">
+                            <i class="fa fa-trash"></i>
                         </a>
-                    }
-                </td>
-                <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Product/EditProduct/@item.Id">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductDelete/@item.Id">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetProductImages", "Product", new {  productid = item.Id })">
-                        <i class="fa fa-info"></i>
-                    </a>
-                </td>
-                <td><a class="btn-info" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductPage/@item.Id">Ürün Sayfası</a></td>
-            </tr>
-        }
-    </table>
-   <center class="mt-2">
+                    </td>
+                    <td>
+                        <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetProductImages", "Product", new {  id = item.Id })">
+                            <i class="fa fa-picture-o"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn-info" style="border-radius: 5px;padding: 4px 10px;" href="/Product/DetailProduct/@item.Id">
+                            <i class="fa fa-info"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <center class="mt-2">
         <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
-   </center>
+    </center>
 
 }
 

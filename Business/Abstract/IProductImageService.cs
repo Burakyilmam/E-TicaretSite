@@ -10,6 +10,6 @@ namespace Business.Abstract
     public interface IProductImageService : IGenericService<ProductImage>
     {
         List<ProductImage> ListProductImages(int id);
-        List<ProductImage> GetProductImages(int productid);
+        List<ProductImage> GetProductImages(int id);
     }
 }

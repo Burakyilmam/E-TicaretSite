@@ -4,6 +4,7 @@ using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace E_TicaretSite.Web.Controllers
@@ -14,8 +15,12 @@ namespace E_TicaretSite.Web.Controllers
         DataContext c = new DataContext();
         MainCategoryManager mcm = new MainCategoryManager(new EfMainCategoryRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-        public IActionResult MainCategoryList()
+        public IActionResult MainCategoryList(string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())));
+            }
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (!string.IsNullOrEmpty(userIdClaim))
             {
@@ -54,7 +59,7 @@ namespace E_TicaretSite.Web.Controllers
             }
             
         }
-        public IActionResult CategoryDelete(int id)
+        public IActionResult MainCategoryDelete(int id)
         {
             var value = mcm.Get(id);
             mcm.Delete(value);
@@ -62,13 +67,13 @@ namespace E_TicaretSite.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditCategory(int id)
+        public IActionResult EditMainCategory(int id)
         {
             var value = mcm.Get(id);
             return View(value);
         }
         [HttpPost]
-        public IActionResult EditCategory(MainCategory mainCategory)
+        public IActionResult EditMainCategory(MainCategory mainCategory)
         {
             mcm.Update(mainCategory);
             return RedirectToAction("MainCategoryList", "MainCategory");

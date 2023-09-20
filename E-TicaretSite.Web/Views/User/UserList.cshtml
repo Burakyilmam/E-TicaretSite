@@ -1,84 +1,109 @@
 ﻿@using Entity.Entities
-@model List<User>
+@model IEnumerable<User>
 @{
     ViewData["Title"] = "Kullanıcılar";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @if (!Model.Any())
 {
-    <div>
+    <div class="col-12 text-center mt-3 mb-3">
+        @using (Html.BeginForm())
+        {
+            <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
+            <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                <i class="fa fa-search"></i>
+            </button>
+        }
+    </div>
+    <div class="alert alert-danger text-center mt-4">
         Kullanıcı Bulunamadı
     </div>
-}
-@if (Model.Any())
-{
-    <table class="text-center">
-        <tr>
-            <th>ID</th>
-            <th>Kullanıcı Ad</th>
-            <th>Parola</th>
-            <th>Email</th>
-            <th>Statüsü</th>
-            <th>Eklenme Tarihi</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.UserName</td>
-                <td>
-                    <div style="display:flex;justify-content:center">
-                        <button style="border:none;background-color:transparent;outline:None" onclick="togglePasswordVisibility('@item.Id');toggleEye('@item.Id');">
-                            <i class="fa fa-eye" id="eye_@item.Id"></i>
-                            <i style="display:none;" class="fa fa-eye-slash" id="eye-slash_@item.Id"></i>
-                        </button>
-                        <input disabled type="password" id="password_@item.Id" style="border:none;background-color:transparent;text-align:center" value="@item.Password">
-                    </div>
-                </td>
-                <td>@item.Email</td>
-                <td>
-
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
-                        </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
-                        </a>
-                    }
-                </td>
-                <td>@item.CreatedDate</td>
-                <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/User/EditUser/@item.Id">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserDelete/@item.Id">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
-        } 
-    </table>
-   <center class="mt-4">
+    <center class="mt-4">
         <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserRegister/">
             <i class="fa fa-plus"></i>
         </a>
-   </center>
+    </center>
+}
+@if (Model.Any())
+{
+    <div class="container-fluid">
+        <div class="col-12 text-center mt-3 mb-3">
+            @using (Html.BeginForm())
+            {
+                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
+                <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                    <i class="fa fa-search"></i>
+                </button>
+            }
+        </div>
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Kullanıcı Ad</th>
+                    <th>Parola</th>
+                    <th>Email</th>
+                    <th>Statüsü</th>
+                    <th>Eklenme Tarihi</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    <td>
+                        <div style="display:flex;justify-content:center">
+                            <button style="border:none;background-color:transparent;outline:None" onclick="togglePasswordVisibility('@item.Id');toggleEye('@item.Id');">
+                                <i class="fa fa-eye" id="eye_@item.Id"></i>
+                                <i style="display:none;" class="fa fa-eye-slash" id="eye-slash_@item.Id"></i>
+                            </button>
+                            <input disabled type="password" id="password_@item.Id" style="border:none;background-color:transparent;text-align:center" value="@item.Password">
+                        </div>
+                    </td>
+                    <td>@item.Email</td>
+                    <td>
+
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                    <td>@item.CreatedDate</td>
+                    <td>
+                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/User/EditUser/@item.Id">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserDelete/@item.Id">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <center class="mt-4">
+        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserRegister/">
+            <i class="fa fa-plus"></i>
+        </a>
+    </center>
     <script>
         function togglePasswordVisibility(Id) {
             var passwordField = document.getElementById("password_" + Id);
 
             if (passwordField.getAttribute("type") === "password") {
-                // Parola gizliyse
                 passwordField.setAttribute("type", "text");
             } else {
-                // Parola görünürse
                 passwordField.setAttribute("type", "password");
             }
         }

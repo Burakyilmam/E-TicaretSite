@@ -33,9 +33,9 @@ namespace Business.Concrete
             return _productImageDal.GetId(id);
         }
 
-        public List<ProductImage> GetProductImages(int productid)
+        public List<ProductImage> GetProductImages(int id)
         {
-            return _productImageDal.GetProductImages(productid);
+            return _productImageDal.GetProductImages(id);
         }
 
         public List<ProductImage> List()

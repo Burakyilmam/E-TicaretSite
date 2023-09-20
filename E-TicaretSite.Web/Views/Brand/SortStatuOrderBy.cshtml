@@ -1,7 +1,7 @@
 ﻿@using Entity.Entities
-@model IEnumerable<Category>
+@model IEnumerable<Brand>
 @{
-    ViewData["Title"] = "CategoryList";
+    ViewData["Title"] = "Marka Listesi";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @if (!Model.Any())
@@ -9,17 +9,17 @@
     <div class="col-12 text-center mt-3 mb-3">
         @using (Html.BeginForm())
         {
-            <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kategori adını yazınız.">
+            <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz markanın adını yazınız.">
             <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
                 <i class="fa fa-search"></i>
             </button>
         }
     </div>
     <div class="alert alert-danger text-center mt-4">
-        Kategori Bulunamadı
+        Marka Bulunamadı
     </div>
     <div class="text-center">
-        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
+        @await Html.PartialAsync("~/Views/Brand/BrandAdd.cshtml")
     </div>
 }
 @if (Model.Any())
@@ -28,7 +28,7 @@
         <div class="col-12 text-center mt-3 mb-3">
             @using (Html.BeginForm())
             {
-                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kategori adını yazınız.">
+                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz markanın adını yazınız.">
                 <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
                     <i class="fa fa-search"></i>
                 </button>
@@ -37,29 +37,25 @@
         <table class="table table-bordered text-center">
             <thead class="thead-dark">
                 <tr>
-                    <th>Kategori ID</th>
-                    <th>Genel Kategorisi</th>
-                    <th>Kategori Adı</th>
-                    <th>Statüsü</th>
-                    <th>Güncelle</th>
-                    <th>Sil</th>
-                    <th>Ürünler</th>
+                    <th style="width:80px">
+                        <a href="/Brand/SortIdOrderBy/">Id</a>
+                    </th>
+                    <th style="width:200px">
+                        <a href="/Brand/SortNameOrderBy/">Ad</a>
+                    </th>
+                    <th style="width:80px">
+                        <a href="/Brand/SortStatuOrderByDescending/">Statü</a>
+                    </th>
+                    <th style="width:80px">Güncelle</th>
+                    <th style="width:80px">Sil</th>
+                    <th style="width:80px">Ürünler</th>
                 </tr>
             </thead>
             @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.Id</td>
-                    <td>
-                        <a href="/Product/ListMainCategoryProduct/@item.MainCategoryId" style="text-decoration:none;font-weight:bolder;">
-                            @item.MainCategory.MainCategoryName
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/Product/ListCategoryProduct/@item.Id" style="text-decoration:none;font-weight:bolder;">
-                            @item.Name
-                        </a>
-                    </td>
+                    <td><a style="text-decoration:none;font-weight:bolder" href="/Product/ListBrandProduct/@item.Id">@item.Name</a></td>
                     <td>
 
                         @if (item.Statu == true)
@@ -74,18 +70,18 @@
                         }
                     </td>
                     <td>
-                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Category/EditCategory/@item.Id">
+                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Brand/EditBrand/@item.Id">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </td>
                     <td>
-                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Category/CategoryDelete/@item.Id">
+                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Brand/BrandDelete/@item.Id">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
                     <td>
-                        <a class="btn-secondary" style="border-radius: 5px;padding: 4px 10px;text-decoration:none;font-weight:500" href="/Product/ListCategoryProduct/@item.Id">
-                            Ürünler
+                        <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="/Brand/ /@item.Id">
+                            <i class="fa fa-info"></i>
                         </a>
                     </td>
                 </tr>
@@ -99,7 +95,7 @@
                 @TempData["ErrorMessage"]
             </div>
         }
-        @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
+        @await Html.PartialAsync("~/Views/Brand/BrandAdd.cshtml")
     </div>
 }
 

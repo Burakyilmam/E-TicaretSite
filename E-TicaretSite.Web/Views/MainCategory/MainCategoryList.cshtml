@@ -1,13 +1,21 @@
-﻿
-@using Entity.Entities
-@model List<MainCategory>
+﻿@using Entity.Entities
+@model IEnumerable<MainCategory>
 @{
     ViewData["Title"] = "CategoryList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @if (!Model.Any())
 {
-    <div>
+    <div class="col-12 text-center mt-3 mb-3">
+        @using (Html.BeginForm())
+        {
+            <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz genel kategori adını yazınız.">
+            <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                <i class="fa fa-search"></i>
+            </button>
+        }
+    </div>
+    <div class="alert alert-danger text-center mt-4">
         Kategori Bulunamadı
     </div>
     <div class="text-center">
@@ -16,51 +24,68 @@
 }
 @if (Model.Any())
 {
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Adı</th>
-            <th>Statüsü</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-            <th>Kategoriler</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.MainCategoryName</td>
-                <td>
+    <div class="container-fluid">
+        <div class="col-12 text-center mt-3 mb-3">
+            @using (Html.BeginForm())
+            {
+                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz genel kategori adını yazınız.">
+                <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                    <i class="fa fa-search"></i>
+                </button>
+            }
+        </div>
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Adı</th>
+                    <th>Statüsü</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                    <th>Kategoriler</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        <a href="/Product/ListMainCategoryProduct/@item.Id" style="text-decoration:none;font-weight:bolder;">
+                            @item.MainCategoryName
+                        </a>
+                    </td>
+                    <td>
 
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/MainCategory/EditMainCategory/@item.Id">
+                            <i class="fa fa-refresh"></i>
                         </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                    </td>
+                    <td>
+                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/MainCategory/MainCategoryDelete/@item.Id">
+                            <i class="fa fa-trash"></i>
                         </a>
-                    }
-                </td>
-                <td>
-                    <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Category/EditCategory/@item.Id">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Category/CategoryDelete/@item.Id">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetCategory", "MainCategory", new {  categoryid = item.Id })">
-                        <i class="fa fa-info"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </table>
+                    </td>
+                    <td>
+                        <a class="btn-secondary" style="border-radius: 5px;padding: 4px 10px;text-decoration:none;font-weight:500" href="@Url.Action("GetCategory", "MainCategory", new {  categoryid = item.Id })">
+                            Kategoriler
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
     <div class="text-center">
         @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
         {

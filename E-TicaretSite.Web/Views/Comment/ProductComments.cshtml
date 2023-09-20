@@ -12,25 +12,28 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if (!Model.Any())
 {
-    <div style="text-align:center">
-        <b>Yorum Bulunamadı.</b>
+    <div class="alert alert-danger text-center mt-4">
+        <b>Ürün Yorumu Bulunamadı.</b>
     </div>
 }
 @if (Model.Any())
 {
     <div style="display:flex;justify-content:center;flex-wrap:wrap">
-        <h1 style="width:100%" class="text-center">Yorumlarım</h1>
-        <table class="text-center">
-            <tr>
-                <th>Yorum</th>
-                <th>Kullanıcı</th>
-            </tr>
+        <h1 style="width:100%" class="text-center">Ürün Yorumları</h1>
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="col-5">Yorum</th>
+                    <th class="col-3">Kullanıcı</th>
+                    <th class="col-4">Ürün Sayfası</th>
+                </tr>
+            </thead>
             @foreach (var y in Model)
             {
                 <tr>
                     <td>@y.CommentText</td>
                     <td>@y.User.UserName</td>
-                    <td><a class="btn-primary" style="padding:1px 5px;border-radius:3px;text-decoration:none;" href="/Product/ProductPage/@y.ProductId">Ürün Sayfası</a></td>
+                    <td><a class="btn-primary" style="padding:4px 5px;border-radius:3px;text-decoration:none;" href="/Product/ProductPage/@y.ProductId">Ürün Sayfası</a></td>
                 </tr>
             }
         </table>

@@ -6,41 +6,49 @@
 }
 @if (!Model.Any())
 {
-    <div>
+    <div class="alert alert-danger text-center mt-4">
         Kategori Bulunamadı
     </div>
 }
 @if (Model.Any())
 {
-    <table class="text-center">
-        <tr>
-            <th>ID</th>
-            <th>Ad</th>
-            <th>Genel Kategorisi</th>
-            <th>Statü</th>
-            <th>Tarih</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.MainCategory.MainCategoryName</td>
-                <td>
-                    @if (item.Statu == true)
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
-                        </a>
-                    }
-                    else
-                    {
-                        <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
-                        </a>
-                    }
-                </td>
-                <td>@item.CreatedDate</td>
-            </tr>
-        }
-    </table>
+    <div class="container-fluid">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Ad</th>
+                    <th>Genel Kategorisi</th>
+                    <th>Statü</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        <a style="text-decoration:none;font-weight:bolder" href="/Product/ListCategoryProduct/@item.Id">@item.Name</a>
+                    </td>
+                    <td>
+                        <a style="text-decoration:none;font-weight:bolder" href="/Product/ListMainCategoryProduct/@item.MainCategoryId">@item.MainCategory.MainCategoryName</a>
+                    </td>
+                    <td>
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                    <td>@item.CreatedDate</td>
+                </tr>
+            }
+        </table>
+    </div>
 }
 
