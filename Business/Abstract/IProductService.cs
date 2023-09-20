@@ -21,6 +21,7 @@ namespace Business.Abstract
         List<Product> ProductPage(int id);
         List<Product> ListElectronicProducts();
         List<Product> ListClothingProducts();
+        List<Product> ListStationaryProducts();
         List<Product> MainCategoryProducts(int id);
         List<Product> ListMostViewProduct();
         List<Product> ListCommentProduct();

@@ -18,6 +18,22 @@
     </h2>
 </div>
 @await Component.InvokeAsync("ListClothingProducts")
+<div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+    <h2>
+        Kırtasiye<span style="font-size:16px;">
+            <a href="/Product/ListMainCategoryProduct/6">Tümünü Göster</a>
+        </span>
+    </h2>
+</div>
+@await Component.InvokeAsync("ListStationaryProducts")
+@* <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+    <h2>
+        Gıda<span style="font-size:16px;">
+            <a href="/Product/ListMainCategoryProduct/3">Tümünü Göster</a>
+        </span>
+    </h2>
+</div>
+@await Component.InvokeAsync("ListFoodProducts") *@
 <div class="col-12" style="display:flex;justify-content:center;margin-left:60px">
     <h2>
         En Çok Bakılanlar<span style="font-size:16px;">

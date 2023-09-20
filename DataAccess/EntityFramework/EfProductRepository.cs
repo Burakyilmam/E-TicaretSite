@@ -113,6 +113,14 @@ namespace DataAccess.EntityFramework
                 return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Category.MainCategoryId == 2).Take(10).ToList();
             }
         }
+        public List<Product> ListStationaryProducts()
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).Where(x => x.Category.MainCategoryId == 6).Take(10).ToList();
+            }
+        }
+        
         public List<Product> ListMostViewProduct()
         {
             using (var c = new DataContext())

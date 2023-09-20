@@ -132,5 +132,10 @@ namespace Business.Concrete
         {
             return _productDal.MainCategoryProducts(id);
         }
+
+        public List<Product> ListStationaryProducts()
+        {
+            return _productDal.ListStationaryProducts();
+        }
     }
 }
