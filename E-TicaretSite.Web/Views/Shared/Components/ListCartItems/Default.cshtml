@@ -9,15 +9,20 @@
     }
     @if (Model.Any())
     {
-        <table class="text-center table-bordered" style="width:100%">
-            <tr>
-                <th>Resim</th>
-                <th>Adet</th>
-                <th>Ürün</th>
-                <th>Fiyat</th>
-                <th>İndirim</th>
-                <th>Toplam</th>
-            </tr>
+        <table class="text-center table table-striped table-bordered" style="width:100%">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Resim</th>
+                    <th>Adet</th>
+                    <th>Ürün</th>
+                    <th>Fiyat</th>
+                    <th>İndirim</th>
+                    <th>Toplam</th>
+                    <th>Arttır</th>
+                    <th>Azalt</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
             @foreach (var y in Model)
             {
                 <tr>
@@ -66,7 +71,7 @@
                         @using (Html.BeginForm("Decrease", "Cart"))
                         {
                             @Html.Hidden("Id",y.ProductId)
-                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-warning">-</button>
+                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-secondary">-</button>
                         }
                     </td>
                     <td>
@@ -81,7 +86,7 @@
                 </tr>
             }
             <tr>
-                <td colspan="5">
+                <td colspan="6">
                     @using (Html.BeginForm("Clear", "Cart"))
                     {
                         <button type="submit" style="padding:7px;border-radius:3px;" class="btn-primary">
@@ -90,9 +95,11 @@
                     }
                 </td>
                 <td colspan="5">
-                    <b>
-                        Toplam : @Model.Sum(y => y.TotalPrice).ToString("N0") TL
-                    </b>
+                    <div>
+                        <b>
+                            Toplam : @Model.Sum(y => y.TotalPrice).ToString("N0") TL
+                        </b>
+                    </div>
                 </td>
             </tr>
         </table>
