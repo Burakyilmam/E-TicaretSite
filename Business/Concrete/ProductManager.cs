@@ -37,9 +37,9 @@ namespace Business.Concrete
             return _productDal.GetId(id);
         }
 
-        public List<Product> List()
+        public List<Product> ListProductWith()
         {
-            return _productDal.List();
+            return _productDal.ListProductWith();
         }
 
         public List<Product> ListBrandProduct(int id)
@@ -81,13 +81,6 @@ namespace Business.Concrete
         {
             return _productDal.ListNewProduct();
         }
-
-
-        public List<Product> ListProductWith()
-        {
-            return _productDal.ListProductWith();
-        }
-
 
         public List<Product> ProductPage(int id)
         {
@@ -136,6 +129,11 @@ namespace Business.Concrete
         public List<Product> ListStationaryProducts()
         {
             return _productDal.ListStationaryProducts();
+        }
+
+        public List<Product> List()
+        {
+            return _productDal.List();
         }
     }
 }

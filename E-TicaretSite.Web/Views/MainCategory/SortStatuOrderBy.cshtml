@@ -47,7 +47,7 @@
                         <a class="text-white" style="text-decoration:none;" href="/MainCategory/SortNameOrderBy/">Genel Kategori Ad</a>
                     </th>
                     <th>
-                        <a class="text-white" style="text-decoration:none;" href="/MainCategory/SortStatuOrderBy/">Statü</a>
+                        <a class="text-white" style="text-decoration:none;" href="/MainCategory/SortStatuOrderByDescending/">Statü</a>
                     </th>
                     <th>Güncelle</th>
                     <th>Sil</th>
@@ -96,7 +96,7 @@
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("MainCategoryList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortStatuOrderBy",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <div class="text-center">
         @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))

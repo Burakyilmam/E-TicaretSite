@@ -52,7 +52,7 @@
                         <a class="text-white" style="text-decoration:none;" href="/Product/SortCategoryOrderBy/">Kategori</a>
                     </th>
                     <th>
-                        <a class="text-white" style="text-decoration:none;" href="/Product/SortStatuOrderBy/">Statü</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Product/SortStatuOrderByDescending/">Statü</a>
                     </th>
                     <th>Güncelle</th>
                     <th>Sil</th>
@@ -112,7 +112,7 @@
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("ProductList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortStatuOrderBy",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <center class="mt-2">
         <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
