@@ -1,4 +1,10 @@
-﻿@using Entity.Entities
+﻿
+@{
+    ViewData["Title"] = "SortMainCategoryNameOrderByDescending";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using Entity.Entities
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc.Bootstrap4.Core
@@ -57,32 +63,32 @@
                     <th>Ürünler</th>
                 </tr>
             </thead>
-    @foreach (var item in Model)
-    {
-                <tr>    
+            @foreach (var item in Model)
+            {
+                <tr>
                     <td>@item.Id</td>
                     <td>
                         <a href="/Product/ListMainCategoryProduct/@item.MainCategoryId" style="text-decoration:none;font-weight:bolder;">
-                    @item.MainCategory.MainCategoryName
+                            @item.MainCategory.MainCategoryName
                         </a>
                     </td>
                     <td>
                         <a href="/Product/ListCategoryProduct/@item.Id" style="text-decoration:none;font-weight:bolder;">
-                    @item.Name
+                            @item.Name
                         </a>
                     </td>
                     <td>
 
-                @if (item.Statu == true)
-                {
+                        @if (item.Statu == true)
+                        {
                             <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
                             </a>
-                }
-                else
-                {
+                        }
+                        else
+                        {
                             <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
                             </a>
-                }
+                        }
                     </td>
                     <td>
                         <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Category/EditCategory/@item.Id">
@@ -100,11 +106,11 @@
                         </a>
                     </td>
                 </tr>
-    }
+            }
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("CategoryList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortMainCategoryNameOrderByDescending",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <div class="text-center">
         @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
@@ -116,4 +122,6 @@
         @await Html.PartialAsync("~/Views/Category/CategoryAdd.cshtml")
     </div>
 }
+
+
 

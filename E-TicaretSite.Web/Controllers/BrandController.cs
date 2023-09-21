@@ -4,6 +4,7 @@ using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 using X.PagedList;
 
@@ -76,34 +77,58 @@ namespace E_TicaretSite.Web.Controllers
             bm.Update(brand);
             return RedirectToAction("BrandList", "Brand");
         }
-        public IActionResult SortIdOrderBy()
+        public IActionResult SortIdOrderBy(string p, int page = 1)
         {
-            var value = bm.List().OrderBy(x=>x.Id);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(bm.List().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = bm.List().OrderBy(x=>x.Id).ToPagedList(page, 10);
             return View(value);
         }
-        public IActionResult SortIdOrderByDescending()
+        public IActionResult SortIdOrderByDescending(string p, int page = 1)
         {
-            var value = bm.List().OrderByDescending(x => x.Id);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(bm.List().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = bm.List().OrderByDescending(x => x.Id).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult SortNameOrderBy()
+        public IActionResult SortNameOrderBy(string p, int page = 1)
         {
-            var value = bm.List().OrderBy(x => x.Name);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(bm.List().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = bm.List().OrderBy(x => x.Name).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult SortNameOrderByDescending()
+        public IActionResult SortNameOrderByDescending(string p, int page = 1)
         {
-            var value = bm.List().OrderByDescending(x => x.Name);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(bm.List().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = bm.List().OrderByDescending(x => x.Name).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult SortStatuOrderBy()
+        public IActionResult SortStatuOrderBy(string p, int page = 1)
         {
-            var value = bm.List().OrderBy(x => x.Statu);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(bm.List().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = bm.List().OrderBy(x => x.Statu).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult SortStatuOrderByDescending()
+        public IActionResult SortStatuOrderByDescending(string p,int page = 1)
         {
-            var value = bm.List().OrderByDescending(x => x.Statu);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(bm.List().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = bm.List().OrderByDescending(x => x.Statu).ToPagedList(page, 10); ;
             return View(value);
         }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace E_TicaretSite.Web.Controllers
 {
@@ -15,11 +16,11 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-        public IActionResult CategoryList(string p)
+        public IActionResult CategoryList(string p, int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
             {
-                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())));
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
             var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (!string.IsNullOrEmpty(userIdClaim))
@@ -33,7 +34,7 @@ namespace E_TicaretSite.Web.Controllers
                     ViewBag.Id = userId;
                 }
             }
-            var value = cm.ListProductCategory();
+            var value = cm.ListProductCategory().ToPagedList(page,10);
             return View(value);
         }
         [HttpGet]
@@ -77,6 +78,79 @@ namespace E_TicaretSite.Web.Controllers
         {
             cm.Update(category);
             return RedirectToAction("CategoryList", "Category");
+        }
+
+        public IActionResult SortIdOrderBy(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderBy(x => x.Id).ToPagedList(page, 10);
+            return View(value);
+        }
+        public IActionResult SortIdOrderByDescending(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderByDescending(x => x.Id).ToPagedList(page, 10); ;
+            return View(value);
+        }
+        public IActionResult SortNameOrderBy(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderBy(x => x.Name).ToPagedList(page, 10); ;
+            return View(value);
+        }
+        public IActionResult SortNameOrderByDescending(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderByDescending(x => x.Name).ToPagedList(page, 10); ;
+            return View(value);
+        }
+        public IActionResult SortMainCategoryNameOrderBy(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderBy(x => x.MainCategory.MainCategoryName).ToPagedList(page, 10); ;
+            return View(value);
+        }
+        public IActionResult SortMainCategoryNameOrderByDescending(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderByDescending(x => x.MainCategory.MainCategoryName).ToPagedList(page, 10); ;
+            return View(value);
+        }
+        public IActionResult SortStatuOrderBy(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderBy(x => x.Statu).ToPagedList(page, 10); ;
+            return View(value);
+        }
+        public IActionResult SortStatuOrderByDescending(string p, int page = 1)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductCategory().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var value = cm.ListProductCategory().OrderByDescending(x => x.Statu).ToPagedList(page, 10); ;
+            return View(value);
         }
     }
 }
