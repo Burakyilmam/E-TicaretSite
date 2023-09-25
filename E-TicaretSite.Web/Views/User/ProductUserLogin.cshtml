@@ -2,17 +2,41 @@
     ViewData["Title"] = "Kullanıcı Giriş Sayfası";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div style="margin-top:180px" class="container-fluid">
-    <div style="text-center;display;flex;justify-content:center;flex-wrap:wrap" class="row">
-        <h1 class="mt-4 mb-4 col-12 text-center">Kullanıcı Giriş Formu</h1>
-        <form class="text-center" action="#" method="post">
-            <input class="mt-2 mb-2" style="width:100%" type="text" placeholder="Kullanıcı Adı" name="UserName" />
-            <input class="mt-2 mb-2" style="width:100%" type="password" placeholder="Parola" name="Password" />
-            <input style="padding:6px;border-radius:5px;" class="btn-success text-center mt-2" type="submit" value="Giriş Yap" />
-        </form>
-    </div>
-    <div class="col-12 text-center mt-4">
-        <a style="padding:6px;border-radius:5px" class="btn-warning" href="/User/UserRegister/">Yeni Üyelik</a>
+<div style="margin-top: 100px" class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                    <h2>Giriş Yap</h2>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="UserName">Kullanıcı Adı</label>
+                            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Kullanıcı Adı" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Parola</label>
+                            <input type="password" class="form-control" id="Password" name="Password" placeholder="Parola" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <div class="alert alert-dark">
+                    <div class="mt-2">
+                        <h5>
+                            Üye değil misiniz ?
+                        </h5>
+                    </div>
+                    <div>
+                        <h6>Hemen üye olun, güvenilir alışverişin keyfini çıkarın!</h6>
+                    </div>
+                    <a class="btn btn-warning" href="/User/UserRegister/">Yeni Üyelik</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
