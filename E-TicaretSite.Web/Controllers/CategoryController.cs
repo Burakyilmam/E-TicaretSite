@@ -16,6 +16,7 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+        ProductManager pm = new ProductManager(new EfProductRepository());
         public IActionResult CategoryList(string p, int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
@@ -79,7 +80,11 @@ namespace E_TicaretSite.Web.Controllers
             cm.Update(category);
             return RedirectToAction("CategoryList", "Category");
         }
-
+        public IActionResult GetProduct(int id)
+        {
+            var products = pm.GetProduct(id);
+            return View(products);
+        }
         public IActionResult SortIdOrderBy(string p, int page = 1)
         {
             if (!string.IsNullOrEmpty(p))

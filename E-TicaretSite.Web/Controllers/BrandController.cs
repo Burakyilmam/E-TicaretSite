@@ -15,6 +15,7 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         BrandManager bm = new BrandManager(new EfBrandRepository());
+        ProductManager pm = new ProductManager(new EfProductRepository());
         public IActionResult BrandList(string p,int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
@@ -76,6 +77,11 @@ namespace E_TicaretSite.Web.Controllers
         {
             bm.Update(brand);
             return RedirectToAction("BrandList", "Brand");
+        }
+        public IActionResult GetBrandProduct(int id)
+        {
+            var products = pm.GetBrandProduct(id);
+            return View(products);
         }
         public IActionResult SortIdOrderBy(string p, int page = 1)
         {

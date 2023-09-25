@@ -27,5 +27,7 @@ namespace Business.Abstract
         List<Product> ListCommentProduct();
         List<Product> ListSimilarCategoryProduct(int id);
         List<Product> ListBrandProducts(int id);
+        List<Product> GetProduct(int id);
+        List<Product> GetBrandProduct(int id);
     }
 }

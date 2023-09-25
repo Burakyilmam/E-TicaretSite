@@ -1,0 +1,62 @@
+﻿@using Entity.Entities
+@model List<Product>
+@{
+    ViewData["Title"] = "Ürün Resimleri";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (!Model.Any())
+{
+    <div class="alert alert-danger text-center mt-4">
+        Ürün Bulunamadı
+    </div>
+}
+@if (Model.Any())
+{
+    <div class="container-fluid">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Resim</th>
+                    <th>Ad</th>
+                    <th>Marka</th>
+                    <th>Açıklama</th>
+                    <th>Fiyat</th>
+                    <th>Stok</th>
+                    <th>Kategorisi</th>
+                    <th>Statü</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@item.Id</td>
+                    <td><img width="100" src="@item.ThumbnailImage" /></td>
+                    <td>@item.Name</td>
+                    <td><a style="text-decoration:none;font-weight:bolder" href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></td>
+                    <td>
+                        <p>
+                            @item.Description
+                        </p>
+                    </td>
+                    <td>@item.Price.ToString("0")</td>
+                    <td>@item.Stock</td>
+                    <td><a style="text-decoration:none;font-weight:bolder" href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></td>
+                    <td>
+                        @if (item.Statu == true)
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-success">
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+

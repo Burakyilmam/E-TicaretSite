@@ -10,7 +10,7 @@ namespace DataAccess.Abstract
     public interface ICategoryDal : IGenericDal<Category>
     {
         public List<Category> ListProductCategory();
-        List<Category> GetCategory(int categoryid);
+        List<Category> GetCategory(int id);
         bool CheckCategoryName(string CategoryName);
     }
 }

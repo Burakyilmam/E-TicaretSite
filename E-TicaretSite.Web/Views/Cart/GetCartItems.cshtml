@@ -85,8 +85,11 @@
                     </td>
                     <td>@item.CreatedDate</td>
                 </tr>
+            }
+            @foreach(var item in Model.Take(1))
+            {
                 <tr>
-                    <td colspan="11">
+                    <td colspan="11" class="bg-secondary text-white">
                         <b>Toplam Fiyatı : @Model.Sum(y => y.TotalPrice).ToString("N0") ₺</b>
                     </td>
                 </tr>

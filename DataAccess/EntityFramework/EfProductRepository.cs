@@ -149,5 +149,19 @@ namespace DataAccess.EntityFramework
                 return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x => x.View).Where(x => (x.BrandId == id) && (x.Statu == true)).ToList();
             }
         }
+        public List<Product> GetProduct(int id)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x=>x.Brand).Where(x => (x.Statu == true) && (x.CategoryId == id)).ToList();
+            }
+        }
+        public List<Product> GetBrandProduct(int id)
+        {
+            using (var c = new DataContext())
+            {
+                return c.Products.Include(x => x.Category).Include(x => x.Brand).OrderByDescending(x => x.CreatedDate).Where(x => (x.BrandId == id) && (x.Statu == true)).ToList();
+            }
+        }
     }
 }

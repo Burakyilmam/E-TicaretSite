@@ -79,9 +79,9 @@ namespace E_TicaretSite.Web.Controllers
             mcm.Update(mainCategory);
             return RedirectToAction("MainCategoryList", "MainCategory");
         }
-        public IActionResult GetCategory(int categoryid)
+        public IActionResult GetCategory(int id)
         {
-            var categories = cm.GetCategory(categoryid);
+            var categories = cm.GetCategory(id);
             return View(categories);
         }
 

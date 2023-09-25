@@ -135,5 +135,15 @@ namespace Business.Concrete
         {
             return _productDal.List();
         }
+
+        public List<Product> GetProduct(int id)
+        {
+            return _productDal.GetProduct(id);
+        }
+
+        public List<Product> GetBrandProduct(int id)
+        {
+            return _productDal.GetBrandProduct(id);
+        }
     }
 }

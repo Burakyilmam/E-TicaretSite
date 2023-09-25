@@ -44,9 +44,9 @@ namespace Business.Concrete
             return _categoryDal.GetId(id);
         }
 
-        public List<Category> GetCategory(int categoryid)
+        public List<Category> GetCategory(int id)
         {
-            return _categoryDal.GetCategory(categoryid);
+            return _categoryDal.GetCategory(id);
         }
 
         public List<Category> List()
