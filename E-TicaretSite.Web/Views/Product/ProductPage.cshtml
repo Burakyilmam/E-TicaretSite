@@ -10,57 +10,90 @@
         text-decoration: none;
     }
 </style>
-@foreach (var item in Model)
-{
-    <img src="@item.ThumbnailImage" width="100">
-    <h1>@item.Name</h1>
-    <b><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></b>
-    <b><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></b>
+<div class="container-fluid">
+    @foreach (var item in Model)
+    {
+        @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
+        <h1>@item.Name</h1>
+        <b><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></b>
+        <b><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></b>
 
-    @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
-    @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
-    <br />
-    @if (User.Identity.IsAuthenticated)
-    {
-        @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")
-    }
-    else
-    {
-        <div class="col-12">
-            <p class="bg-secondary text-white p-3" style="border-radius:10px;">
-                Sadece kayıtlı üyeler yorum yapabilir.Yorum Yapabilmeniz için üye girişi yapmanız gerekmektedir.Eğer üye değilseniz yan tarafta bulunan kayıt ol butonu ile üye olabilirsiniz.
-                <a class="btn-light m-2" style="padding:10px;border-radius:10px" href="/User/ProductUserLogin/@item.Id">
-                    Giriş Yap
-                </a>
-                <a class="btn-danger" style="padding:10px;border-radius:10px" href="/User/UserRegister/">
-                    Üye Ol
-                </a>
-            </p>
+        @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
+        <br />
+        @if (User.Identity.IsAuthenticated)
+        {
+            @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml")
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="bg-secondary text-white p-3" style="border-radius:10px;">
+                    Sadece kayıtlı üyeler yorum yapabilir.Yorum Yapabilmeniz için üye girişi yapmanız gerekmektedir.Eğer üye değilseniz yan tarafta bulunan kayıt ol butonu ile üye olabilirsiniz.
+                    <a class="btn-light m-2" style="padding:10px;border-radius:10px" href="/User/ProductUserLogin/@item.Id">
+                        Giriş Yap
+                    </a>
+                    <a class="btn-danger" style="padding:10px;border-radius:10px" href="/User/UserRegister/">
+                        Üye Ol
+                    </a>
+                </p>
+            </div>
+        }
+        <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+            <h2>
+                @item.Category.Name <span style="font-size:16px;">
+                    <a href="/Product/ListCategoryProduct/@item.CategoryId">Tümünü Göster</a>
+                </span>
+            </h2>
         </div>
+        @await Component.InvokeAsync("ListSimilarCategory",new {id = item.CategoryId})
+        <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+            <h2>
+                @item.Brand.Name <span style="font-size:16px;">
+                    <a href="/Product/ListBrandProduct/@item.BrandId">Tümünü Göster</a>
+                </span>
+            </h2>
+        </div>
+        @await Component.InvokeAsync("ListBrandProducts",new {id = item.BrandId})
+        <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+            <h2>
+                @item.Category.MainCategory.MainCategoryName <span style="font-size:16px;">
+                    <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a>
+                </span>
+            </h2>
+        </div>
+        @await Component.InvokeAsync("MainCategoryProducts",new {id = item.Category.MainCategoryId})
+
     }
-    <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
-        <h2>
-            @item.Category.Name <span style="font-size:16px;">
-                <a href="/Product/ListCategoryProduct/@item.CategoryId">Tümünü Göster</a>
-            </span>
-        </h2>
-    </div>
-    @await Component.InvokeAsync("ListSimilarCategory",new {id = item.CategoryId})
-    <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
-        <h2>
-            @item.Brand.Name <span style="font-size:16px;">
-                <a href="/Product/ListBrandProduct/@item.BrandId">Tümünü Göster</a>
-            </span>
-        </h2>
-    </div>
-    @await Component.InvokeAsync("ListBrandProducts",new {id = item.BrandId})
-    <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
-        <h2>
-            @item.Category.MainCategory.MainCategoryName <span style="font-size:16px;">
-                <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a>
-            </span>
-        </h2>
-    </div>
-    @await Component.InvokeAsync("MainCategoryProducts",new {id = item.Category.MainCategoryId})
-   
-}
+</div>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+</script>
