@@ -4,7 +4,12 @@
     ViewData["Title"] = "ProductPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .col-12 span a {
+        color: darkorange;
+        text-decoration: none;
+    }
+</style>
 @foreach (var item in Model)
 {
     <img src="@item.ThumbnailImage" width="100">
@@ -34,18 +39,27 @@
         </div>
     }
     <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
-        <h2>@item.Category.Name Kategorisi<span style="font-size:16px;">
-            <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>
+        <h2>
+            @item.Category.Name <span style="font-size:16px;">
+                <a href="/Product/ListCategoryProduct/@item.CategoryId">Tümünü Göster</a>
+            </span>
+        </h2>
     </div>
     @await Component.InvokeAsync("ListSimilarCategory",new {id = item.CategoryId})
     <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
-        <h2>@item.Brand.Name Ürünleri<span style="font-size:16px;">
-            <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>
+        <h2>
+            @item.Brand.Name <span style="font-size:16px;">
+                <a href="/Product/ListBrandProduct/@item.BrandId">Tümünü Göster</a>
+            </span>
+        </h2>
     </div>
     @await Component.InvokeAsync("ListBrandProducts",new {id = item.BrandId})
     <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
-        <h2>@item.Category.MainCategory.MainCategoryName Kategorisi<span style="font-size:16px;">
-            <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a></span></h2>
+        <h2>
+            @item.Category.MainCategory.MainCategoryName <span style="font-size:16px;">
+                <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a>
+            </span>
+        </h2>
     </div>
     @await Component.InvokeAsync("MainCategoryProducts",new {id = item.Category.MainCategoryId})
    
