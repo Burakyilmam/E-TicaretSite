@@ -128,13 +128,13 @@ namespace E_TicaretSite.Web.Controllers
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ListMainCategoryProduct(int id,string p)
+        public IActionResult ListMainCategoryProduct(int id,string p,int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
             {
                 return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
             }
-            var value = pm.ListMainCategoryProduct(id);
+            var value = pm.ListMainCategoryProduct(id).ToPagedList(page,5);
             return View(value);
         }
         [HttpGet]
