@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
+using X.PagedList;
 
 namespace E_TicaretSite.Web.Controllers
 {
@@ -13,11 +14,11 @@ namespace E_TicaretSite.Web.Controllers
     {
         ProductManager pm = new ProductManager(new EfProductRepository());
         [AllowAnonymous]
-        public IActionResult HomePage(string p)
+        public IActionResult HomePage(string p,int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
             {
-                return View("~/Views/Product/MostViewProduct.cshtml",pm.ListMostViewProduct().Where(x => x.Name.ToLower().Contains(p.ToLower())));
+                return View("~/Views/Product/MostViewProduct.cshtml",pm.ListMostViewProduct().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page,10));
             }
             return View();
         }

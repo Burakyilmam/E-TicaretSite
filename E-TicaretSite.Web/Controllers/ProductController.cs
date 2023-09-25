@@ -40,13 +40,13 @@ namespace E_TicaretSite.Web.Controllers
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult MostViewProduct(string p)
+        public IActionResult MostViewProduct(string p,int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
             {
-                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))).ToPagedList(page,10));
             }
-            var value = pm.ListMostViewProduct();
+            var value = pm.ListMostViewProduct().ToPagedList(page,10);
             return View(value);
         }
         [AllowAnonymous]
@@ -108,23 +108,23 @@ namespace E_TicaretSite.Web.Controllers
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ListCategoryProduct(int id, string p)
+        public IActionResult ListCategoryProduct(int id, string p,int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
             {
-                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))).ToPagedList(page, 10));
             }
-            var value = pm.ListCategoryProduct(id);
+            var value = pm.ListCategoryProduct(id).ToPagedList(page,10);
             return View(value);
         }
         [AllowAnonymous]
-        public IActionResult ListBrandProduct(int id, string p)
+        public IActionResult ListBrandProduct(int id, string p,int page = 1)
         {
             if (!string.IsNullOrEmpty(p))
             {
-                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))));
+                return View("~/Views/Product/MostViewProduct.cshtml", pm.ListMostViewProduct().Where(x => x.Name.Contains((CultureInfo.CurrentCulture.TextInfo.ToTitleCase(p.ToLower())))).ToPagedList(page, 10));
             }
-            var value = pm.ListBrandProduct(id);
+            var value = pm.ListBrandProduct(id).ToPagedList(page,10);
             return View(value);
         }
         [AllowAnonymous]
