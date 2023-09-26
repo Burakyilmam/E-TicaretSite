@@ -20,9 +20,8 @@
                     <th>Kullanıcı Adı</th>
                     <th>Statü</th>
                     <th>Tarih</th>
-                    <th>Güncelle</th>
                     <th>Sil</th>
-                    <th>Sepet Ögeleri</th>
+                    <th>Sepet Ürünleri</th>
                 </tr>
            </thead>
             @foreach (var item in Model)
@@ -45,18 +44,13 @@
                     </td>
                     <td>@item.CreatedDate</td>
                     <td>
-                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/GetCart/@item.Id">
-                            <i class="fa fa-refresh"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/Clear/">
+                        <a class="btn-danger" style="border-radius: 5px;padding: 4px 10px;" href="/Cart/Clear/">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
                     <td>
-                        <a class="btn-dark" style="border-radius: 5px;padding: 4px 10px;" href="@Url.Action("GetCartItems", "Cart", new { userid = item.UserId, cartid = item.Id })">
-                            <i class="fa fa-info"></i>
+                        <a class="btn-dark" style="border-radius: 5px;padding: 5px 10px;text-decoration:none;" href="@Url.Action("GetCartItems", "Cart", new { userid = item.UserId, cartid = item.Id })">
+                            Sepet Ürünleri
                         </a>
                     </td>
                 </tr>
