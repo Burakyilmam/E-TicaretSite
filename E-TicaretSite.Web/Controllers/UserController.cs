@@ -171,6 +171,7 @@ namespace E_TicaretSite.Web.Controllers
         [HttpPost]
         public IActionResult EditUser(User user)
         {
+            user.Email = "";
             um.Update(user);
             return RedirectToAction("UserList", "User");
         }

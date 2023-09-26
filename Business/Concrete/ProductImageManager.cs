@@ -23,6 +23,11 @@ namespace Business.Concrete
             _productImageDal.Add(t);
         }
 
+        public bool CheckProductImageUrl(string Url)
+        {
+            return _productImageDal.CheckProductImageUrl(Url);
+        }
+
         public void Delete(ProductImage t)
         {
             _productImageDal.Delete(t);

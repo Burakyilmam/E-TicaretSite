@@ -3,32 +3,45 @@
     ViewData["Title"] = "Kullanıcı Kayıt Sayfası";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="margin-top:180px" class="container-fluid">
-    <div style="text-center;display;flex;justify-content:center;flex-wrap:wrap" class="row">
-        <h1 class="mt-4 mb-4 col-12 text-center">Kullanıcı Kayıt Formu</h1>
-        <div style="display:flex" class="col-12 text-center justify-content-center">
-            <div class="col-7">
-                @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
-                {
-                    <div class="alert alert-danger">
-                        @ViewData["ErrorMessage"]
-                    </div>
-                }
-            </div>
-        </div>
-        <div style="display:flex" class="col-12 text-center justify-content-center">
-            <div class="col-7">
-                @using (Html.BeginForm("UserRegister", "User", FormMethod.Post))
-                {
-                    @Html.TextBoxFor(x=>x.UserName,new {@style="width:100%",@class="mt-2 mb-2"})
-                    @Html.ValidationMessageFor(x=>x.UserName,"", new { @class = "text-danger mt-2 mb-2" })
-                    @Html.TextBoxFor(x=>x.Password,new {@style="width:100%",@class="mt-2 mb-2"})
-                    @Html.ValidationMessageFor(x=>x.Password,"", new { @class = "text-danger mt-2 mb-2" })
-                    <br />
-                    <input style="padding:5px 25px;border-radius:5px;text-decoration:none;" class="btn-success text-center mt-2" type="submit" value="Ekle" />
-                }
-                <p style="margin-top:20px;">Zaten Üye Misiniz ?</p>
-                <a class="btn-primary" style="padding:5px 10px;border-radius:5px;text-decoration:none;" href="/User/UserLogin/" id="btn_login">Giriş Yap</a>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-dark">
+                    <h3 class="text-white">Kullanıcı Kayıt Formu</h3>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+                    {
+                        <div class="alert alert-danger">
+                            @ViewData["ErrorMessage"]
+                        </div>
+                    }
+                    @using (Html.BeginForm("UserRegister", "User", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        <div class="mt-2">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.UserName)
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Password)
+                                @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group text-center pt-2">
+                                <button type="submit" class="btn btn-success mt-3">Kayıt Ol</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer text-center">
+                    <h6 class="pb-2">Zaten Üye Misiniz ?</h6>
+                    <a class="btn btn-danger mb-2" href="/User/UserLogin/" id="btn_login">Giriş Yap</a>
+                </div>
             </div>
         </div>
     </div>
+</div>

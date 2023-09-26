@@ -11,5 +11,6 @@ namespace DataAccess.Abstract
     {
         List<ProductImage> ListProductImages(int id);
         List<ProductImage> GetProductImages(int id);
+        bool CheckProductImageUrl(string Url);
     }
 }

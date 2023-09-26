@@ -17,7 +17,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.Categories.Include(x=>x.MainCategory).Where(x => x.Statu == true).OrderBy(x => x.Name).ToList();
+                return c.Categories.Include(x=>x.MainCategory).OrderBy(x => x.Name).ToList();
             }
         }
         public List<Category> GetCategory(int id)
