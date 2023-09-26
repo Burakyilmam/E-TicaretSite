@@ -22,7 +22,6 @@
                     <th>ID</th>
                     <th>Resim</th>
                     <th>Resim Url</th>
-                    <th>Ürün Ad</th>
                     <th>Statü</th>
                     <th>Tarih</th>
                 </tr>
@@ -33,7 +32,6 @@
                     <td>@item.Id</td>
                     <td><img src="@item.ImageUrl" width="100" /></td>
                     <td>@item.ImageUrl</td>
-                    <td>@item.Product.Name</td>
                     <td>
                         @if (item.Statu == true)
                         {
@@ -51,12 +49,9 @@
             }
         </table>
     </div>
-    @foreach (var item in Model.Take(1))
-    {
         <div class="text-center">
-            @await Html.PartialAsync("~/Views/ProductImages/ProductImageAdd.cshtml",new { id = @item.ProductId })
+            @await Html.PartialAsync("~/Views/ProductImages/ProductImageAdd.cshtml")
         </div>
-    }
 
 }
 

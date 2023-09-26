@@ -90,7 +90,7 @@
             @foreach (var item in Model)
             {
                 <div class="mySlides">
-                    <img src="@item.ImageUrl" style="width:100%" onclick="openFullScreen(this)">
+                    <img src="@item.ImageUrl" style="width:100%;cursor:pointer" onclick="openFullScreen(this)">
                 </div>
             }
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

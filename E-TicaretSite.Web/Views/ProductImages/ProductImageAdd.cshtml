@@ -3,6 +3,7 @@
 <div style="display:flex" class="col-12 text-center justify-content-center">
     <div class="col-6">
         <form action="/ProductImages/ProductImageAdd/" method="post">
+            <input type="text" name="ProductId" style="display:none" value="@ViewBag.ProductId" />
             <input type="text" style="width:50%;padding: 4px 10px;outline:none" name="ImageUrl" placeholder="Eklemek İstediğiniz Resim Url Giriniz." required />
             <input class="text-center btn-success" style="padding: 4px 10px;margin-left:-10px;" type="submit" value="Ekle" />
         </form>

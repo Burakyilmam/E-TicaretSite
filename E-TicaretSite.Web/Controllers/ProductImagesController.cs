@@ -16,13 +16,12 @@ namespace E_TicaretSite.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ProductImageAdd(ProductImage productImage,int id = 9)
+        public IActionResult ProductImageAdd(ProductImage productImage)
         {
             productImage.Statu = true;
             productImage.CreatedDate = DateTime.Now;
-            productImage.ProductId = id;
             pim.Add(productImage);
-            return RedirectToAction("GetProductImages", "Product",new {id=id});
+            return RedirectToAction("GetProductImages", "Product", new { @id = productImage.ProductId });
         }
     }
 }

@@ -249,6 +249,7 @@ namespace E_TicaretSite.Web.Controllers
                     ViewBag.Id = userId;
                 }
             }
+            ViewBag.ProductId = id;
             var productimages = pim.GetProductImages(id);
             return View(productimages);
         }
