@@ -85,25 +85,23 @@
 }
 @if (Model.Any())
 {
-    <div class="container-fluid">
-        <div class="col-4">
-            @foreach (var item in Model)
-            {
-                <div class="mySlides">
-                    <img src="@item.ImageUrl" style="width:100%;cursor:pointer" onclick="openFullScreen(this)">
-                </div>
-            }
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-        <div class="col-4 row">
-            @for (int i = 0; i < Model.Count(); i++)
-            {
-                <div class="column">
-                    <img class="demo cursor" src="@Model.ElementAt(i).ImageUrl" style="width:100%" onclick="currentSlide(@i + 1)" alt="Resim">
-                </div>
-            }
-        </div>
+    <div class="col-sm-12">
+        @foreach (var item in Model)
+        {
+            <div class="mySlides">
+                <img src="@item.ImageUrl" style="width:100%;cursor:pointer" onclick="openFullScreen(this)">
+            </div>
+        }
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <div class="col-sm-12 row">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <div class="column">
+                <img class="demo cursor" src="@Model.ElementAt(i).ImageUrl" style="width:100%" onclick="currentSlide(@i + 1)" alt="Resim">
+            </div>
+        }
     </div>
     <div id="myModal" class="modal">
         <span class="close" onclick="closeFullScreen()">&times;</span>

@@ -3,7 +3,14 @@
     ViewData["Title"] = "Profilim";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<a href="/Home/HomePage/">Ana Sayfaya Dön</a>
+<marquee class="bg-dark text-white">
+    Hoşgeldin @await Html.PartialAsync("~/Views/User/GetUserName.cshtml") Umarım iyi bir gün geçiriyorsunuzdur.
+</marquee>
+<div class="row">
+    @await Component.InvokeAsync("UserComments")
+    @await Component.InvokeAsync("Weather")
+    @await Component.InvokeAsync("Weather")
+</div>
 <div class="row" style="display:flex;justify-content:center;">
 @await Component.InvokeAsync("CategoryCount")
 @await Component.InvokeAsync("MainCategoryCount")
@@ -26,3 +33,4 @@
     </div>
     <script src="~/js/NumberCounter.js"></script>
 </div>
+

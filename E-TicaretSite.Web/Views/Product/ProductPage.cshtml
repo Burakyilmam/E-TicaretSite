@@ -13,10 +13,54 @@
 <div class="container-fluid">
     @foreach (var item in Model)
     {
-        @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
-        <h1>@item.Name</h1>
-        <b><a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a></b>
-        <b><a href="/Product/ListBrandProduct/@item.BrandId">@item.Brand.Name</a></b>
+        <div class="col-12 bg-light" style="height:50px;display:flex;align-items:center;">
+            <b>
+                <a style="text-decoration:none;color:black;" href="/Home/HomePage/">Ana Sayfa</a>
+                <span style="opacity:0.5;font-size:10px;color:black;">
+                    <i class="fa fa-chevron-right"></i>
+                </span>
+                <a style="text-decoration:none;color:black;" href="/Home/HomePage/">@item.Category.MainCategory.MainCategoryName</a>
+                <span style="opacity:0.5;font-size:10px;color:black;">
+                    <i class="fa fa-chevron-right"></i>
+                </span>
+                <a style="text-decoration:none;color:black;" href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a>
+            </b>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
+            </div>
+            <div class="col-md-6 col-lg-8 bg-dark text-white pt-3">
+                <div class="col-12">
+                    @item.Name
+                </div>
+                <div class="col-12">
+                    <a style="text-decoration:none;color:White;" href="/Product/ListBrandProduct/@item.BrandId/">
+                        <b>@item.Brand.Name</b>
+                    </a>
+                </div>                
+                    @if (item.Discount == 0)
+                    {
+                        <div class="col-12"><b>@item.Price.ToString("0")</b> ₺</div>
+                    }
+                    @if (item.Discount > 0)
+                    {
+                        <div class="col-12">
+                            <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                            <b class="text-success">%@item.Discount.ToString("0")</b>
+                        </div>
+                        var discountedPrice =
+                        item.Price - (item.Price * @item.Discount) / 100;
+                        <div class="col-12 text-danger">
+                            <b>
+                                @discountedPrice.ToString("0")
+                            </b> ₺
+                        </div>
+
+                    }
+            </div>
+        </div>
+
 
         @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
         <br />
