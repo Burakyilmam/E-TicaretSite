@@ -1,20 +1,4 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using System.Xml.Linq;
-
-//namespace E_TicaretSite.Web.ViewComponents
-//{
-//    public class Weather : ViewComponent
-//    {
-//        public IViewComponentResult Invoke()
-//        {
-//            string api = "0928835605ea3e6b03f3a11f83b9d751";
-//            string city = "Bursa";
-//            string connection = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api}";
-//            return View();
-//        }
-//    }
-//}
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;

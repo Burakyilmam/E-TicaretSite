@@ -38,10 +38,10 @@
             <thead class="thead-dark">
                 <tr>
                     <th>
-                        <a class="text-white" style="text-decoration:none;" href="/Cart/SortIdOrderByDescending/">Id</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Cart/SortIdOrderBy/">Id</a>
                     </th>
                     <th>
-                        <a class="text-white" style="text-decoration:none;" href="/Cart/SortNameOrderBy/">Kullanıcı Ad</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Cart/SortNameOrderByDescending/">Kullanıcı Ad</a>
                     </th>
                     <th>
                         <a class="text-white" style="text-decoration:none;" href="/Cart/SortStatuOrderBy/">Statü</a>
@@ -87,7 +87,15 @@
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("CartList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortNameOrderBy",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+    <div class="text-center">
+        @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
     </div>
 }
 

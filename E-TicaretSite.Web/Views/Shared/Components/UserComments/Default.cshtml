@@ -1,18 +1,21 @@
 ﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="text-center col-sm-4 mt-2 mb-2">
-    <div class="card text-white" style="background-color:brown;;height:150px;">
+    <div class="card text-white" style="background-color:darkblue;;height:150px;">
         <div class="card-body">
-            <h4>
+            <h5>
                 <div class="row">
-                    <div class="col-6">
-                        <img src="" alt="hata" />
+                    <div class="col-6 mt-4">
+                        <img src="https://cdn-icons-png.flaticon.com/128/2190/2190552.png" width="80" />
                     </div>
-                    <div class="col*6">
-                        <div class="col-12">Yorumlarım</div>
-                        <div class="col-12 counter" data-val="@ViewBag.comments">0</div>
+                    <div class="col-6 mt-1">
+                        <div class="col-12 pb-2">Yorumlarım</div>
+                        <div class="col-12 counter pb-2" data-val="@ViewBag.comments">0</div>
+                        <div class="col-12 btn btn-info">
+                            <a style="text-decoration:none;color:White;width:" href="/Comment/UserComments/@ViewBag.Id">Yorumlarıma Git</a>
+                        </div>
                     </div>
                 </div>
-            </h4>
+            </h5>
         </div>
     </div>
 </div>

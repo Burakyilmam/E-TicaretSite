@@ -9,7 +9,28 @@
 <div class="row">
     @await Component.InvokeAsync("UserComments")
     @await Component.InvokeAsync("Weather")
-    @await Component.InvokeAsync("Weather")
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="text-center col-sm-4 mt-2 mb-2">
+        <div class="card text-white" style="background-color:darkorange;;height:150px;">
+            <div class="card-body">
+                <h5>
+                    <div class="row">
+                        <div class="col-6 mt-3">
+                            <img src="https://cdn-icons-png.flaticon.com/128/2435/2435292.png" width="90" />
+                        </div>
+                        <div class="col-6 mt-1">
+                            <div class="col-12 pb-2">Siparişlerim</div>
+                            <div class="col-12 counter pb-2" data-val="0">0</div>
+                            <div class="col-12 btn btn-info">
+                                <a style="text-decoration:none;color:White;width:100%" href="#">Siparişler</a>
+                            </div>
+                        </div>
+                    </div>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/NumberCounter.js"></script>
 </div>
 <div class="row" style="display:flex;justify-content:center;">
 @await Component.InvokeAsync("CategoryCount")
