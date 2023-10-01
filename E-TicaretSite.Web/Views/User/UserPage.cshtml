@@ -3,8 +3,8 @@
     ViewData["Title"] = "Profilim";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<marquee class="bg-dark text-white">
-    Hoşgeldin @await Html.PartialAsync("~/Views/User/GetUserName.cshtml") Umarım iyi bir gün geçiriyorsunuzdur.
+<marquee scrollamount="5" class="bg-dark text-white" style="height:50px;padding-top:12px;">
+    Hoşgeldin @await Html.PartialAsync("~/Views/User/GetUserName.cshtml") - Umarım iyi bir gün geçiriyorsundur.
 </marquee>
 <div class="row">
     @await Component.InvokeAsync("UserComments")
