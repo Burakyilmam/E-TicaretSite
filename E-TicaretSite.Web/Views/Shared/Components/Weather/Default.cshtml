@@ -9,7 +9,10 @@
                         </div>
                         <div class="col-6 mt-1">
                             <div class="col-12 pb-2">@ViewBag.city</div>
-                            <div class="col-12 counter pb-2" data-val="@ViewBag.temperature">0</div>
+                        <div class="col-12 pb-2">
+                            <span class="counter" data-val="@ViewBag.temperature">0</span>
+                            <span>°C</span>
+                        </div>
                         <div class="col-12 btn btn-info">
                             <a style="text-decoration:none;color:White;width:100%" href="https://openweathermap.org/city/750268">Detaylar</a>
                         </div>
