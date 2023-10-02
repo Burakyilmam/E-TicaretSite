@@ -38,7 +38,7 @@
                         <a class="text-white" style="text-decoration:none;" href="/Comment/SortTextOrderBy/">Yorum</a>
                     </th>
                     <th style="width:200px">
-                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortNameOrderBy/">Kullanıcı Ad</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortNameOrderByDescending/">Kullanıcı Ad</a>
                     </th>
                     <th style="width:200px">
                         <a class="text-white" style="text-decoration:none;" href="/Comment/SortProductOrderBy/">Ürün ad</a>
@@ -89,7 +89,7 @@
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("CommentList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortNameOrderBy",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <div class="text-center">
         @await Html.PartialAsync("~/Views/Comment/AdminCommentAdd.cshtml")

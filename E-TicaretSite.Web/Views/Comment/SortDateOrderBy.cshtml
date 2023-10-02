@@ -32,7 +32,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th style="width:80px">
-                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortIdOrderByDescending/">Id</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortIdOrderBy/">Id</a>
                     </th>
                     <th style="width:400px">
                         <a class="text-white" style="text-decoration:none;" href="/Comment/SortTextOrderBy/">Yorum</a>
@@ -47,7 +47,7 @@
                         <a class="text-white" style="text-decoration:none;" href="/Comment/SortStatuOrderBy/">Statü</a>
                     </th>
                     <th style="width:200px">
-                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortDateOrderBy/">Eklenme Tarihi</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortDateOrderByDescending/">Eklenme Tarihi</a>
                     </th>
                     <th>Güncelle</th>
                     <th>Sil</th>
@@ -89,7 +89,7 @@
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("CommentList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortDateOrderBy",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <div class="text-center">
         @await Html.PartialAsync("~/Views/Comment/AdminCommentAdd.cshtml")

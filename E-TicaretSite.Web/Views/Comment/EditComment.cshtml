@@ -1,0 +1,37 @@
+﻿@model Entity.Entities.Comment
+@{
+    ViewData["Title"] = "EditComment";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("EditComment", "Comment", FormMethod.Post))
+{
+    @Html.TextBoxFor(x=>x.Id,new {@style="display:none;"})
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.CommentText,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center class="mb-2">
+        @Html.DropDownListFor(model => model.UserId, ((IEnumerable<SelectListItem>)ViewBag.User).Select(c => new SelectListItem
+    {
+    Value = c.Value,
+    Text = $"{c.Value} - {c.Text}"
+    }),new {style="padding: 4px 10px;margin-left:-10px;width:50%;" })
+    </center>
+    <center class="mb-2">
+        @Html.DropDownListFor(model => model.ProductId, ((IEnumerable<SelectListItem>)ViewBag.Product).Select(c => new SelectListItem
+    {
+    Value = c.Value,
+    Text = $"{c.Value} - {c.Text}"
+    }),new {style="padding: 4px 10px;margin-left:-10px;width:50%;" })
+    </center>
+    <center>
+        @Html.DropDownList("Statu", new List<SelectListItem>
+    {
+    new SelectListItem { Value = "True", Text = "Aktif" },
+    new SelectListItem { Value = "False", Text = "Pasif" }
+    }, "-- Seçiniz --", new {@style="padding: 4px 10px;margin-left:-10px;width:50%"})
+    </center>
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.CreatedDate,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center class="mt-2">
+        <button style="padding: 4px 10px;margin-left:-10px;" class="btn-success text-center">Güncelle</button>
+    </center>
+}
+
+

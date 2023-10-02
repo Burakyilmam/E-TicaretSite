@@ -89,7 +89,7 @@
         </table>
     </div>
     <div class="col-12" style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("CommentList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SortNameOrderByDescending",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <div class="text-center">
         @await Html.PartialAsync("~/Views/Comment/AdminCommentAdd.cshtml")
