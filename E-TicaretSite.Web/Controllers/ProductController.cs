@@ -24,18 +24,8 @@ namespace E_TicaretSite.Web.Controllers
             {
                 return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page,10));
             }
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             var value = pm.ListProductWith().ToPagedList(page,10);
             return View(value);
         }
@@ -161,18 +151,9 @@ namespace E_TicaretSite.Web.Controllers
         [HttpGet]
         public IActionResult EditProduct(int id)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
+            
             CategoryManager cm = new CategoryManager(new EfCategoryRepository());
             BrandManager bm = new BrandManager(new EfBrandRepository());
 
@@ -196,18 +177,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult DetailProduct(int id)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             CategoryManager cm = new CategoryManager(new EfCategoryRepository());
             BrandManager bm = new BrandManager(new EfBrandRepository());
 
@@ -235,80 +206,88 @@ namespace E_TicaretSite.Web.Controllers
             pm.Update(product);
             return RedirectToAction("ProductList", "Product");
         }
-        public IActionResult GetProductImages(int id)
+        public IActionResult GetProductImages(int id,string p,int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
+            if (!string.IsNullOrEmpty(p))
             {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             ViewBag.ProductId = id;
-            var productimages = pim.GetProductImages(id);
+            var productimages = pim.GetProductImages(id).ToPagedList(page,10);
             return View(productimages);
         }
-        public IActionResult ProductImagesSortIdOrderBy(string p, int page = 1)
+        public IActionResult ProductImagesSortIdOrderBy(int id,string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var value = pm.ListProductWith().OrderBy(x => x.Id).ToPagedList(page, 10);
+            var value = pim.GetProductImages(id).OrderBy(x => x.Id).ToPagedList(page, 10);
             return View(value);
         }
-        public IActionResult ProductImagesSortIdOrderByDescending(string p, int page = 1)
+        public IActionResult ProductImagesSortIdOrderByDescending(int id, string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var value = pm.ListProductWith().OrderByDescending(x => x.Id).ToPagedList(page, 10); ;
+            var value = pim.GetProductImages(id).OrderByDescending(x => x.Id).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult ProductImagesSortStatuOrderBy(string p, int page = 1)
+        public IActionResult ProductImagesSortStatuOrderBy(int id, string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var value = pm.ListProductWith().OrderBy(x => x.Name).ToPagedList(page, 10); ;
+            var value = pim.GetProductImages(id).OrderBy(x => x.Statu).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult ProductImagesSortStatuOrderByDescending(string p, int page = 1)
+        public IActionResult ProductImagesSortStatuOrderByDescending(int id,string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var value = pm.ListProductWith().OrderByDescending(x => x.Name).ToPagedList(page, 10);
+            var value = pim.GetProductImages(id).OrderByDescending(x => x.Statu).ToPagedList(page, 10);
             return View(value);
         }
-        public IActionResult ProductImagesSortDateOrderBy(string p, int page = 1)
+        public IActionResult ProductImagesSortDateOrderBy(int id, string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var value = pm.ListProductWith().OrderBy(x => x.Brand.Name).ToPagedList(page, 10); ;
+            var value = pim.GetProductImages(id).OrderBy(x => x.CreatedDate).ToPagedList(page, 10); ;
             return View(value);
         }
-        public IActionResult ProductImagesSortDateOrderByDescending(string p, int page = 1)
+        public IActionResult ProductImagesSortDateOrderByDescending(int id, string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var value = pm.ListProductWith().OrderByDescending(x => x.Brand.Name).ToPagedList(page, 10); ;
+            var value = pim.GetProductImages(id).OrderByDescending(x => x.CreatedDate).ToPagedList(page, 10); ;
             return View(value);
         }
         public IActionResult SortIdOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -318,6 +297,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortIdOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -327,6 +308,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));

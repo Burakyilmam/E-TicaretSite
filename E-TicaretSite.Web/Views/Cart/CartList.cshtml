@@ -3,24 +3,41 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc.Bootstrap4.Core
 @model IPagedList<Cart>
+
 @{
-    ViewData["Title"] = "CategoryList";
+    ViewData["Title"] = "Sepet Listele";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+
 @if (!Model.Any())
 {
     <div class="col-12 text-center mt-3 mb-3">
         @using (Html.BeginForm())
         {
-            <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kategori adını yazınız.">
-            <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+            <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
+            <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
                 <i class="fa fa-search"></i>
             </button>
         }
     </div>
-    <div class="alert alert-danger text-center mt-4">
-        Sepet Bulunamadı
-    </div>
+    <center>
+        <div class="alert alert-danger text-center mt-4" style="width:50%;">
+            <div class="mt-2 mb-2">
+                <b>Sepet Bulunamadı.</b>
+            </div>
+            <div class="mt-2 mb-2">
+                Lütfen geçerli bir kullanıcı adı yazınız.
+            </div>
+        </div>
+    </center>
 }
 @if (Model.Any())
 {
@@ -28,8 +45,8 @@
         <div class="col-12 text-center mt-3 mb-3">
             @using (Html.BeginForm())
             {
-                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
-                <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
+                <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
                     <i class="fa fa-search"></i>
                 </button>
             }
@@ -46,7 +63,6 @@
                     <th>
                         <a class="text-white" style="text-decoration:none;" href="/Cart/SortStatuOrderBy/">Statü</a>
                     </th>
-                    <th>Sil</th>
                     <th>Sepet Ürünleri</th>
                 </tr>
             </thead>
@@ -55,9 +71,9 @@
                 <tr>
                     <td>@item.Id</td>
                     <td>
-                        <a href="#" style="text-decoration:none;font-weight:bolder;">
+                           <b>
                             @item.User.UserName
-                        </a>
+                           </b>
                     </td>
                     <td>
 
@@ -71,11 +87,6 @@
                             <a id="statu" style="padding:2px 12px;border-radius:80%" class="@item.Statu btn-danger">
                             </a>
                         }
-                    </td>
-                    <td>
-                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/Category/CategoryDelete/@item.Id">
-                            <i class="fa fa-trash"></i>
-                        </a>
                     </td>
                     <td>
                         <a class="btn-secondary" style="border-radius: 5px;padding: 4px 10px;text-decoration:none;font-weight:500" href="@Url.Action("GetCartItems", "Cart", new { userid = item.UserId, cartid = item.Id })">

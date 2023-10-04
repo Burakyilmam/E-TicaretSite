@@ -7,6 +7,14 @@
     ViewData["Title"] = "Ürünler";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+
 @if (!Model.Any())
 {
     <div class="alert alert-danger text-center mt-4">
@@ -16,6 +24,7 @@
         <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
     </center>
 }
+
 @if (Model.Any())
 {
     <div class="container-fluid">

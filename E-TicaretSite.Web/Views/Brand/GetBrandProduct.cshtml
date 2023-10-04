@@ -1,17 +1,56 @@
 ﻿@using Entity.Entities
-@model List<Product>
+@using X.PagedList.Mvc.Bootstrap4.Core;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model IPagedList<Product>
+
 @{
     ViewData["Title"] = "Ürün Resimleri";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+
 @if (!Model.Any())
 {
-    <div class="alert alert-danger text-center mt-4">
-        Ürün Bulunamadı
+    <div class="col-12 text-center mt-3 mb-3">
+        @using (Html.BeginForm())
+        {
+            <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz ürün adını yazınız.">
+            <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
+                <i class="fa fa-search"></i>
+            </button>
+        }
     </div>
+    <center>
+        <div class="alert alert-danger text-center mt-4" style="width:50%;">
+            <div class="mt-2 mb-2">
+                <b>Ürün Bulunamadı.</b>
+            </div>
+            <div class="mt-2 mb-2">
+                Lütfen geçerli bir ürün adı yazınız.
+            </div>
+        </div>
+    </center>
 }
+
 @if (Model.Any())
 {
+    <div class="col-12 text-center mt-3 mb-3">
+        @using (Html.BeginForm())
+        {
+            <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz ürün adını yazınız.">
+            <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
+                <i class="fa fa-search"></i>
+            </button>
+        }
+    </div>
     <div class="container-fluid">
         <table class="table table-bordered text-center">
             <thead class="thead-dark">
@@ -23,7 +62,7 @@
                     <th>Açıklama</th>
                     <th>Fiyat</th>
                     <th>Stok</th>
-                    <th>Kategorisi</th>
+                    <th>Kategori</th>
                     <th>Statü</th>
                 </tr>
             </thead>
@@ -57,6 +96,9 @@
                 </tr>
             }
         </table>
+        <div class="col-12" style="display:flex;justify-content:center;">
+            @Html.PagedListPager((IPagedList)Model,page=>Url.Action("GetBrandProduct",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
     </div>
 }
 

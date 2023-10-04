@@ -7,11 +7,34 @@
     ViewData["Title"] = "Yorumlar";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
 @if (!Model.Any())
 {
-    <div class="alert alert-danger text-center mt-4">
-        Yorum Bulunamadı
+    <div class="col-12 text-center mt-3 mb-3">
+        @using (Html.BeginForm())
+        {
+            <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz yorumu yazınız.">
+            <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
+                <i class="fa fa-search"></i>
+            </button>
+        }
     </div>
+    <center>
+        <div class="alert alert-danger text-center mt-4" style="width:50%;">
+            <div class="mt-2 mb-2">
+                <b>Yorum Bulunamadı.</b>
+            </div>
+            <div class="mt-2 mb-2">
+                Lütfen geçerli bir yorum yazınız.
+            </div>
+        </div>
+    </center>
     <div class="text-center">
         @await Html.PartialAsync("~/Views/Comment/AdminCommentAdd.cshtml")
     </div>
@@ -22,8 +45,8 @@
         <div class="col-12 text-center mt-3 mb-3">
             @using (Html.BeginForm())
             {
-                <input style="width:50%;padding:5.8px;border-right:none;padding-top:3px;" type="text" name="p" placeholder="Aramak istediğiniz yorumu yazınız.">
-                <button style="padding:8px;margin-left:-4px;border-left:none;background-color:transparent;outline:none">
+                <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz yorumu yazınız.">
+                <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
                     <i class="fa fa-search"></i>
                 </button>
             }
@@ -41,7 +64,7 @@
                         <a class="text-white" style="text-decoration:none;" href="/Comment/SortNameOrderBy/">Kullanıcı Ad</a>
                     </th>
                     <th style="width:200px">
-                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortProductOrderBy/">Ürün ad</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Comment/SortProductOrderBy/">Ürün Ad</a>
                     </th>
                     <th style="width:80px">
                         <a class="text-white" style="text-decoration:none;" href="/Comment/SortStatuOrderBy/">Statü</a>
@@ -73,7 +96,7 @@
                             </a>
                         }
                     </td>
-                    <td>@item.CreatedDate</td>
+                    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                     <td>
                         <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/Comment/EditComment/@item.Id">
                             <i class="fa fa-refresh"></i>

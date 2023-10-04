@@ -86,39 +86,19 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult CartList(string p,int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
-            }
+            }            
             var cart = cm.ListCartWith().OrderBy(x => x.Statu).ToPagedList(page, 10); ;
             return View(cart);
         }
         public IActionResult GetCartItems(int cartid, int userid)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             var cartItems = cim.GetCartItemsByUserId(userid, cartid);
             return View(cartItems);
         }
@@ -179,18 +159,8 @@ namespace E_TicaretSite.Web.Controllers
 
         public IActionResult SortIdOrderBy(string p, int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -200,18 +170,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortIdOrderByDescending(string p, int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -221,18 +181,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderBy(string p, int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -242,18 +192,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderByDescending(string p, int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -263,18 +203,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortStatuOrderBy(string p, int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -284,18 +214,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortStatuOrderByDescending(string p, int page = 1)
         {
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCartWith().Where(x => x.User.UserName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));

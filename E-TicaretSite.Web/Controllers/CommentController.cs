@@ -4,6 +4,7 @@ using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using X.PagedList;
@@ -15,22 +16,26 @@ namespace E_TicaretSite.Web.Controllers
     {
         DataContext c = new DataContext();
         CommentManager cm = new CommentManager(new EfCommentRepository());
-        public IActionResult UserComments(int id)
+        public IActionResult UserComments(int id, string p, int page = 1)
         {
-            DataContext c = new DataContext();
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListUserComment(id).Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            ViewBag.Username = User.Identity.Name;
-            ViewBag.Id = user.Id;
-            var value = cm.ListUserComment(id);
+            ViewBag.UserName = User.Identity.Name;
+            var value = cm.ListUserComment(id).ToPagedList(page,10);
             return View(value);
         }
-        public IActionResult ProductComments(int id)
+        public IActionResult ProductComments(int id, string p, int page = 1)
         {
-            DataContext c = new DataContext();
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.ListProductComment(id).Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            ViewBag.Username = User.Identity.Name;
-            ViewBag.Id = user.Id;
-            var value = cm.ListProductComment(id);
+            ViewBag.UserName = User.Identity.Name;
+            var value = cm.ListProductComment(id).ToPagedList(page, 10);
             return View(value);
         }
         [HttpGet]
@@ -58,18 +63,8 @@ namespace E_TicaretSite.Web.Controllers
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var userName = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             var value = cm.ListCommentWith().ToPagedList(page,10);
             return View(value);
         }
@@ -89,6 +84,8 @@ namespace E_TicaretSite.Web.Controllers
         [HttpGet]
         public IActionResult EditComment(int id)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             UserManager um = new UserManager(new EfUserRepository());
             ProductManager pm = new ProductManager(new EfProductRepository());
 
@@ -121,6 +118,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortIdOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -130,6 +129,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortIdOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -139,6 +140,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -148,6 +151,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -157,6 +162,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortTextOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -166,6 +173,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortTextOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -175,6 +184,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortProductOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -184,6 +195,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortProductOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -194,6 +207,8 @@ namespace E_TicaretSite.Web.Controllers
 
         public IActionResult SortDateOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -203,6 +218,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortDateOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -213,6 +230,8 @@ namespace E_TicaretSite.Web.Controllers
       
         public IActionResult SortStatuOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -222,6 +241,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortStatuOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(cm.ListCommentWith().Where(x => x.CommentText.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));

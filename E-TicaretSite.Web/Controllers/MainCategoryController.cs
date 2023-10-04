@@ -4,6 +4,7 @@ using DataAccess.EntityFramework;
 using Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
 using System.Security.Claims;
 using X.PagedList;
@@ -22,18 +23,8 @@ namespace E_TicaretSite.Web.Controllers
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page,10));
             }
-            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!string.IsNullOrEmpty(userIdClaim))
-            {
-                int userId = int.Parse(userIdClaim);
-                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
-                if (user != null)
-                {
-                    var username = User.Identity.Name;
-                    ViewBag.UserName = username;
-                    ViewBag.Id = userId;
-                }
-            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             var value = mcm.List().ToPagedList(page,10);
             return View(value);
         }
@@ -70,6 +61,8 @@ namespace E_TicaretSite.Web.Controllers
         [HttpGet]
         public IActionResult EditMainCategory(int id)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             var value = mcm.Get(id);
             return View(value);
         }
@@ -79,14 +72,22 @@ namespace E_TicaretSite.Web.Controllers
             mcm.Update(mainCategory);
             return RedirectToAction("MainCategoryList", "MainCategory");
         }
-        public IActionResult GetCategory(int id)
+        public IActionResult GetCategory(int id, string p, int page = 1)
         {
-            var categories = cm.GetCategory(id);
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(cm.GetCategory(id).Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+            }
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
+            var categories = cm.GetCategory(id).ToPagedList(page,10);
             return View(categories);
         }
 
         public IActionResult SortIdOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -96,6 +97,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortIdOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -105,6 +108,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -114,6 +119,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortNameOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -123,6 +130,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortStatuOrderBy(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
@@ -132,6 +141,8 @@ namespace E_TicaretSite.Web.Controllers
         }
         public IActionResult SortStatuOrderByDescending(string p, int page = 1)
         {
+            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            ViewBag.UserName = User.Identity.Name;
             if (!string.IsNullOrEmpty(p))
             {
                 return View(mcm.List().Where(x => x.MainCategoryName.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));

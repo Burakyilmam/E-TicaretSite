@@ -7,20 +7,34 @@
     ViewData["Title"] = "Kullanıcılar";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
 @if (!Model.Any())
 {
     <div class="col-12 text-center mt-3 mb-3">
         @using (Html.BeginForm())
         {
-            <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
-            <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+            <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
+            <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
                 <i class="fa fa-search"></i>
             </button>
         }
     </div>
-    <div class="alert alert-danger text-center mt-4">
-        Kullanıcı Bulunamadı
-    </div>
+    <center>
+        <div class="alert alert-danger text-center mt-4" style="width:50%;">
+            <div class="mt-2 mb-2">
+                <b>Kullanıcı Bulunamadı.</b>
+            </div>
+            <div class="mt-2 mb-2">
+                Lütfen geçerli bir kullanıcı adı yazınız.
+            </div>
+        </div>
+    </center>
     <center class="mt-4">
         <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserRegister/">
             <i class="fa fa-plus"></i>
@@ -33,8 +47,8 @@
         <div class="col-12 text-center mt-3 mb-3">
             @using (Html.BeginForm())
             {
-                <input style="width:50%;padding:4.5px;border-right:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
-                <button style="padding:8px;margin-left:-4px;margin-top:-3px;border-left:none;background-color:transparent;outline:none">
+                <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz kullanıcı adını yazınız.">
+                <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
                     <i class="fa fa-search"></i>
                 </button>
             }

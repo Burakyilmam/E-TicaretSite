@@ -1,13 +1,23 @@
 ﻿@using Entity.Entities
 @model List<CartItems>
+
 @{
     ViewData["Title"] = "Sepet Ürünleri";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+
 @if (!Model.Any())
 {
     <div class="alert alert-danger text-center mt-4">
-        Sepet Bulunamadı
+        Sepet içerisinde ürün bulunamadı.
     </div>
 }
 @if (Model.Any())
