@@ -3,10 +3,12 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc.Bootstrap4.Core
 @model IPagedList<Category>
+
 @{
     ViewData["Title"] = "CategoryList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <style>
     .table td {
         vertical-align: middle;
@@ -57,7 +59,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>
-                        <a class="text-white" style="text-decoration:none;" href="/Category/SortIdOrderByDescending/">Id</a>
+                        <a class="text-white" style="text-decoration:none;" href="/Category/SortIdOrderBy/">Id</a>
                     </th>
                     <th>
                         <a class="text-white" style="text-decoration:none;" href="/Category/SortMainCategoryNameOrderBy/">Genel Kategori Ad</a>
@@ -111,7 +113,7 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn-secondary" style="border-radius: 5px;padding: 4px 10px;text-decoration:none;font-weight:500" href="/Product/ListCategoryProduct/@item.Id">
+                        <a class="btn-secondary" style="border-radius: 5px;padding: 4px 10px;text-decoration:none;font-weight:500" href="@Url.Action("GetProduct", "Category", new {  id = item.Id })">
                             Ürünler
                         </a>
                     </td>
