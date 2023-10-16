@@ -1,0 +1,11 @@
+﻿﻿@using Entity.Entities
+@model IEnumerable<ProductsAttribute>
+<table class="table table-bordered table-striped">
+    @foreach (var item in Model)
+    {
+            <tr>
+            <td class="col-3 pl-4 text-center"><b>@item.Name</b></td>
+                <td class="col-9 pl-4">@item.Value</td>
+            </tr>
+    }
+</table>

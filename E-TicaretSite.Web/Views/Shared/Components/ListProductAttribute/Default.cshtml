@@ -1,6 +1,13 @@
 ﻿﻿@using Entity.Entities
 @model IEnumerable<ProductsAttribute>
+<div class="row text-center" style="display:flex;justify-content:center;align-items:center">
+    @foreach (var item in Model.Take(10))
+    {
 
-    @foreach(var item in Model){
-        @item.Name <span> </span> @item.Value
+            <div class="col-4 alert alert-primary ml-2 mr-2">
+                <b>@item.Name :</b>
+                @item.Value
+            </div>
+
     }
+</div>

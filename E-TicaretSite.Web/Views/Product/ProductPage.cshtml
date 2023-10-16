@@ -131,8 +131,12 @@
             </div>
         </div>
 
-
-        @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
+        <div class="col-12">
+            @await Component.InvokeAsync("ListProductAttributeAll",new {id = item.CategoryId})
+        </div>
+        <div class="col-12">
+            @await Component.InvokeAsync("ListComment",new {id=ViewBag.Id})
+        </div>
         <br />
         @if (User.Identity.IsAuthenticated)
         {
