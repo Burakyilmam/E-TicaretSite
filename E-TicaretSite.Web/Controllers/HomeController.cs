@@ -1,9 +1,11 @@
 ﻿using Business.Concrete;
 using DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Globalization;
 using X.PagedList;
 
@@ -22,5 +24,10 @@ namespace E_TicaretSite.Web.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
+        public IActionResult Error(int code)
+        {
+            return View();
+        }
     }
-}
+    }

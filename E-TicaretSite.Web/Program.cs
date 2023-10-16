@@ -1,3 +1,4 @@
+using E_TicaretSite.Web.Controllers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace E_TicaretSite.Web
@@ -19,13 +20,7 @@ namespace E_TicaretSite.Web
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            app.UseStatusCodePagesWithReExecute("/Home/Error/", "?Code={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
