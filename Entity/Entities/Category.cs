@@ -13,6 +13,7 @@ namespace Entity.Entities
         public int MainCategoryId { get; set; }
         public MainCategory MainCategory { get; set; }
         public List<Product> Products { get; set; }
+        public List<ProductsAttribute> ProductAttributes { get; set; }
 
     }
 }

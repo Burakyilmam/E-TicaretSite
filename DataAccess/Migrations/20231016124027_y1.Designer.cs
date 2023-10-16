@@ -4,6 +4,7 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231016124027_y1")]
+    partial class y1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,9 +282,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -290,16 +289,15 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Statu")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductAttributes");
                 });
@@ -427,13 +425,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entities.ProductsAttribute", b =>
                 {
-                    b.HasOne("Entity.Entities.Category", "Category")
+                    b.HasOne("Entity.Entities.Product", "Product")
                         .WithMany("ProductAttributes")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Entity.Entities.Brand", b =>
@@ -448,8 +446,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entities.Category", b =>
                 {
-                    b.Navigation("ProductAttributes");
-
                     b.Navigation("Products");
                 });
 
@@ -463,6 +459,8 @@ namespace DataAccess.Migrations
                     b.Navigation("CartItems");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("ProductAttributes");
 
                     b.Navigation("ProductImages");
                 });

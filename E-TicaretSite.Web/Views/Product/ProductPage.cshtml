@@ -27,37 +27,107 @@
             </b>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-5" style="border:1px solid black;border-right:none;border-top-left-radius:5px;border-bottom-left-radius:5px;">
                 @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
             </div>
-            <div class="col-md-6 col-lg-8 bg-dark text-white pt-3">
-                <div class="col-12">
-                    @item.Name
+            <div class="col-md-6 col-lg-7 bg-light text-black pt-3" style="border:1px solid black;border-left:none;border-top-right-radius:5px;border-bottom-right-radius:5px;">
+                <div class="col-12 mt-4 mb-4">
+                    <h3>@item.Name</h3>
                 </div>
-                <div class="col-12">
-                    <a style="text-decoration:none;color:White;" href="/Product/ListBrandProduct/@item.BrandId/">
-                        <b>@item.Brand.Name</b>
+                <div class="col-12 mt-2 mb-2">
+                    <a style="text-decoration:none;color:black;" href="/Product/ListBrandProduct/@item.BrandId/">
+                        <h4>@item.Brand.Name</h4>
                     </a>
-                </div>                
-                    @if (item.Discount == 0)
-                    {
-                        <div class="col-12"><b>@item.Price.ToString("0")</b> ₺</div>
-                    }
-                    @if (item.Discount > 0)
-                    {
-                        <div class="col-12">
-                            <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
-                            <b class="text-success">%@item.Discount.ToString("0")</b>
-                        </div>
-                        var discountedPrice =
-                        item.Price - (item.Price * @item.Discount) / 100;
-                        <div class="col-12 text-danger">
-                            <b>
-                                @discountedPrice.ToString("0")
-                            </b> ₺
-                        </div>
-
-                    }
+                </div>
+               <div class="row">
+                    <div class="col-6 mt-2 mb-2">
+                        <h5>
+                            @if (item.Discount == 0)
+                            {
+                                <div class="col-12"><b>@item.Price.ToString("0")</b> ₺</div>
+                            }
+                            @if (item.Discount > 0)
+                            {
+                                <div class="col-12">
+                                    <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                                    <b class="text-success">
+                                        %@item.Discount.ToString("0")
+                                        <i class="fa fa-caret-down"></i>
+                                    </b>
+                                </div>
+                                var discountedPrice =
+                                item.Price - (item.Price * @item.Discount) / 100;
+                                <div class="col-12 text-danger">
+                                    <b>
+                                        @discountedPrice.ToString("0")
+                                    </b> ₺
+                                </div>
+                            }
+                        </h5>
+                    </div>
+                    <div class="col-6 text-secondary text-center mt-2 mb-2">
+                        @if (item.Star == 5)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span><b>@item.Star</b></span>
+                        }
+                        @if (item.Star == 4)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span><b>@item.Star</b></span>
+                        }
+                        @if (item.Star == 3)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span><b>@item.Star</b></span>
+                        }
+                        @if (item.Star == 2)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span><b>@item.Star</b></span>
+                        }
+                        @if (item.Star == 1)
+                        {
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span><b>@item.Star</b></span>
+                        }
+                        @if (item.Star == 0)
+                        {
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span><b>@item.Star</b></span>
+                        }
+                    </div>
+                    <div class="col-12 text-center mt-4 mb-4">
+                        @await Html.PartialAsync("~/Views/Cart/AddToCart.cshtml", item.Id)
+                    </div>
+                    <div class="col-12">
+                        @await Component.InvokeAsync("ListProductAttribute",new {id = item.CategoryId})
+                    </div>
+               </div>
             </div>
         </div>
 

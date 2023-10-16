@@ -1,0 +1,6 @@
+﻿﻿@using Entity.Entities
+@model IEnumerable<ProductsAttribute>
+
+    @foreach(var item in Model){
+        @item.Name <span> </span> @item.Value
+    }

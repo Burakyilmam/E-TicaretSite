@@ -23,5 +23,6 @@ namespace DataAccess.Context
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItems> CartItems { get; set; }
         public DbSet<MainCategory> MainCategories { get; set; }
+        public DbSet<ProductsAttribute> ProductAttributes { get; set; }
     }
 }

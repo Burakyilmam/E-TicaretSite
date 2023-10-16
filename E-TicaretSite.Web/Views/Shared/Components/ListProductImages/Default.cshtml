@@ -79,8 +79,8 @@
 </style>
 @if (!Model.Any())
 {
-    <div style="text-align:center">
-        <b>Aradığınız Ürünün Görselleri Bulunmamaktadır.</b>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;" class="text-center">
+        <b style="margin-bottom:50px">Aradığınız Ürünün Görselleri Bulunmamaktadır.</b>
     </div>
 }
 @if (Model.Any())
