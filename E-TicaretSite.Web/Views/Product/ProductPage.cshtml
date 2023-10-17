@@ -4,42 +4,37 @@
     ViewData["Title"] = "ProductPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .col-12 span a {
-        color: darkorange;
-        text-decoration: none;
-    }
-</style>
+<link href="~/css/productpage.css" rel="stylesheet" />
 <div class="container-fluid">
     @foreach (var item in Model)
     {
-        <div class="col-12 bg-light" style="height:50px;display:flex;align-items:center;">
+        <div class="col-12 bg-light" id="MainCategory">
             <b>
-                <a style="text-decoration:none;color:black;" href="/Home/HomePage/">Ana Sayfa</a>
+                <a href="/Home/HomePage/">Ana Sayfa</a>
                 <span style="opacity:0.5;font-size:10px;color:black;">
                     <i class="fa fa-chevron-right"></i>
                 </span>
-                <a style="text-decoration:none;color:black;" href="/Product/ListMainCategoryProduct/@item.Category.MainCategoryId">@item.Category.MainCategory.MainCategoryName</a>
-                <span style="opacity:0.5;font-size:10px;color:black;">
+                <a href="/Product/ListMainCategoryProduct/@item.Category.MainCategoryId">@item.Category.MainCategory.MainCategoryName</a>
+                <span style="">
                     <i class="fa fa-chevron-right"></i>
                 </span>
-                <a style="text-decoration:none;color:black;" href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a>
+                <a href="/Product/ListCategoryProduct/@item.CategoryId">@item.Category.Name</a>
             </b>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-5" style="border:1px solid black;border-right:none;border-top-left-radius:5px;border-bottom-left-radius:5px;">
+            <div id="ProductImage" class="col-md-6 col-lg-5">
                 @await Component.InvokeAsync("ListProductImages",new {id=ViewBag.Id})
             </div>
-            <div class="col-md-6 col-lg-7 bg-light text-black pt-3" style="border:1px solid black;border-left:none;border-top-right-radius:5px;border-bottom-right-radius:5px;">
+            <div class="col-md-6 col-lg-7 bg-light text-black pt-3" id="ProductInfo">
                 <div class="col-12 mt-4 mb-4">
                     <h3>@item.Name</h3>
                 </div>
-                <div class="col-12 mt-2 mb-2">
-                    <a style="text-decoration:none;color:black;" href="/Product/ListBrandProduct/@item.BrandId/">
+                <div class="col-12 mt-2 mb-2" id="Brand">
+                    <a href="/Product/ListBrandProduct/@item.BrandId/">
                         <h4>@item.Brand.Name</h4>
                     </a>
                 </div>
-               <div class="row">
+                <div class="row">
                     <div class="col-6 mt-2 mb-2">
                         <h5>
                             @if (item.Discount == 0)
@@ -48,8 +43,8 @@
                             }
                             @if (item.Discount > 0)
                             {
-                                <div class="col-12">
-                                    <span style="text-decoration:line-through;opacity: 0.85;">@item.Price.ToString("0") ₺</span>
+                                <div class="col-12" id="Price">
+                                    <span>@item.Price.ToString("0") ₺</span>
                                     <b class="text-success">
                                         %@item.Discount.ToString("0")
                                         <i class="fa fa-caret-down"></i>
@@ -127,7 +122,7 @@
                     <div class="col-12">
                         @await Component.InvokeAsync("ListProductAttribute",new {id = item.CategoryId})
                     </div>
-               </div>
+                </div>
             </div>
         </div>
 
@@ -144,37 +139,42 @@
         }
         else
         {
-            <div class="col-12">
-                <p class="bg-secondary text-white p-3" style="border-radius:10px;">
-                    Sadece kayıtlı üyeler yorum yapabilir.Yorum Yapabilmeniz için üye girişi yapmanız gerekmektedir.Eğer üye değilseniz yan tarafta bulunan kayıt ol butonu ile üye olabilirsiniz.
-                    <a class="btn-light m-2" style="padding:10px;border-radius:10px" href="/User/ProductUserLogin/@item.Id">
+            <div class="col-12 bg-secondary" id="Comment">
+                <p class="col-12 pt-2 pb-1 text-white text-center">
+                    Sadece kayıtlı üyeler yorum yapabilir.Yorum Yapabilmeniz için üye girişi yapmanız gerekmektedir.
+                </p>
+                <div id="CommentDiv" class="col-12 text-center pb-4">
+                    <a class="btn-light text-center" href="/User/ProductUserLogin/@item.Id">
                         Giriş Yap
                     </a>
-                    <a class="btn-danger" style="padding:10px;border-radius:10px" href="/User/UserRegister/">
+                    <a class="btn-danger text-center" href="/User/UserRegister/">
                         Üye Ol
                     </a>
-                </p>
+                </div>
             </div>
         }
-        <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+        <div class="col-12 text-center mt-2" id="CategoryProduct">
             <h2>
-                @item.Category.Name <span style="font-size:16px;">
+                @item.Category.Name
+                <span>
                     <a href="/Product/ListCategoryProduct/@item.CategoryId">Tümünü Göster</a>
                 </span>
             </h2>
         </div>
         @await Component.InvokeAsync("ListSimilarCategory",new {id = item.CategoryId})
-        <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+        <div class="col-12 text-center" id="CategoryProduct">
             <h2>
-                @item.Brand.Name <span style="font-size:16px;">
+                @item.Brand.Name
+                <span>
                     <a href="/Product/ListBrandProduct/@item.BrandId">Tümünü Göster</a>
                 </span>
             </h2>
         </div>
         @await Component.InvokeAsync("ListBrandProducts",new {id = item.BrandId})
-        <div class="col-12" style="display:flex;justify-content:center;margin-left:-25px">
+        <div class="col-12 text-center" id="CategoryProduct">
             <h2>
-                @item.Category.MainCategory.MainCategoryName <span style="font-size:16px;">
+                @item.Category.MainCategory.MainCategoryName
+                <span>
                     <a href="/Product/ListMainCategoryProduct/1">Tümünü Göster</a>
                 </span>
             </h2>
@@ -182,36 +182,5 @@
         @await Component.InvokeAsync("MainCategoryProducts",new {id = item.Category.MainCategoryId})
 
     }
-</div>
-<script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    // Next/previous controls
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    // Thumbnail image controls
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("demo");
-        let captionText = document.getElementById("caption");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        captionText.innerHTML = dots[slideIndex - 1].alt;
-    }
-</script>
+</div
+><script src="~/js/slider.js"></script>

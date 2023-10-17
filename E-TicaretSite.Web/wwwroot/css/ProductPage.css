@@ -1,0 +1,77 @@
+﻿.col-12 span a {
+    color: darkorange;
+    text-decoration: none;
+}
+
+#MainCategory {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+    #MainCategory a {
+        text-decoration: none;
+        color: black;
+    }
+    #MainCategory span {
+        opacity: 0.5;
+        font-size: 10px;
+        color: black;
+    }
+#ProductImage {
+    border: 1px solid black;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#ProductInfo {
+    border: 1px solid black;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#Brand a {
+    text-decoration: none;
+    color: black;
+}
+#Price span {
+    text-decoration: line-through;
+    opacity: 0.85;
+}
+#Comment {
+    border-radius: 5px;
+}
+#Comment p {
+    border-radius: 5px;
+}
+#CommentDiv a {
+    margin: 5px;
+    padding: 10px 50px 10px 50px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+#CategoryProduct span {
+    font-size: 16px;
+}
+#alert {
+    height: 75px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:14px;
+}
+@media screen and (max-width: 782px) {
+    #Value {
+        text-align: center;
+        vertical-align: middle;
+    }
+    #ProductImage {
+        border: 1px solid black;
+
+    }
+
+    #ProductInfo {
+        border: 1px solid black;
+    }
+}

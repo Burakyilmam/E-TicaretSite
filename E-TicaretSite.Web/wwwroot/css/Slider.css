@@ -1,0 +1,63 @@
+﻿img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.next {
+    right: 0;
+}
+
+
+.column {
+    width: 20%;
+}
+
+.demo {
+    opacity: 0.6;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+#Error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

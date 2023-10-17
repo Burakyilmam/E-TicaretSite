@@ -1,13 +1,12 @@
 ﻿﻿@using Entity.Entities
 @model IEnumerable<ProductsAttribute>
-<div class="row text-center" style="display:flex;justify-content:center;align-items:center">
-    @foreach (var item in Model.Take(10))
+<div class="text-center" style="display:flex;justify-content:center;flex-wrap:wrap;align-items:center;">
+    <h3 class="text-center col-12 pb-2">Ürün Özellikleri</h3>
+    @foreach (var item in Model.Take(6))
     {
-
-            <div class="col-4 alert alert-primary ml-2 mr-2">
-                <b>@item.Name :</b>
-                @item.Value
-            </div>
-
+        <div id="alert" class="col-sm-4 col-md-5 col-xl- alert alert-danger ml-2 mr-2">
+            <b>@item.Name :</b>
+            @item.Value
+        </div>
     }
 </div>
