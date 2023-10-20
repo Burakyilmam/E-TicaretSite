@@ -19,3 +19,5 @@ Demo görüntüleri -> https://www.youtube.com/playlist?list=PLPCWhaSK59Ag3VQBX4
 <img src="https://github.com/Burakyilmam/E-TicaretSite/assets/61635780/634c5a93-6e83-4dec-a906-6ba0ed9777ff">
 <h3 align="center">Ürün Sayfası (Bilgisayar)</h1>
 <img src="https://github.com/Burakyilmam/E-TicaretSite/assets/61635780/3ea98222-d20a-4115-927b-0bc86ff7894b">
+<h3 align="center">Hata Sayfası</h1>
+<img src="https://github.com/Burakyilmam/E-TicaretSite/assets/61635780/9f1973e4-a4ef-4bf4-ab61-662b578d8222">
