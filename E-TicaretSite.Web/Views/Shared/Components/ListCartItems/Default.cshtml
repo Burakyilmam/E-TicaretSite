@@ -28,7 +28,7 @@
             {
                 <tr>
                     <td class="align-middle"><img src="@y.Product.ThumbnailImage" width="100" /></td>
-                    <td class="align-middle">@y.Quantity</td>
+                    <td id="quantity" class="align-middle">@y.Quantity</td>
                     <td class="align-middle">@y.Product.Name</td>
                     @if (y.Product.Discount == 0)
                     {
@@ -73,9 +73,9 @@
                         @using (Html.BeginForm("Decrease", "Cart"))
                         {
                             @Html.Hidden("Id",y.ProductId)
-                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-secondary">-</button>
+                            <button onclick="confirmDecrease(@y.ProductId, @y.Quantity);return false;" type="submit" style="padding:7px;border-radius:3px;" class="btn-secondary">-</button>
                         }
-                    </td class="align-middle">
+                    </td>
                     <td class="align-middle">
                         @using (Html.BeginForm("DeleteFromCart", "Cart"))
                         {
@@ -143,6 +143,39 @@
         });
     }
 </script>
+<script>
+    function confirmDecrease(productId, quantity) {
+        if (quantity === 1) {
+            Swal.fire({
+                title: 'Ürünü sepetinizden silmek istiyor musunuz?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Evet',
+                cancelButtonText: 'Hayır'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    decreaseQuantity(productId);
+                }
+            });
+        } else if (quantity > 1) {
+            decreaseQuantity(productId);
+        }
+    }
+
+    function decreaseQuantity(productId) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/Cart/Decrease");
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "Id");
+        hiddenField.setAttribute("value", productId);
+        form.appendChild(hiddenField);
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+
 
 
 
