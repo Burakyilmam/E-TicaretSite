@@ -80,7 +80,7 @@
                         @using (Html.BeginForm("DeleteFromCart", "Cart"))
                         {
                             @Html.Hidden("Id",y.ProductId)
-                            <button type="submit" style="padding:7px;border-radius:3px;" class="btn-danger">
+                            <button  onclick="confirmDelete(@y.ProductId); return false;" type="submit" style="padding:7px;border-radius:3px;" class="btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
                         }
@@ -116,3 +116,35 @@
     </h2>
 </div>
 @await Component.InvokeAsync("ListMostViewProducts")
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function confirmDelete(productId) {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu ürünü sepetten çıkarmak istediğinizden emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil',
+            cancelButtonText: 'Hayır, Vazgeç',
+        }).then((result) => {
+            if (result.isConfirmed) {   
+                var form = document.createElement("form");
+                form.method = "post";
+                form.action = "/Cart/DeleteFromCart";
+                var hiddenField = document.createElement("input");
+                hiddenField.type = "hidden";
+                hiddenField.name = "Id";
+                hiddenField.value = productId;
+                form.appendChild(hiddenField);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    }
+</script>
+
+
+
+
+
