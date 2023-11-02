@@ -99,9 +99,9 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/MainCategory/MainCategoryDelete/@item.Id">
+                        <button class="btn-primary" onclick="confirmDelete(@item.Id)" style="border-radius: 5px; padding: 4px 10px;">
                             <i class="fa fa-trash"></i>
-                        </a>
+                        </button>
                     </td>
                     <td>
                         <a class="btn-secondary" style="border-radius: 5px;padding: 4px 10px;text-decoration:none;font-weight:500" href="@Url.Action("GetCategory", "MainCategory", new {  id = item.Id })">
@@ -125,5 +125,23 @@
         @await Html.PartialAsync("~/Views/MainCategory/MainCategoryAdd.cshtml")
     </div>
 }
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu öğeyi silmek istediğinizden emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil',
+            cancelButtonText: 'Hayır, Vazgeç',
+        }).then((result) => {
+            if (result.isConfirmed) {   
+                window.location.href = '/MainCategory/MainCategoryDelete/' + id;
+            }
+        });
+    }
+</script>
 
 

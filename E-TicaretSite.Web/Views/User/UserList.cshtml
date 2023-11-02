@@ -109,7 +109,7 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn-primary" style="border-radius: 5px;padding: 4px 10px;" href="/User/UserDelete/@item.Id">
+                        <a class="btn-primary text-white" style="border-radius: 5px;padding: 4px 10px;" onclick="confirmDelete(@item.Id)">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -148,4 +148,21 @@
         }
     </script>
 }
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu öğeyi silmek istediğinizden emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil',
+            cancelButtonText: 'Hayır, Vazgeç',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/User/UserDelete/' + id;
+            }
+        });
+    }
+</script>
