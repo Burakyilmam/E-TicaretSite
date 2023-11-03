@@ -79,6 +79,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = cm.Get(id);
             cm.Delete(value);
+            TempData["SuccessMessage"] = "Yorum başarıyla silindi.";
             return RedirectToAction("CommentList", "Comment");
         }
         [HttpGet]

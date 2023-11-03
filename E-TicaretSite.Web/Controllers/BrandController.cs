@@ -54,6 +54,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = bm.Get(id);
             bm.Delete(value);
+            TempData["SuccessMessage"] = "Marka başarıyla silindi.";
             return RedirectToAction("BrandList", "Brand");
         }
         [HttpGet]

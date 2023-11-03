@@ -56,6 +56,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = cm.Get(id);
             cm.Delete(value);
+            TempData["SuccessMessage"] = "Kategori başarıyla silindi.";
             return RedirectToAction("CategoryList", "Category");
         }
 

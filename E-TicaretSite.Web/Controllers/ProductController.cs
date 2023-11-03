@@ -146,6 +146,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = pm.Get(id);
             pm.Delete(value);
+            TempData["SuccessMessage"] = "Ürün başarıyla silindi.";
             return RedirectToAction("ProductList", "Product");
         }
         [HttpGet]

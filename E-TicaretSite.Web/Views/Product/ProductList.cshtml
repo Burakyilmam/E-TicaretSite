@@ -161,6 +161,12 @@
             }
         });
     }
+    var successMessage = "@TempData["SuccessMessage"]";
+    if (successMessage) {
+        Swal.fire('Başarılı', successMessage, 'success');
+        setTimeout(function () {
+        }, 3000);
+    }
 </script>
 
 

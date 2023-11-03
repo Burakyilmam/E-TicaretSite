@@ -139,6 +139,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = um.Get(id);
             um.Delete(value);
+            TempData["SuccessMessage"] = "Kullanıcı başarıyla silindi.";
             return RedirectToAction("UserList", "User");
         }
         [HttpGet]

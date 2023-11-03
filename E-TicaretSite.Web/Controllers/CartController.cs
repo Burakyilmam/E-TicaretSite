@@ -154,6 +154,7 @@ namespace E_TicaretSite.Web.Controllers
             id = existingCart.Id;
             var value = cm.Get(id);
             cm.Delete(value);
+            TempData["SuccessMessage"] = "Sepet başarıyla temizlendi.";
             return RedirectToAction("MyCart", "Cart");
         }
 

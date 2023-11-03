@@ -55,6 +55,7 @@ namespace E_TicaretSite.Web.Controllers
         {
             var value = mcm.Get(id);
             mcm.Delete(value);
+            TempData["SuccessMessage"] = "Genel marka başarıyla silindi.";
             return RedirectToAction("MainCategoryList", "MainCategory");
         }
 
