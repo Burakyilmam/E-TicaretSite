@@ -1,0 +1,128 @@
+﻿@using Entity.Entities
+@using X.PagedList.Mvc.Bootstrap4.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model IPagedList<Address>
+@{
+    ViewData["Title"] = "Address";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .table td {
+        vertical-align: middle;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+@if (!Model.Any())
+{
+    <div class="col-12 text-center mt-3 mb-3">
+        @using (Html.BeginForm())
+        {
+            <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz adresi yazınız.">
+            <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
+                <i class="fa fa-search"></i>
+            </button>
+        }
+    </div>
+    <center>
+        <div class="alert alert-danger text-center mt-4" style="width:50%;">
+            <div class="mt-2 mb-2">
+                <b>Adres Bulunamadı.</b>
+            </div>
+            <div class="mt-2 mb-2">
+                Lütfen geçerli bir adres yazınız.
+            </div>
+        </div>
+    </center>
+    <center class="mt-4">
+        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/UserAddress/AddressAdd/">
+            <i class="fa fa-plus"> Ekle</i>
+        </a>
+    </center>
+}
+@if (Model.Any())
+{
+    <div class="container-fluid">
+        <div class="col-12 text-center mt-3 mb-3">
+            @using (Html.BeginForm())
+            {
+                <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz adresi yazınız.">
+                <button style="border-left:none;background-color:transparent;outline:none;margin-left:-4px;padding:9px 9px 7.3px 1px">
+                    <i class="fa fa-search"></i>
+                </button>
+            }
+        </div>
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        <a class="text-white" style="text-decoration:none;" href="/User/SortIdOrderByDescending/">Id</a>
+                    </th>
+                    <th>
+                        <a class="text-white" style="text-decoration:none;" href="/User/SortNameOrderBy/">Başlık</a>
+                    </th>
+                    <th>Adres</th>
+                    <th>Ülke</th>
+                    <th>Şehir</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>
+                        @item.AddressText
+                    </td>
+                    <td>@item.Country</td>
+                    <td>@item.City</td>
+                    <td>
+                        <a class="btn-primary text-white" style="border-radius: 5px;padding: 4px 10px;" href="/UserAddress/EditAddress/@item.Id">
+                            <i class="fa fa-refresh"> Güncelle</i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn-danger text-white" style="border-radius: 5px;padding: 4px 10px;" onclick="confirmDelete(@item.Id)">
+                            <i class="fa fa-trash"> Sil</i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <center>
+            <a href="/UserAddress/AddressAdd/" class="btn btn-success p-2 mb-4 mt-2">
+                <i class="fa fa-plus"> Ekle</i>
+            </a>
+        </center>
+    </div>
+    <div class="col-12" style="display:flex;justify-content:center;">
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("Address",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu öğeyi silmek istediğinizden emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil',
+            cancelButtonText: 'Hayır, Vazgeç',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/UserAddress/AddressDelete/' + id;
+            }
+        });
+    }
+    var successMessage = "@TempData["SuccessMessage"]";
+    if (successMessage) {
+        Swal.fire('Başarılı', successMessage, 'success');
+        setTimeout(function () {
+        }, 3000);
+    }
+</script>
