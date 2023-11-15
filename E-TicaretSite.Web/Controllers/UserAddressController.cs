@@ -5,6 +5,7 @@ using Entity.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Net;
 using System.Security.Claims;
 using X.PagedList;
 
@@ -106,12 +107,25 @@ namespace E_TicaretSite.Web.Controllers
             }
             return RedirectToAction("Address", "UserAddress", new { @id = address.UserId });
         }
-        public IActionResult AddressDelete(int id)
+        public IActionResult AddressDelete(Address address, int id)
         {
-            var value = am.Get(id);
-            am.Delete(value);
-            TempData["SuccessMessage"] = "Adres başarıyla silindi.";
-            return RedirectToAction("Address", "UserAddress");
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+                    var value = am.Get(id);
+                    am.Delete(value);
+                    TempData["SuccessMessage"] = "Adres başarıyla silindi.";
+                    return RedirectToAction("Address", "UserAddress", new { @id = userId });
+                }
+            }
+            return View();     
         }
     }
 }

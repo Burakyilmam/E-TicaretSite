@@ -18,16 +18,41 @@ namespace E_TicaretSite.Web.Controllers
         DataContext c = new DataContext();
         ProductManager pm = new ProductManager(new EfProductRepository());
         ProductImageManager pim = new ProductImageManager(new EfProductImageRepository());
-        public IActionResult ProductList(Product product,string p,int page = 1)
+        public IActionResult ProductList(string p,int page = 1)
         {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (!string.IsNullOrEmpty(p))
             {
-                return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page,10));
+                if (!string.IsNullOrEmpty(userIdClaim))
+                {
+                    int userId = int.Parse(userIdClaim);
+                    var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                    if (user != null)
+                    {
+                        var username = User.Identity.Name;
+                        ViewBag.UserName = username;
+                        ViewBag.Id = userId;
+                        return View(pm.ListProductWith().Where(x => x.Name.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
+                    }
+                    return View();
+                }
+               
             }
-            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            ViewBag.UserName = User.Identity.Name;
-            var value = pm.ListProductWith().ToPagedList(page,10);
-            return View(value);
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+                    var value = pm.ListProductWith().ToPagedList(page, 10);
+                    return View(value);
+                }
+            }
+            
+            return View();
         }
         [AllowAnonymous]
         public IActionResult MostViewProduct(string p,int page = 1)
@@ -130,6 +155,19 @@ namespace E_TicaretSite.Web.Controllers
         [HttpGet]
         public IActionResult ProductAdd()
         {
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+                    return View();
+                }
+            }
             return View();
         }
         [HttpPost]
@@ -152,54 +190,78 @@ namespace E_TicaretSite.Web.Controllers
         [HttpGet]
         public IActionResult EditProduct(int id)
         {
-            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            ViewBag.UserName = User.Identity.Name;
-            
-            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-            BrandManager bm = new BrandManager(new EfBrandRepository());
-
-            var categories = cm.List();
-            var brands = bm.List();
-
-            var categoryItems = categories.Select(c => new SelectListItem
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
             {
-                Value = c.Id.ToString(),
-                Text = c.Name
-            }).ToList();
-            var branditems = brands.Select(c => new SelectListItem
-            {
-                Value = c.Id.ToString(),
-                Text = c.Name
-            }).ToList();
-            ViewBag.Categories = categoryItems;
-            ViewBag.Brands = branditems;
-            var value = pm.Get(id);
-            return View(value);
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+
+                    CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+                    BrandManager bm = new BrandManager(new EfBrandRepository());
+
+                    var categories = cm.List();
+                    var brands = bm.List();
+
+                    var categoryItems = categories.Select(c => new SelectListItem
+                    {
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    }).ToList();
+                    var branditems = brands.Select(c => new SelectListItem
+                    {
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    }).ToList();
+                    ViewBag.Categories = categoryItems;
+                    ViewBag.Brands = branditems;
+                    var value = pm.Get(id);
+                    return View(value);
+                }
+            }
+            return View();
         }
         public IActionResult DetailProduct(int id)
         {
-            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            ViewBag.UserName = User.Identity.Name;
-            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-            BrandManager bm = new BrandManager(new EfBrandRepository());
-
-            var categories = cm.List();
-            var brands = bm.List();
-
-            var categoryItems = categories.Select(c => new SelectListItem
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
             {
-                Value = c.Id.ToString(),
-                Text = c.Name
-            }).ToList();
-            var branditems = brands.Select(c => new SelectListItem
-            {
-                Value = c.Id.ToString(),
-                Text = c.Name
-            }).ToList();
-            ViewBag.Categories = categoryItems;
-            ViewBag.Brands = branditems;
-            var value = pm.Get(id);
-            return View(value);
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+
+                    CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+                    BrandManager bm = new BrandManager(new EfBrandRepository());
+
+                    var categories = cm.List();
+                    var brands = bm.List();
+
+                    var categoryItems = categories.Select(c => new SelectListItem
+                    {
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    }).ToList();
+                    var branditems = brands.Select(c => new SelectListItem
+                    {
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    }).ToList();
+                    ViewBag.Categories = categoryItems;
+                    ViewBag.Brands = branditems;
+                    var value = pm.Get(id);
+                    return View(value);
+                }
+            }
+            return View();
+            
         }
         [HttpPost]
         public IActionResult EditProduct(Product product)
@@ -213,11 +275,21 @@ namespace E_TicaretSite.Web.Controllers
             {
                 return View(pim.GetProductImages(id).Where(x => x.ImageUrl.ToLower().Contains(p.ToLower())).ToPagedList(page, 10));
             }
-            var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            ViewBag.UserName = User.Identity.Name;
-            ViewBag.ProductId = id;
-            var productimages = pim.GetProductImages(id).ToPagedList(page,10);
-            return View(productimages);
+            var userIdClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim))
+            {
+                int userId = int.Parse(userIdClaim);
+                var user = c.Users.FirstOrDefault(x => x.Id == userId && x.Statu);
+                if (user != null)
+                {
+                    var username = User.Identity.Name;
+                    ViewBag.UserName = username;
+                    ViewBag.Id = userId;
+                    var productimages = pim.GetProductImages(id).ToPagedList(page, 10);
+                    return View(productimages);
+                }
+            }
+            return View();   
         }
         public IActionResult ProductImagesSortIdOrderBy(int id,string p, int page = 1)
         {
