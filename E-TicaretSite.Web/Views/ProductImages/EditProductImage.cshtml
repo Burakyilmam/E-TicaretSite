@@ -1,0 +1,30 @@
+﻿@model Entity.Entities.ProductImage
+@{
+    ViewData["Title"] = "Ürün Güncelleme Sayfası";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid">
+    <h2 class="text-center mt-3 mb-3">Ürün Güncelleme Formu</h2>
+    <center>
+        @using (Html.BeginForm("EditProductImage", "ProductImages", FormMethod.Post))
+        {
+            @Html.TextBoxFor(x=>x.Id,new {@style="display:none;"})
+            @Html.TextBoxFor(x=>x.ProductId,new {@style="display:none;"})
+            @Html.TextBoxFor(x=>x.CreatedDate,new {@style="display:none;"})
+            <div class="col-12 text-center mb-3">
+                <img width="50%" src="@Model.ImageUrl">
+            </div>
+            <h2 class="text-center col-12">Resim Url</h2>
+            @Html.TextBoxFor(x=>x.ImageUrl,new {style="border-radius: 5px;padding: 4px 10px;width:50%", })
+            <h2 class="text-center col-12">Ürün Statüsü</h2>
+            <div class="mb-2">
+                @Html.DropDownList("Statu", new List<SelectListItem>
+            {
+            new SelectListItem { Value = "True", Text = "Aktif" },
+            new SelectListItem { Value = "False", Text = "Pasif" }
+            }, new {style="border-radius: 5px;padding: 4px 10px;width:50%"})
+            </div>
+            <button style="padding: 4px 10px;" class="btn-success text-center"><i class="fa fa-plus"></i></button>
+        }
+    </center>
+</div>

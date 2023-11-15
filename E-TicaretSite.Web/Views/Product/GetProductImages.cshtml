@@ -59,6 +59,8 @@
                     <th>Resim Url</th>
                     <th>Statü</th>
                     <th>Tarih</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
                 </tr>
             </thead>
             @foreach (var item in Model)
@@ -80,6 +82,16 @@
                         }
                     </td>
                     <td>@item.CreatedDate</td>
+                    <td>
+                        <a class="btn-warning text-white" style="border-radius: 5px;padding: 4px 10px;" href="/ProductImages/EditProductImage/@item.Id">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn-primary text-white" style="border-radius: 5px;padding: 4px 10px;" onclick="confirmDelete(@item.Id)">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             }
         </table>
@@ -98,7 +110,29 @@
             @await Html.PartialAsync("~/Views/ProductImages/ProductImageAdd.cshtml")
         </div>
     </div>
-
-
 }
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu öğeyi silmek istediğinizden emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil',
+            cancelButtonText: 'Hayır, Vazgeç',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/ProductImages/ProductImageDelete/' + id;
+            }
+        });
+    }
+    var successMessage = "@TempData["SuccessMessage"]";
+    if (successMessage) {
+        Swal.fire('Başarılı', successMessage, 'success');
+        setTimeout(function () {
+        }, 3000);
+    }
+</script>
 
