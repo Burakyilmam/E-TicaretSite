@@ -24,7 +24,7 @@ namespace DataAccess.EntityFramework
         {
             using (var c = new DataContext())
             {
-                return c.ProductImages.Include(x=>x.Product).Where(x => (x.Statu == true) && (x.ProductId == id)).ToList();
+                return c.ProductImages.Include(x=>x.Product).Where(x =>(x.ProductId == id)).ToList();
             }
         }
         public bool CheckProductImageUrl(string Url)
