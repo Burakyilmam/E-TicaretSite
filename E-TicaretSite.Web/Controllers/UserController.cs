@@ -56,7 +56,17 @@ namespace E_TicaretSite.Web.Controllers
             {
                 user.Statu = true;
                 user.CreatedDate = DateTime.Now;
-                user.Email = "";
+
+                user.Profile = new Profile();
+                user.Profile.Name = " ";
+                user.Profile.Surname = " ";
+                user.Profile.BirthDate = DateTime.Now;
+                user.Profile.Email = " ";
+                user.Profile.Gender = " ";
+                user.Profile.PhoneNumber = " ";
+                user.Profile.Statu = true;
+                user.Profile.CreatedDate = DateTime.Now;
+
                 um.Add(user);
                 return RedirectToAction("UserLogin", "User");
             }
@@ -153,7 +163,6 @@ namespace E_TicaretSite.Web.Controllers
         [HttpPost]
         public IActionResult EditUser(User user)
         {
-            user.Email = "";
             um.Update(user);
             return RedirectToAction("UserList", "User");
         }
