@@ -285,6 +285,7 @@ namespace E_TicaretSite.Web.Controllers
                     var username = User.Identity.Name;
                     ViewBag.UserName = username;
                     ViewBag.Id = userId;
+                    ViewBag.ProductId = id;
                     var productimages = pim.GetProductImages(id).ToPagedList(page, 10);
                     return View(productimages);
                 }
