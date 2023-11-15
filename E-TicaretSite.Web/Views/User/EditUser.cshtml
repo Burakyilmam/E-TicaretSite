@@ -9,7 +9,6 @@
     @Html.TextBoxFor(x=>x.Id,new {@style="display:none;"})
     <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.UserName,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
     <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.Password,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
-    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.Email,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
     <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.CreatedDate,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;display:none;",@readonly = "readonly"})</center>
     <center>
         @Html.DropDownList("Statu", new List<SelectListItem>

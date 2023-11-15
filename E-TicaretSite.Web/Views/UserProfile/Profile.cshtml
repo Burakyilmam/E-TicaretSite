@@ -1,0 +1,53 @@
+﻿@using Entity.Entities
+@using X.PagedList.Mvc.Bootstrap4.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model List<Profile>
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (Model.Any())
+{
+    <div class="container-fluid">
+        <h1 class="text-center mt-4">Profilim</h1>
+        @foreach (var item in Model)
+        {
+            <h4 class="mt-4 mb-4 text-center alert-dark p-3">Kişisel Bilgilerim</h4>
+            <div class="row" style="display:flex;justify-content:start">
+                <div class="col-6">
+                    <label class="font-weight-bold" for="name">Ad</label>
+                    <input disabled class="text-center mb-2 pt-1 pb-1" type="text" style="width:100%;background-color:white;border:1px solid black;" value="@item.Name">
+                </div>
+                <div class="col-6">
+                    <label class="font-weight-bold" for="surname">Soyad</label>
+                    <input disabled class="text-center mb-2 pt-1 pb-1" type="text" style="width:100%;background-color:white;border:1px solid black;" value="@item.Surname">
+                </div>
+                <div class="col-6">
+                    <label class="font-weight-bold" for="birthdate">Doğum Tarihi</label>
+                    <input disabled class="text-center mb-2 pt-1 pb-1" type="text" style="width:100%;background-color:white;border:1px solid black;" value="@item.BirthDate.ToString("dd.MM.yyyy")">
+                </div>
+                <div class="col-6">
+                    <label class="font-weight-bold" for="gender">Cinsiyet</label>
+                    <input disabled class="text-center mb-2 pt-1 pb-1" type="text" style="width:100%;background-color:white;border:1px solid black;" value="@item.Gender">
+                </div>
+            </div>
+            <h4 class="mt-4 text-center col-12 alert-dark p-3">İletişim Bilgilerim</h4>
+            <div class="row" style="display:flex;justify-content:start">
+                <div class="col-6">
+                    <label class="font-weight-bold" for="email">Email</label>
+                    <input disabled class="text-center mb-2 pt-1 pb-1" type="text" style="width:100%;background-color:white;border:1px solid black;" value="@item.Email">
+                </div>
+                <div class="col-6">
+                    <label class="font-weight-bold" for="phonenumber">Cep Telefonu</label>
+                    <input disabled class="text-center mb-2 pt-1 pb-1" type="text" style="width:100%;background-color:white;border:1px solid black;" value="@item.PhoneNumber">
+                </div>
+                <div class="col-12 text-center mt-4">
+                    <a href="/UserProfile/EditProfile/@item.Id" class="btn btn-success p-2">
+                        <i class="fa fa-refresh"> Güncelle</i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}

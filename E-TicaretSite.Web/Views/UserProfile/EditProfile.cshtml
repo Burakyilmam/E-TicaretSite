@@ -1,0 +1,31 @@
+﻿@model Entity.Entities.Profile
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("EditProfile", "UserProfile", FormMethod.Post))
+{
+    @Html.TextBoxFor(x=>x.Id,new {@style="display:none;"})
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.Name,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.Surname,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center>
+        <div class="mb-2 mt-2">
+            @Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { @style="padding: 4px 10px;margin-left:-10px;width:50%;", @type = "date" })
+        </div>
+    </center>
+    <center>
+        <div class="mb-2">
+            @Html.DropDownList("Gender", new List<SelectListItem>
+        {
+        new SelectListItem { Value = "Erkek", Text = "Erkek" },
+        new SelectListItem { Value = "Kadın", Text = "Kadın" }
+        }, new {style="padding: 4px 10px;margin-left:-10px;width:50%;"})
+        </div>
+    </center>
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.Email,new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center class="mb-2 mt-2">@Html.TextBoxFor(x=>x.PhoneNumber, new {@style="padding: 4px 10px;margin-left:-10px;width:50%;"})</center>
+    <center class="mt-2">
+        <button style="padding: 4px 10px;margin-left:-10px;" class="btn-success text-center">Güncelle</button>
+    </center>
+}

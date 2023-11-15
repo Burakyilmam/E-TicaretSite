@@ -22,12 +22,12 @@
                     {
                         <div class="mt-2">
                             <div class="form-group">
-                                @Html.LabelFor(x => x.UserName)
+                                <label for="UserName">Kullanıcı Adı</label>
                                 @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.Password)
+                                <label for="Password">Parola</label>
                                 @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
                             </div>

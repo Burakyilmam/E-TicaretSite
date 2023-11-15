@@ -75,14 +75,15 @@
                 </div>
                 <div style="text-align:end;padding-right:30px;padding-top:10px;border-radius:10px;" class="col-6">
                     <div class="dropdown">
-                        <a class="dropbtn">
+                        <a href="/User/UserPage/" class="dropbtn text-white" style="text-decoration:none;">
                             @await Html.PartialAsync("~/Views/User/GetUserName.cshtml")
                         </a>
                         <div class="dropdown-content bg-light">
-                            <a class="text-center" href="/User/UserPage/@ViewBag.Id">Profilim</a>
+                            <a class="text-center" href="/UserProfile/Profile/@ViewBag.Id">Profilim</a>
                             <a class="text-center" href="/Cart/MyCart">Sepetim</a>
                             <a class="text-center" href="/User/UserOrders">Siparişlerim</a>
                             <a class="text-center" href="/Comment/UserComments/@ViewBag.Id">Yorumlarım</a>
+                            <a class="text-center" href="/UserAddress/Address/@ViewBag.Id">Adreslerim</a>
                         </div>
                     </div>
                     <a class="text-white" style="text-decoration:none" href="/User/UserLogout/">Çıkış Yap</a>
