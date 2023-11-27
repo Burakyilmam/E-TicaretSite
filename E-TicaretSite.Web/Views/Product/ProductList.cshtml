@@ -14,7 +14,7 @@
         overflow: hidden;
     }
 
-    .table tr th{
+    .table tr th {
         vertical-align: middle;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -23,7 +23,7 @@
 
 @if (!Model.Any())
 {
-        <div class="col-12 text-center mt-3 mb-3">
+    <div class="col-12 text-center mt-3 mb-3">
         @using (Html.BeginForm())
         {
             <input style="width:50%;border-right:none;padding:4.5px;outline:none;" type="text" name="p" placeholder="Aramak istediğiniz ürün adını yazınız.">
@@ -146,7 +146,9 @@
         @Html.PagedListPager((IPagedList)Model,page=>Url.Action("ProductList",new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
     </div>
     <center class="mt-2">
-        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">Ekle</a>
+        <a class="btn-success" style="border-radius: 5px;padding: 4px 10px;" href="/Product/ProductAdd/">
+            <i class="fa fa-plus"> Ekle</i>
+        </a>
     </center>
 
 }
