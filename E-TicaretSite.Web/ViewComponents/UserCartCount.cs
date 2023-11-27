@@ -13,7 +13,7 @@ namespace E_TicaretSite.Web.ViewComponents
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return View(0); // Kullanıcı giriş yapmamışsa sepet sayısını 0 olarak görüntüle
+                return View(0);
             }
             var user = c.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
             if (user == null)

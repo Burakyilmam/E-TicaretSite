@@ -24,7 +24,7 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
-                    <span>@item.Star</span>
+                    @await Component.InvokeAsync("ProductCommentCount",new {id = item.Id})
                 }
                 @if (item.Star == 4)
                 {
@@ -33,7 +33,7 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star "></span>
-                    <span>@item.Star</span>
+                    @await Component.InvokeAsync("ProductCommentCount",new {id = item.Id})
                 }
                 @if (item.Star == 3)
                 {
@@ -42,7 +42,7 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
-                    <span>@item.Star</span>
+                    @await Component.InvokeAsync("ProductCommentCount",new {id = item.Id})
                 }
                 @if (item.Star == 2)
                 {
@@ -51,7 +51,7 @@
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
-                    <span>@item.Star</span>
+                    @await Component.InvokeAsync("ProductCommentCount",new {id = item.Id})
                 }
                 @if (item.Star == 1)
                 {
@@ -60,7 +60,7 @@
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
-                    <span>@item.Star</span>
+                    @await Component.InvokeAsync("ProductCommentCount",new {id = item.Id})
                 }
                 @if (item.Star == 0)
                 {
@@ -69,7 +69,7 @@
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
-                    <span>@item.Star</span>
+                    @await Component.InvokeAsync("ProductCommentCount",new {id = item.Id})
                 }
             </div>
             <div class="col-12 mb-3">
