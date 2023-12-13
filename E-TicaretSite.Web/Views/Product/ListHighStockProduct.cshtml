@@ -41,9 +41,6 @@
             display: block;
         }
 
-
-    /* Show the dropdown menu on hover */
-
 </style>
 @if (!Model.Any())
 {
@@ -55,8 +52,10 @@
     <div class="dropdown">
         <button class="dropbtn">Sıralama <i class="fa fa-caret-down"></i></button>
         <div class="dropdown-content">
-            <a href="/Product/ListHighPriceProduct">Azalan</a>
-            <a href="/Product/ListLowPriceProduct">Artan</a>
+            <a href="/Product/ListHighPriceProduct">Fiyatı Yüksek</a>
+            <a href="/Product/ListLowPriceProduct">Fiyatı Az</a>
+            <a href="/Product/ListHighStockProduct">Stoğu Az</a>
+            <a href="/Product/ListLowStockProduct">Stoğu Çok</a>
         </div>
     </div>
     @foreach (var item in Model)
